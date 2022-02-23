@@ -1,63 +1,61 @@
-<% cache user do %>
-  <div class="section-title">
-    <p><%= user.role %></p>
-    <h2>Profile</h2>
-  </div>
-  <section class="section profile">
-    <div class="row">
-      <div class="col-xl-4">
-        <div class="card">
-          <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
-            <%= image_tag user.avatar_path, class: 'rounded-circle mb-3' %>
-            <h2><%= user.full_name %></h2>
-            <h3><%= user.role %></h3>
-            <% if user.classroom %>
-              <h4><%= user.classroom_name %></h4>
-            <% end %>
-          </div>
-        </div>
-        <% unless current_user == user %>
-          <%= button_to private_threads_path(user_id: user.id), class: 'btn btn-outline-primary w-100' do %>
-            Message
+<div class="section-title">
+  <p><%= user.role %></p>
+  <h2>Profile</h2>
+</div>
+<section class="section profile">
+  <div class="row">
+    <div class="col-xl-4">
+      <div class="card">
+        <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
+          <%= image_tag user.avatar_path, class: 'rounded-circle mb-3' %>
+          <h2><%= user.full_name %></h2>
+          <h3><%= user.role %></h3>
+          <% if user.classroom %>
+            <h4><%= user.classroom_name %></h4>
           <% end %>
-        <% end %>
+        </div>
       </div>
-      <div class="col-xl-8">
-        <div class="card">
-          <div class="card-body pt-3">
-            <ul class="nav nav-tabs nav-tabs-bordered">
+      <% unless current_user == user %>
+        <%= button_to private_threads_path(user_id: user.id), class: 'btn btn-outline-primary w-100' do %>
+          Message
+        <% end %>
+      <% end %>
+    </div>
+    <div class="col-xl-8">
+      <div class="card">
+        <div class="card-body pt-3">
+          <ul class="nav nav-tabs nav-tabs-bordered">
+            <li class="nav-item">
+              <button class="nav-link <%= 'active' unless @edit  %>" data-bs-toggle="tab" data-bs-target="#profile-overview">Overview</button>
+            </li>
+            <% if user == current_user || current_user.admin? %>
               <li class="nav-item">
-                <button class="nav-link <%= 'active' unless @edit  %>" data-bs-toggle="tab" data-bs-target="#profile-overview">Overview</button>
+                <button class="nav-link <%= 'active' if (@edit && !@edit_password)  %>"" data-bs-toggle="tab" data-bs-target="#profile-edit">Edit Profile</button>
               </li>
-              <% if user == current_user || current_user.admin? %>
-                <li class="nav-item">
-                  <button class="nav-link <%= 'active' if (@edit && !@edit_password)  %>"" data-bs-toggle="tab" data-bs-target="#profile-edit">Edit Profile</button>
-                </li>
-              <% end %>
-              <% if user == current_user %>
-                <li class="nav-item">
-                  <button class="nav-link <%= 'active' if @edit_password %>"  data-bs-toggle="tab" data-bs-target="#profile-change-password">Change Password</button>
-                </li>
-              <% end %>
-            </ul>
-            <div class="tab-content pt-2">
-              <div class="tab-pane fade <%= 'show active' unless @edit %> profile-overview" id="profile-overview">
-                <%= render 'users/profile_overview', user: user %>
-              </div>
-              <% if user == current_user || current_user.admin? %>
-                <div class="tab-pane fade <%= 'show active' if (@edit && !@edit_password) %> profile-edit pt-3" id="profile-edit">
-                  <%= render 'users/profile_edit_form', user: user %>
-                </div>
-              <% end %>
-              <% if user == current_user %>
-                <div class="tab-pane fade pt-3 <%= 'show active' if @edit_password %>" id="profile-change-password">
-                  <%= render 'users/change_password_form', user: user %>
-                </div>
-              <% end %>
+            <% end %>
+            <% if user == current_user %>
+              <li class="nav-item">
+                <button class="nav-link <%= 'active' if @edit_password %>"  data-bs-toggle="tab" data-bs-target="#profile-change-password">Change Password</button>
+              </li>
+            <% end %>
+          </ul>
+          <div class="tab-content pt-2">
+            <div class="tab-pane fade <%= 'show active' unless @edit %> profile-overview" id="profile-overview">
+              <%= render 'users/profile_overview', user: user %>
             </div>
+            <% if user == current_user || current_user.admin? %>
+              <div class="tab-pane fade <%= 'show active' if (@edit && !@edit_password) %> profile-edit pt-3" id="profile-edit">
+                <%= render 'users/profile_edit_form', user: user %>
+              </div>
+            <% end %>
+            <% if user == current_user %>
+              <div class="tab-pane fade pt-3 <%= 'show active' if @edit_password %>" id="profile-change-password">
+                <%= render 'users/change_password_form', user: user %>
+              </div>
+            <% end %>
           </div>
         </div>
       </div>
     </div>
-  </section>
-<% end %>
+  </div>
+</section>
