@@ -1,0 +1,78 @@
+#main {
+  margin-top: 60px;
+  padding: 20px 30px;
+  transition: all 0.3s;
+}
+
+@media (max-width: 1199px) {
+  #main {
+    padding: 20px;
+  }
+}
+
+.alert-heading {
+  font-weight: 500;
+  font-family: 'Poppins', sans-serif;
+  font-size: 20px;
+}
+
+img.teacher-avatar {
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.lesson-content {
+  img {
+    width: 100%;
+  }
+}
+
+.topic-number {
+  height: 32px;
+  width: 32px;
+  border-radius: 50%;
+  background-color: #eee;
+  margin-right: 0.65em;
+  border: thin solid rgba(238, 238, 238, 0.466);
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  font-size: 17px;
+  font-weight: 300;
+}
+
+.form-label.sr-only {
+  display: none;
+}
+
+img.lesson-image,
+img.topic-image {
+  height: 180px;
+  object-fit: cover;
+  width: 100%;
+  transition: all 0.2s ease;
+  border-bottom: solid thin rgba(211, 211, 211, 0.222);
+
+  &:hover {
+    transform: scale(1.075);
+  }
+}
+
+.trix-content action-text-attachment .attachment {
+  width: 400px;
+}
+
+#payment-form-fields {
+  label.form-label {
+    display: flex;
+  }
+}
+
+img.payment-avatar {
+  height: 40px;
+  width: 40px;
+  object-fit: cover;
+  border-radius: 50%;
+}

@@ -1,0 +1,75 @@
+<div class="section-title">
+  <% if current_user.admin? %>
+    <p>School Register</p>
+  <% elsif current_user.teacher? %>
+    <p><%= current_user.classroom.name %></p>
+  <% end %>
+  <h2>Register</h2>
+</div>
+<section class="section dashboard">
+  <div class="row">
+    <div class="col-12">
+      <div class="col-12">
+        <div class="card top-selling overflow-auto">
+          <div class="filter">
+            <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
+            <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+              <li class="dropdown-header text-start">
+                <h6>Filter</h6>
+              </li>
+              <li>
+                <%= link_to 'All', student_attendances_path, class: 'dropdown-item' %>
+              </li>
+            </ul>
+          </div>
+          <div class="card-body pb-0">
+            <h5 class="card-title">Student Attendances</h5>
+            <table class='table table-borderless'>
+              <thead>
+                <tr>
+                  <th>Date</th>
+                  <th>Name</th>
+                  <% if current_user.admin? %>
+                    <th>Class</th>
+                  <% end %>
+                  <th>Gender</th>
+                  <th scope='col' class='text-center'>Present</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% cache @student_attendances do %>
+                  <% @student_attendances.each do |student_attendance| %>
+                    <% cache student_attendance do %>
+                      <% user = student_attendance.user %>
+                      <tr>
+                        <td>
+                          <%= link_to student_attendance.date, student_attendances_path(date: student_attendance.date, classroom: params[:classroom]) %>
+                        </td>
+                        <td><%= link_to user.full_name, student_attendances_path(user_id: user.id), class: 'fw-bold' %></td>
+                        <% if current_user.admin? %>
+                          <td><%= link_to user.classroom.name, student_attendances_path(date: params[:date], classroom: user.classroom.id), class: 'link link-success' %></td>
+                        <% end %>
+                        <td>
+                          <span class='<%= "badge rounded-pill text-decoration-none #{user.gender == User::MALE ? 'bg-info': 'bg-warning'}" %>'>
+                            <%= user.gender %>
+                          </span>
+                        </td>
+                        <td class='text-center'>
+                          <% if student_attendance.present? %>
+                            <i class="bi bi-check-circle text-success"></i>
+                          <% else %>
+                            <i class="bi bi-x-circle text-danger"></i>
+                          <% end %>
+                        </tr>
+                      <% end %>
+                    <% end %>
+                  <% end %>
+                </tbody>
+              </table>
+              <%= will_paginate @student_attendances %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>

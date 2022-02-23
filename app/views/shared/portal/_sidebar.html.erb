@@ -1,0 +1,83 @@
+<aside id="sidebar" class="sidebar">
+  <ul class="sidebar-nav" id="sidebar-nav">
+    <li class="nav-heading"><%= current_user.teacher? ? "Teacher" : 'Students' %> Portal</li>
+    <li class="nav-item">
+      <%= link_to dashboard_path, class: "nav-link #{'collapsed' unless on_dashboard?}" do %>
+        <i class="bi bi-grid"></i>
+        <span>Dashboard</span>
+      <% end %>
+    </li>
+    <li class="nav-item">
+      <%= link_to  notifications_path, class: "nav-link #{'collapsed' unless on_notifications?}" do %>
+        <i class="bi bi-bell"></i>
+        <span>Notifications</span>
+      <% end %>
+    </li>
+    <li class="nav-heading"><%= current_user.teacher? ? 'Manage Students' : 'Learn' %></li>
+    <% if current_user.student? %>
+      <li class="nav-item">
+        <%= link_to reports_path, class: "nav-link #{'collapsed' unless on_reports_index?}" do %>
+          <i class="bi bi-bar-chart-steps"></i>
+          <span>Reports</span>
+        <% end %>
+      </li>
+    <% elsif current_user.teacher? %>
+      <li class="nav-item">
+        <%= link_to students_path, class: "nav-link #{'collapsed' unless on_students?}" do %>
+          <i class="bi bi-people"></i>
+          <span>Students</span>
+        <% end %>
+      </li>
+    <% end %>
+    <li class="nav-item">
+      <a class="nav-link collapsed" data-bs-target="#assignments-nav" data-bs-toggle="collapse" href="#">
+        <i class="bi bi-book"></i><span>Assignments</span><i class="bi bi-chevron-down ms-auto"></i>
+      </a>
+      <ul id="assignments-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+        <% current_user.classroom_subjects&.each do |csub| %>
+          <li>
+            <%= link_to classroom_subject_assignments_path(csub) do %>
+              <i class="bi bi-circle"></i><span><%= csub.name %></span>
+            <% end %>
+          </li>
+        <% end %>
+      </ul>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link collapsed" data-bs-target="#subjects-nav" data-bs-toggle="collapse" href="#">
+        <i class="bi bi-layout-text-window-reverse"></i><span>Subjects</span><i class="bi bi-chevron-down ms-auto"></i>
+      </a>
+      <ul id="subjects-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+        <% current_user.classroom_subjects&.each do |csub| %>
+          <li>
+            <%= link_to csub do %>
+              <i class="bi bi-circle"></i><span><%= csub.name %></span>
+            <% end %>
+          </li>
+        <% end %>
+      </ul>
+    </li>
+    <li class="nav-heading">Administration</li>
+    <li class="nav-item">
+      <%= link_to profile_users_path, class: "nav-link #{'collapsed' unless on_user_profile?}" do %>
+        <i class="bi bi-person"></i>
+        <span>Account</span>
+      <% end %>
+    </li>
+    <% unless current_user.teacher? %>
+      <li class="nav-item">
+        <%= link_to payments_path, class: "nav-link #{'collapsed' unless on_payments_index?}" do %>
+          <i class="bi bi-currency-dollar"></i>
+          <span>Payments</span>
+        <% end %>
+      </li>
+    <% else %>
+      <li class="nav-item">
+        <%= link_to student_attendances_path, class: "nav-link #{'collapsed' unless on_student_attendances?}" do %>
+          <i class="bi bi-calendar2-minus"></i>
+          <span>Register</span>
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
+</aside>

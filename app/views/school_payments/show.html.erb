@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Levy:</strong>
+  <%= @school_payment.levy %>
+</p>
+
+<p>
+  <strong>Tution:</strong>
+  <%= @school_payment.tution %>
+</p>
+
+<p>
+  <strong>Year:</strong>
+  <%= @school_payment.year %>
+</p>
+
+<p>
+  <strong>Term:</strong>
+  <%= @school_payment.term %>
+</p>
+
+<%= link_to 'Edit', edit_school_payment_path(@school_payment) %> |
+<%= link_to 'Back', school_payments_path %>

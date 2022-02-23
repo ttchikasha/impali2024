@@ -1,0 +1,83 @@
+<div class="section-title">
+  <p>Users</p>
+  <h2>User List</h2>
+</div>
+<section class="section dashboard">
+  <div class="row">
+    <div class="col-12">
+      <div class="col-12">
+        <div class="card top-selling overflow-auto">
+          <div class="filter">
+            <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
+            <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+              <li class="dropdown-header text-start">
+                <h6>Filter</h6>
+              </li>
+              <li>
+                <%= link_to 'All', users_path, class: 'dropdown-item' %>
+              </li>
+              <li>
+                <%= link_to 'Students', users_path(role: 'Student', gender: params[:gender]), class: 'dropdown-item' %>
+              </li>
+              <li>
+                <%= link_to 'Teachers', users_path(role: 'Teacher', gender: params[:gender]), class: 'dropdown-item' %>
+              </li>
+              <li>
+                <%= link_to 'Admins', users_path(role: 'Admin', gender: params[:gender]), class: 'dropdown-item' %>
+              </li>
+            </ul>
+          </div>
+          <div class="card-body pb-0">
+            <h5 class="card-title">Users <span>| <%= params[:role]&.pluralize || 'All' %></span>
+              <% if params[:gender] %>
+                <span>| <%= params[:gender] %></span>
+              <% end %>
+            </h5>
+            <table class="table table-borderless">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Name</th>
+                  <th scope="col">Email</th>
+                  <th scope="col">Role</th>
+                  <th scope="col">Gender</th>
+                  <th scope="col">Start Date</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% cache @users do  %>
+                  <% @users.each do |user| %>
+                    <% cache user do %>
+                      <tr>
+                        <th scope='row'>
+                          <a href="#">
+                            <% if user.avatar.attached? %>
+                              <img src="<%= user.avatar_path %>" alt="">
+                            <% else %>
+                              <%= image_tag 'user.png' %>
+                            <% end %>
+                          </a>
+                        </th>
+                        <td>
+                          <%= link_to user.full_name, user, class: 'text-primary fw-bold' %>
+                        </td>
+                        <td><%= user.email %></td>
+                        <td><%= user.role %></td>
+                        <td>
+                          <%= link_to user.gender, users_path(gender: user.gender, role: params[:role]), class: "badge rounded-pill text-decoration-none #{user.gender == User::MALE ? 'bg-info': 'bg-warning'}" %>
+                        </td>
+                        <td class="fw-bold"><%= user.start_date %></td>
+                      </tr>
+                    <% end %>
+                  <% end %>
+                </tbody>
+              <% end %>
+            </table>
+            <%= will_paginate @users %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</section>

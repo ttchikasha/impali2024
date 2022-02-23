@@ -1,0 +1,16 @@
+<div class="card info-card sales-card">
+  <div class="card-body">
+    <h5 class="card-title">Students</h5>
+    <div class="d-flex align-items-center">
+      <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+        <i class="bi bi-people"></i>
+      </div>
+      <div class="ps-3">
+        <h6><%= User.students.count %></h6>
+        <span class="text-dark small pt-1 fw-bold"><%= User.boys.count %></span> <span class="text-dark small pt-2 ps-1">boys</span>
+        <span class="mx-1"></span>
+        <span class="text-success small pt-1 fw-bold"><%= User.girls.count %></span> <span class="text-success small pt-2 ps-1">girls</span>
+      </div>
+    </div>
+  </div>
+</div>

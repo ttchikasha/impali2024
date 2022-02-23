@@ -1,0 +1,13 @@
+<div class="section-title mt-3">
+  <div class="d-flex align-items-center justify-content-between">
+    <p><%= @topic.classroom_subject.name %></p>
+    <p><%= @topic.classroom_subject.classroom.name %></p>
+  </div>
+  <h2>Lesson <%= @lesson.order %> - <%= @lesson.title %></h2>
+</div>
+<div class="card">
+  <div class="card-body">
+    <h3 class="card-title">Edit Lesson</h3>
+    <%= render 'form', lesson: @lesson %>
+  </div>
+</div>

@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Impali School</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= stylesheet_link_tag "devise", media: "all", 'data-turbolinks-track': "reload" %>
+  </head>
+  <body>
+    <main class='form-signin'>
+      <%= yield %>
+      <p class='mt-5 text-center'>Copyright &copy; <%= Date.today.year %> Impali</p>
+    </main>
+    <%= javascript_include_tag 'bootstrap.bundle.min' %>
+  </body>
+</html>

@@ -1,0 +1,12 @@
+<div class="section-title">
+  <div class="d-flex align-items-center justify-content-between">
+    <p>Site Messages</p>
+  </div>
+  <h2>Messages from Website</h2>
+</div>
+<div class="row">
+  <% cache @contact_messages do %>
+    <%= render @contact_messages %>
+  <% end %>
+  <%= will_paginate @contact_messages %>
+</div>

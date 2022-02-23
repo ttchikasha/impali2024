@@ -1,0 +1,15 @@
+<div class="text-center">
+  <h1 class='mb-3 h2'>Impali School</h1>
+  <p class='text-secondary fw-bold mb-3'>Please Log-In</p>
+</div>
+<%= render 'shared/alerts' %>
+<%= bootstrap_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+  <%= f.text_field :login_id, autofocus: true, floating: true, label: 'Login ID' %>
+  <%= f.password_field :password, autocomplete: "current-password", floating: true %>
+  <div class="mb-3">
+    <% if devise_mapping.rememberable? %>
+      <%= f.check_box :remember_me %>
+    <% end %>
+  </div>
+  <%= f.primary "Log in", class: 'w-100 btn btn-lg btn-primary' %>
+<% end %>

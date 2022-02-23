@@ -1,0 +1,17 @@
+<div class="d-flex align-items-center">
+  <% att = user.attendance %>
+  <% method = user.attendance ? 'PUT' : 'POST'  %>
+  <% url1 = att ? student_attendance_path(att, present: true) : student_attendances_path(user_id: user.id, present: true)  %>
+  <%= link_to url1, class: 'btn btn-sm btn-success me-1', method: method, remote: true do %>
+    <i class="bi bi-check-circle"></i>
+  <% end %>
+  <% if att %>
+    <span>
+      <%= att.present ? 'YES' : 'NO' %>
+    </span>
+  <% end %>
+  <% url2 = att ? student_attendance_path(att, present: false) : student_attendances_path(user_id: user.id, present: false)  %>
+  <%= link_to url2, class: 'btn btn-sm btn-danger ms-1', method: method, remote: true do %>
+    <i class="bi bi-x"></i>
+  <% end %>
+</div>

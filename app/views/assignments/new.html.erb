@@ -1,0 +1,13 @@
+<div class="section-title">
+  <p><%= current_user.classroom.name %></p>
+  <h2>New <%= @classroom_subject.name %> Assignment</h2>
+</div>
+<div class="card">
+  <div class="card-body">
+    <h3 class="card-title fw-bold">Time</h3>
+    <div id="assignment-form">
+      <%= render 'form', assignment: @assignment %>
+    </div>
+  </div>
+</div>
+<%= link_to 'Back', assignments_path %>

@@ -1,0 +1,61 @@
+<aside id="sidebar" class="sidebar">
+  <ul class="sidebar-nav" id="sidebar-nav">
+    <li class="nav-heading">Admin Portal</li>
+    <li class="nav-item">
+      <%= link_to dashboard_path, class: "nav-link #{'collapsed' unless on_dashboard?}" do %>
+        <i class="bi bi-grid"></i>
+        <span>Dashboard</span>
+      <% end %>
+    </li>
+    <li class="nav-item">
+      <%= link_to  notifications_path, class: "nav-link #{'collapsed' unless on_notifications?}" do %>
+        <i class="bi bi-bell"></i>
+        <span>Notifications</span>
+      <% end %>
+    </li>
+    <li class="nav-item">
+      <%= link_to classrooms_path, class: "nav-link #{'collapsed' unless on_classrooms_index?}" do %>
+        <i class="bi bi-journals"></i>
+        <span>Classes</span>
+      <% end %>
+    </li>
+    <li class="nav-heading">User Management</li>
+    <li class="nav-item">
+      <%= link_to users_path, class: "nav-link #{'collapsed' unless on_users_index?}" do %>
+        <i class="bi bi-people"></i>
+        <span>Users</span>
+      <% end %>
+    </li>
+    <li class="nav-item">
+      <%= link_to new_user_path, class: "nav-link #{'collapsed' unless on_new_user?}" do %>
+        <i class="bi bi-person-plus"></i>
+        <span>Add User</span>
+      <% end %>
+    </li>
+    <li class="nav-item">
+      <%= link_to student_attendances_path, class: "nav-link #{'collapsed' unless on_student_attendances?}" do %>
+        <i class="bi bi-calendar2-minus"></i>
+        <span>Attendances</span>
+      <% end %>
+    </li>
+    <li class="nav-heading">Administration</li>
+    <li class="nav-item">
+      <%= link_to profile_users_path, class: "nav-link #{'collapsed' unless on_user_profile?}" do %>
+        <i class="bi bi-person"></i>
+        <span>Account</span>
+      <% end %>
+    </li>
+    <li class="nav-item">
+      <%= link_to payments_path, class: "nav-link #{'collapsed' unless on_payments_index?}" do %>
+        <i class="bi bi-currency-dollar"></i>
+        <span>Payments</span>
+      <% end %>
+    </li>
+    <li class="nav-item">
+      <%= link_to online_applications_path, class: "nav-link #{'collapsed' unless on_online_applications?}" do %>
+        <i class="bi bi-border-width"></i>
+        <span>Applications</span>
+      <% end %>
+    </li>
+  </ul>
+</aside>

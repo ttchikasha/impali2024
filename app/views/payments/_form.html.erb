@@ -1,0 +1,5 @@
+<%= bootstrap_form_with(model: payment) do |form| %>
+  <%= render 'shared/form_alert', resource: payment %>
+  <%= render 'form_fields' %>
+  <%= form.primary %>
+<% end %>

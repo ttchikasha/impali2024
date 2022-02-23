@@ -1,0 +1,105 @@
+.courses .course-item {
+  border-radius: 5px;
+  border: 1px solid #eef0ef;
+  background-color: white;
+  width: 100%;
+  overflow: hidden;
+
+  img.lesson-image {
+    height: 160px;
+    width: 100%;
+    object-fit: cover;
+  }
+}
+
+.courses .course-content {
+  padding: 15px;
+}
+.courses .course-content h3 {
+  font-weight: 700;
+  font-size: 20px;
+}
+.courses .course-content h3 a {
+  color: #37423b;
+  transition: 0.3s;
+}
+.courses .course-content h3 a:hover {
+  color: var(--bs-primary);
+}
+.courses .course-content p {
+  font-size: 14px;
+  color: #777777;
+}
+.courses .course-content h4 {
+  font-size: 14px;
+  background: var(--bs-primary);
+  padding: 7px 14px;
+  color: #fff;
+  margin: 0;
+}
+.courses .course-content .price {
+  margin: 0;
+  font-weight: 700;
+  font-size: 18px;
+  color: #37423b;
+}
+.courses .trainer {
+  padding-top: 15px;
+  border-top: 1px solid #eef0ef;
+}
+.courses .trainer .trainer-profile img {
+  max-width: 50px;
+  border-radius: 50px;
+}
+.courses .trainer .trainer-profile span {
+  padding-left: 10px;
+  font-weight: 600;
+  font-size: 16px;
+  color: #5a6c60;
+}
+.courses .trainer .trainer-rank {
+  font-size: 18px;
+  color: #657a6d;
+}
+
+// Sections
+
+.section-bg {
+  background-color: #f6f7f6;
+}
+
+.section-title {
+  padding-bottom: 15px;
+}
+
+.section-title h2 {
+  font-size: 14px;
+  font-weight: 500;
+  padding: 0;
+  line-height: 1px;
+  margin: 0 0 5px 0;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #aaaaaa;
+  font-family: 'Poppins', sans-serif;
+}
+
+.section-title h2::after {
+  content: '';
+  width: 120px;
+  height: 1px;
+  display: inline-block;
+  background: var(--bs-teal);
+  margin: 4px 10px;
+}
+
+.section-title p {
+  margin: 0;
+  margin: 0;
+  font-size: 32px;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-family: 'Poppins', sans-serif;
+  color: #37423b;
+  margin-bottom: 0.5em;
+}

@@ -1,0 +1,56 @@
+<div class="section-title">
+  <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center">
+    <p><%= @assignment.classroom_subject.name %></p>
+    <div class='d-flex flex-column align-items-md-end'>
+      <div class="mb-1">
+        <% if @assignment.started? %>
+          <strong>started :</strong>
+        <% else %>
+          <strong>to start :</strong>
+        <% end %>
+        <%= @assignment.start.to_s(:short) %>
+      </div>
+      <div class='mb-2'><strong><%= @assignment.late? ? 'Was' : '' %> due on: </strong><%= @assignment.due.to_s(:short) %></div>
+      <div class='d-flex flex-column flex-md-row justify-content-between align-items-md-center'>
+        <% if current_user.teacher? %>
+          <%= link_to 'Edit Assignment', edit_assignment_path(@assignment), class: 'btn btn-sm btn-outline-primary ms-md-2 mb-md-0 mb-2' %>
+          <%= link_to 'Submissions', assignment_assignment_answers_path(@assignment), class: 'btn btn-primary btn-sm ms-md-2 mb-md-0 mb-2' %>
+        <% end %>
+        <%= link_to assignment_path(@assignment, format: 'pdf'), class: 'btn btn-sm btn-danger ms-md-2 mb-md-0 mb-2' do %>
+          <i class="bi bi-file-earmark-pdf"></i>
+          <span>Download as PDF</span>
+        <% end %>
+        <% if ans = current_user.assignment_answers.find_by(assignment_id: @assignment.id) %>
+          <%= link_to current_user.teacher? ? 'Marking Scheme' : 'My Answer' , assignment_assignment_answer_path(@assignment, ans), class: 'btn btn-sm btn-warning ms-md-2 mb-md-0 mb-2' %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <h2 class='mt-4 mt-md-1'>Assignment <%= @assignment.number %></h2>
+</div>
+<% cache @assignment do  %>
+  <%= bootstrap_form_with model: @assignment, url: assignment_assignment_answers_path(@assignment), html: {method: :post} do |form| %>
+    <%= form.fields_for :questions do |question_form| %>
+      <% question = question_form.object  %>
+      <% question_answer = current_user.question_answers.build(question: question)  %>
+      <div class="card">
+        <div class="card-body">
+          <%= render question %>
+          <%= question_form.fields_for :question_answers, model: question.question_answers.build do |question_answer_form| %>
+            <% qa = question_answer_form.object %>
+            <% unless qa.persisted? %>
+              <% if question.allowed_answers.any? %>
+                <%= question_answer_form.collection_radio_buttons :selected_answer_id, question.allowed_answers, :id, :content, label: 'Select Answer' %>
+              <% else %>
+                <%= question_answer_form.rich_text_area :answer %>
+              <% end %>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+    <% unless @assignment.late? %>
+      <%= form.primary 'Submit Answers' %>
+    <% end %>
+  <% end %>
+<% end %>

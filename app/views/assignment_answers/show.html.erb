@@ -1,0 +1,103 @@
+<div class="section-title">
+  <div class="d-flex justify-content-between align-items-center">
+    <p><%= @assignment.classroom_subject.name %></p>
+    <div>
+      <% if @answer.user.student? && @assignment.late? %>
+        <p class='border rounded-3 bg-white p-2 <%= @answer.score > 50 ? 'text-success' : 'text-danger' %>'><%= number_to_percentage @answer.score, :precision => 0  %></p>
+      <% end %>
+      <% if @assignment.late? %>
+        <div class='mb-2'><strong>Was due on: </strong><%= @assignment.due.to_s(:short) %></div>
+      <% else %>
+        <%= react_component("Timer", { due: @assignment.due - 2.hours }) %>
+        <% if current_user.teacher? %>
+          <div class="d-flex align-items-md-center">
+            <%= link_to 'Submissions', assignment_assignment_answers_path(@assignment), class: 'btn btn-primary' %>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+  <h2>Assignment <%= @assignment.number %></h2>
+</div>
+<h5>
+  <% if @answer.user == current_user %>
+    <% if current_user.teacher? %>
+      Marking Scheme 
+    <% else %>
+      Your Answers
+    <% end %>
+  <% else %>
+    <span class="fw-bold"><%= @answer.user.full_name %></span>
+  <% end %>
+</h5>
+<div class='position-relative'>
+  <% cache @answer.assignment do %>
+    <%= bootstrap_form_with model: @answer.assignment, scope: :assignment, url: assignment_assignment_answer_url(@answer.assignment) do |form| %>
+      <%= form.fields_for :questions do |question_form| %>
+        <% question = question_form.object  %>
+        <% question_answer = @answer.user.question_answers.find_by(question_id: question.id) %>
+        <div class="card">
+          <div class="card-body">
+            <%= render question, locals: {readonly: true} %>
+            <%= question_form.fields_for :question_answers do |question_answer_form| %>
+              <% qa = question_answer_form.object %>
+              <% if qa.user == current_user %>
+                <% if question.allowed_answers.any? %>
+                  <% if @answer.user == current_user && !@answer.assignment.late?  %>
+                    <%= question_answer_form.collection_radio_buttons :selected_answer_id, question.allowed_answers, :id, :content, label: 'Select Answer' %>
+                  <% else %>
+                    <% question.allowed_answers.each.with_index do |answer, index| %>
+                      <% correct = question.correct_answer.selected_answer_id == answer.id  %>
+                      <div class='d-flex my-1 align-items-start align-items-md-center'>
+                        <div class='me-2'>
+                          <% if answer.id == question_answer.selected_answer_id  %>
+                            <i class="bi bi-check-circle"></i>
+                          <% else %>
+                            <i class="bi bi-circle"></i>
+                          <% end %>
+                        </div>
+                        <div><%= answer.content %></div>
+                        <% if correct  %>
+                          <span class="badge bg-success ms-5">
+                            Correct
+                            <i class="bi bi-check-circle"></i>
+                          </span>
+                        <% elsif answer.id == question_answer.selected_answer_id %>
+                          <span class="badge bg-danger ms-5">
+                            Wrong
+                            <i class="bi bi-x-circle"></i>
+                          </span>
+                        <% end %>
+                      </div>
+                    <% end %>
+                  <% end %>
+                <% else %>
+                  <% if @answer.user == current_user && !@answer.assignment.late? %>
+                    <%= question_answer_form.rich_text_area :answer %>
+                  <% else %>
+                    <% unless question_answer.answer.body.to_plain_text.blank? %>
+                      <span class="badge bg-success rounded-0">Answer</span>
+                      <div class='border text-success bg-light p-2'>
+                        <div class='ms-2'><%= question_answer.answer %></div>
+                      </div>
+                      <%= react_component("QuestionMarker", { url: question_answer_path(question_answer, format: :js), mark: question_answer.mark }) %>
+                    <% else %>
+                      <p class='fw-bold text-danger'>No Answer Provided (0%)</p>
+                    <% end %>
+                  <% end %>
+                <% end %>
+              <% end %>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+      <% if @answer.user == current_user && !@answer.assignment.late? %>
+        <%= form.submit 'Update Answers', class: 'btn btn-lg btn-success submit-answer-btn' %>
+      <% elsif current_user.teacher? && @answer.user.student? %>
+        <div id="answer-score">
+          <%= render 'assignment_answers/score', score: @answer.score %>
+        </div>
+      <% end %>
+    <% end %>
+  <% end %>
+</div>

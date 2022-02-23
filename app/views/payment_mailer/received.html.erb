@@ -1,0 +1,5 @@
+<h1>Dear <%= @payment.user.full_name %></h1>
+<p>This is to inform you that your payment (<%= number_to_currency @payment.amount %>) was <strong><%= @payment.accepted ? 'successful' : 'rejected' %></strong></p>
+<% unless @payment.accepted %>
+  <small>Please visit/contact the school for more infomation on why your payment was rejected</small>
+<% end %>

@@ -1,0 +1,30 @@
+<aside id="sidebar" class="sidebar">
+  <ul class="sidebar-nav" id="sidebar-nav">
+    <li class="nav-heading">
+      <%= current_user.role.capitalize %> Portal</li>
+    <li class="nav-item">
+      <%= link_to dashboard_path, class: "nav-link #{'collapsed' unless on_dashboard?}" do %>
+        <i class="bi bi-grid"></i>
+        <span>Dashboard</span>
+      <% end %>
+    </li>
+    <li class="nav-heading">
+      <%= @classroom_subject.name %> - Topics
+      <% if current_user.teacher? %>
+        <%= link_to new_classroom_subject_topic_path(@classroom_subject) do %>
+          <i class="bi bi-plus-circle float-end text-secondary"></i>
+        <% end %>
+      <% end %>
+    </li>
+    <% @classroom_subject.topics.each.with_index do |topic, index| %>
+      <% if topic.persisted? %>
+        <li class="nav-item">
+          <%= link_to classroom_subject_topic_path(@classroom_subject, topic), class: "nav-link #{'collapsed' unless on_dashboard?}" do %>
+            <span class="topic-number"><%= index + 1 %></span>
+            <span><%= topic.title %></span>
+          <% end %>
+        </li>
+      <% end %>
+    <% end %>
+  </ul>
+</aside>

@@ -1,0 +1,64 @@
+<div class="section-title">
+  <p>Classes</p>
+  <h2>Classrooms</h2>
+</div>
+<section class="section dashboard">
+  <div class="row">
+    <div class="col-12">
+      <div class="col-12">
+        <div class="card top-selling overflow-auto">
+          <div class="card-body pb-0">
+            <h5 class="card-title">
+              Classrooms <span>| All</span>
+            </h5>
+            <table class="table table-borderless">
+              <thead>
+                <tr>
+                  <th scope="col">Grade</th>
+                  <th scope="col">Room</th>
+                  <th scope="col">Teacher</th>
+                  <th class='text-center' scope="col">Students</th>
+                  <th class='text-center' scope="col">Subjects</th>
+                  <th scope="col">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% @classrooms.each do |classroom| %>
+                  <tr>
+                    <td><%= classroom.grade %></td>
+                    <td><%= classroom.room %></td>
+                    <th scope='row'>
+                      <% if classroom.teacher %>
+                        <div class="d-flex align-items-center">
+                          <% if classroom.teacher.avatar.attached? %>
+                            <img src="<%= classroom.teacher.avatar_path %>" alt="">
+                          <% else %>
+                            <%= image_tag 'user.png' %>
+                          <% end %>
+                          <%= link_to classroom.teacher.full_name, classroom.teacher, class: 'text-primary fx-bold ms-3' %>
+                        </div>
+                      <% else %>
+                        <span class="badge bg-danger">No Teacher</span>
+                      <% end %>
+                    </th>
+                    <td class='text-center'><%= classroom.students.count %></td>
+                    <td class='text-center'><%= classroom.subjects.count %></td>
+                    <td>
+                      <div class="d-flex align-items-center">
+                        <%= link_to 'Show', classroom %>
+                        <span class="mx-2"></span>
+                        <% if current_user.admin? %>
+                          <%= link_to 'Edit', edit_classroom_path(classroom) %>
+                        <% end %>
+                      </div>
+                    </td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

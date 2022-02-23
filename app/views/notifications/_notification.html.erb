@@ -1,0 +1,18 @@
+<% cache notification do %>
+  <div class="col-md-6">
+    <div class="card">
+      <div class="card-header">
+        <i class="bi bi-<%= notification.icon %> text-<%= notification.tag %>"></i>
+        <%= link_to notification.title, notification, class: 'fw-bold fs-5' %>
+      </div>
+      <div class="card-body py-2">
+        <%= truncate notification.content, length: 100 %>
+      </div>
+      <div class="card-footer py-1">
+        <small class='text-muted'>
+          <%= time_ago_in_words notification.created_at %> ago
+        </small>
+      </div>
+    </div>
+  </div>
+<% end %>

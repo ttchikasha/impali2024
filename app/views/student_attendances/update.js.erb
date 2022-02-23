@@ -1,0 +1,2 @@
+var attendanceMarkerEl = document.getElementById('<%= "user-#{@student_attendance.user.id}-attendance-marker" %>') 
+attendanceMarkerEl.innerHTML = "<%= j render('student_attendances/attendance_marker', user: @student_attendance.user) %>"

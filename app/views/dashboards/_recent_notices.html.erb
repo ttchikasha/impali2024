@@ -1,0 +1,16 @@
+<div class="card">
+  <div class="card-body">
+    <h5 class="card-title">Recent Notifications</h5>
+    <div class="activity">
+      <% Notification.recent(6).each do |notice| %>
+        <div class="activity-item d-flex">
+          <div class="activite-label"><%= distance_of_time_in_words Time.now, notice.created_at %></div>
+          <i class='bi bi-circle-fill activity-badge text-<%= notice.tag %> align-self-start'></i>
+          <div class="activity-content">
+            <%= link_to truncate(notice.title, length: 40), notice %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

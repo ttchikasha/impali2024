@@ -1,0 +1,13 @@
+<%= bootstrap_form_with(model: ContactMessage.new, html: {class: 'php-email-form' }) do |form| %>
+  <div class="row">
+    <div class="col-md-6">
+      <%= form.text_field :name, required: true, placeholder: 'Your Name' %>
+    </div>
+    <div class="col-md-6">
+      <%= form.email_field :email, required: true, placeholder: 'Your Email' %>
+    </div>
+  </div>
+  <%= form.text_field :subject, placeholder: 'Subject' %>
+  <%= form.text_area :message, required: true, placeholder: 'Message', rows: '4', control_class: 'form-control h-100' %>
+  <%= form.primary 'Send Message' %>
+<% end %>

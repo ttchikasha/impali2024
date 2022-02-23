@@ -1,0 +1,42 @@
+<% if current_user.admin? %>
+  <div class="section-title">
+    <p>
+      <span class='text-muted'>Hello,</span>
+      <strong><%= current_user.full_name %></strong>
+    </p>
+    <% if current_user.admin? %>
+      <h2>Dashboard</h2>
+    <% end %>
+  </div>
+  <%= render 'admin' %>
+<% else %>
+  <div class="section-title">
+    <p>Hello, <%= current_user.full_name %></p>
+  </div>
+  <div class="courses">
+    <div class="row">
+      <div class="col-md-7">
+        <div class="section-title">
+          <h2>Recent Assignments</h2>
+        </div>
+        <% cache current_user.recent_assignments do %>
+          <% current_user.recent_assignments.each do |assignment| %>
+            <%= render 'assignments/recent_assignment', assignment: assignment %>
+          <% end %>
+        <% end %>
+      </div>
+      <div class="col-md-5">
+        <div class="section-title">
+          <h2>Recent Topics</h2>
+        </div>
+        <% cache @topics do %>
+          <% @topics.each do |topic| %>
+            <% cache topic do %>
+              <%= render 'topics/topic', topic: topic %>
+            <% end %>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+<% end %>

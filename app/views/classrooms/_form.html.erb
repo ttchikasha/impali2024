@@ -1,0 +1,21 @@
+<%= bootstrap_form_with(model: classroom) do |form| %>
+  <%= render 'shared/form_alert', resource: classroom %>
+  <div class="row">
+    <div class="col-md-6">
+      <%= form.select :grade, Classroom.grades.keys.select {|g| g == classroom.grade }, floating: true %>
+    </div>
+    <div class="col-md-6">
+      <%= form.select :room, Rooms::TYPES.select {|r| r == classroom.room }, floating: true %>
+    </div>
+  </div>
+  <div data-controller="autocomplete" data-autocomplete-url-value="<%= teachers_autocomplete_users_path %>">
+    <%= form.text_field :teacher_name, floating: true, data: {'autocomplete-target' => 'input'}, required: true %>
+    <%= form.hidden_field :teacher_id, data: {'autocomplete-target' => 'hidden'} %>
+    <div class="list-group" data-autocomplete-target="results"></div>
+  </div>
+  <%= form.collection_check_boxes(:subject_ids, Subject.all, :id,
+:name, label: 'Subjects') do |b| %>
+    <% b.label { b.check_box + b.text } %>
+  <% end %>
+  <%= form.primary %>
+<% end %>

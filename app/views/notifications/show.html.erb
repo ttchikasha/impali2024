@@ -1,0 +1,21 @@
+<div class="section-title">
+  <div class="d-flex align-items-center justify-content-between">
+    <p>
+      <i class="bi bi-<%= @notification.icon %> text-<%= @notification.tag %>"></i>
+      <%= @notification.title %>
+    </p>
+    <% if current_user.admin? %>
+      <div class='d-flex flex-column'>
+        <%= link_to 'Edit', edit_notification_path(@notification), class: 'btn btn-success btn-sm' %>
+        <span class="my-1"></span>
+        <%= link_to 'Delete', @notification, class: 'btn btn-outline-danger btn-sm', method: :delete, data: {confirm: 'Are you sure?'} %>
+      </div>
+    <% end %>
+  </div>
+  <h2><strong>Posted: </strong><%= time_ago_in_words @notification.created_at %> ago</h2>
+</div>
+<div class="card shadow-sm">
+  <div class="card-body pt-3">
+    <%= @notification.content %>
+  </div>
+</div>

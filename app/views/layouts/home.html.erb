@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Impali School</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= javascript_pack_tag "stimulus", 'data-turbolinks-track': "reload" %>
+    <%= stylesheet_link_tag "home", media: "all", 'data-turbolinks-track': "reload" %>
+    <%= stylesheet_link_tag "cta", media: "all", 'data-turbolinks-track': "reload" %>
+  </head>
+  <body>
+    <%= render 'home/header' %>
+    <%= yield %>
+    <%= render 'home/footer' %>
+    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+    <%= javascript_include_tag 'purecounter' %>
+    <%= javascript_include_tag 'aos' %>
+    <%= javascript_include_tag 'bootstrap.bundle.min' %>
+    <%= javascript_include_tag 'glightbox.min' %>
+    <%= javascript_include_tag 'isotope.pkgd.min' %>
+    <%= javascript_include_tag 'swiper-bundle.min' %>
+    <%= javascript_include_tag 'main' %>
+  </body>
+</html>

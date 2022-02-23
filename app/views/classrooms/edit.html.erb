@@ -1,0 +1,17 @@
+<div class="pagetitle">
+  <nav>
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item">
+        <%= link_to 'Classes', classrooms_path %>
+      </li>
+      <li class="breadcrumb-item active">Edit</li>
+    </ol>
+  </nav>
+</div>
+<div class="card">
+  <div class="card-body">
+    <h3 class="card-title">Edit Classroom</h3>
+    <%= render 'form', classroom: @classroom %>
+  </div>
+</div>
+>

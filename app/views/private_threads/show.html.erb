@@ -1,0 +1,20 @@
+<% cache @private_thread do %>
+  <div class="private-thread">
+    <div class='thread-header'>
+      <% other = @private_thread.other_user(current_user)  %>
+      <div class='d-flex align-items-center'>
+        <%= image_tag other.avatar_path %>
+        <div id='chatee-name' class="ms-2 fs-5 fw-bold"><%= other.full_name %></div>
+      </div>
+    </div>
+    <div data-controller='messages' id="messages">
+      <% messages = @private_thread.messages.select {|m| m.persisted? } %>
+      <% cache messages do %>
+        <%= render messages %>
+      <% end %>
+    </div>
+    <div class="message-form-wrapper">
+      <%= render 'messages/form', message: @message %>
+    </div>
+  </div>
+<% end %>

@@ -1,0 +1,78 @@
+<div class="section-title">
+  <p>Payment #<%= @payment.id %></p>
+  <h2>For <%= @payment.user.full_name %></h2>
+</div>
+<div class="row">
+  <div class="col-md-9">
+    <div class="card">
+      <div class="card-header w-100 px-4">
+        <div class="d-flex justify-content-md-between align-items-md-center pt-2">
+          <div>
+            <span class="h5 fw-bold"><%= @payment.user.full_name %></span>
+            <% if @payment.accepted %>
+              <span class="badge bg-success">Accepted</span>
+            <% end %>
+            <% if @payment.rejected %>
+              <span class="badge bg-danger">Rejected</span>
+            <% end %>
+          </div>
+          <%= number_to_currency @payment.amount %>
+        </div>
+      </div>
+      <div class="card-body">
+        <table class="table">
+          <tbody>
+            <% if @payment.user.student? %>
+              <tr>
+                <th>Class</th>
+                <td><%= @payment.user.classroom.name %></td>
+              </tr>
+            <% end %>
+            <tr>
+              <th>Year</th>
+              <td><%= @payment.year %></td>
+            </tr>
+            <tr>
+              <th>Term</th>
+              <td><%= @payment.term %></td>
+            </tr>
+            <tr>
+              <th>Date</th>
+              <td>
+                <%= @payment.created_at.localtime.strftime('%a %d %b, %Y - %H:%M') %>
+              </td>
+            </tr>
+            <tr>
+              <td colspan='2'>
+                <h6>Bank Deposit Slip</h6>
+                <%= image_tag url_for(@payment.deposit_slip), class: 'img-fluid' %>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <% if current_user.admin? %>
+      <div class="card">
+        <div class="card-body">
+          <h3 class="card-title">Admin Action</h3>
+          <div class="d-flex">
+            <%= bootstrap_form_with(model: @payment) do |form| %>
+              <%= form.hidden_field :accepted, value: true %>
+              <%= form.hidden_field :rejected, value: false %>
+              <%= form.primary 'Accept' %>
+            <% end %>
+            <span class="mx-1"></span>
+            <%= bootstrap_form_with(model: @payment) do |form| %>
+              <%= form.hidden_field :rejected, value: true %>
+              <%= form.hidden_field :accepted, value: false %>
+              <%= form.submit 'Reject' %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

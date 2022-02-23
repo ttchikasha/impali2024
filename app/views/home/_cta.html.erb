@@ -1,0 +1,61 @@
+<!-- ======= Cta Section ======= -->
+<section id="cta" class="cta">
+  <div class="container" data-aos="zoom-in">
+    <div class="text-center">
+      <h3>Apply Today</h3>
+      <p>Secure your child's future through the transformative, results oriented and high quality education at Impali Primary School. </p>
+      <a data-bs-toggle="modal" data-bs-target="#applicationModal" class="cta-btn" href="#">Apply Today</a>
+    </div>
+  </div>
+</section>
+<!-- End Cta Section -->
+<div class="modal fade" id="applicationModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Online Application</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <% online_application = OnlineApplication.new  %>
+      <%= bootstrap_form_with(model: online_application) do |form| %>
+        <div class="modal-body">
+          <%= form.text_field :first_name, floating: true, required: true %>
+          <%= form.text_field :last_name, floating: true, required: true %>
+          <%= form.email_field :email, floating: true, required: true %>
+          <div class="row">
+            <div class="col-sm-6">
+              <%= form.select :grade, User.grades.keys.reject {|g| g == 'None'}, floating: true, required: true %>
+            </div>
+            <div class="col-sm-6">
+              <%= form.select :gender, User::GENDER_TYPES, floating: true %>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-6">
+              <%= form.text_field :phone, floating: true, required: true %>
+            </div>
+            <div class="col-sm-6">
+              <%= form.date_field :date_of_birth, floating: true, required: true %>
+            </div>
+          </div>
+          <%= form.hidden_field :state, value: OnlineApplication::PENDING %>
+          <%= form.text_field :address, floating: true, required: true %>
+          <%= form.text_field :city, floating: true, required: true %>
+          <div data-controller="multi-upload">
+            <div class="files">
+              <%= form.file_field :files, :multiple => true, :data => {:action => "multi-upload#addFile"} %>
+            </div>
+            <div class="small text-muted">
+              Birth certificate, Proof of residence & Results
+            </div>
+            <div data-multi-upload-target="files"></div>
+          </div>
+        </div>
+        <div class="modal-footer d-flex justify-content-between align-items-center">
+          <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+          <%= form.primary 'Apply' %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

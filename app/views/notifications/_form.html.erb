@@ -1,0 +1,14 @@
+<%= bootstrap_form_with(model: notification) do |form| %>
+  <%= render 'shared/form_alert', resource: notification %>
+  <%= form.text_field :title, floating: true %>
+  <%= form.text_area :content, floating: true, rows: '4', control_class: 'form-control h-100' %>
+  <div class="row">
+    <div class="col-md-6">
+      <%= form.select :tag, Notification.tags.keys, floating: true %>
+    </div>
+    <div class="col-md-6">
+      <%= form.select :to, Notification.tos.keys, floating: true, label: 'Notice To' %>
+    </div>
+  </div>
+  <%= form.primary %>
+<% end %>

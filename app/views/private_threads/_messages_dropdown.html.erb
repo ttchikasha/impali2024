@@ -1,0 +1,41 @@
+<% messages = current_user.unread_messages  %>
+<a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
+  <i class="bi bi-chat-left-text"></i>
+  <% if messages.any? %>
+    <span class="badge bg-success badge-number">
+      <%= messages.count %>
+    </span>
+  <% end %>
+</a><!-- End Messages Icon -->
+<ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow messages">
+  <li class="dropdown-header">
+    You have <%= messages.count %> new <%= 'message'.pluralize messages.count %>
+    <%= link_to messages_path do %>
+      <span class="badge rounded-pill bg-primary p-2 ms-2">View all</span>
+    <% end %>
+  </li>
+  <% current_user.recent_messages.each do |message| %>
+    <% if message.threadable %>
+      <li>
+        <hr class="dropdown-divider">
+      </li>
+      <li class="message-item">
+        <%= link_to message.threadable do %>
+          <%= image_tag message.user.avatar_path, class: 'avatar-img' %>
+          <div>
+            <h4><%= message.user.full_name %></h4>
+            <p><%= truncate message.content, length: 45 %></p>
+            <p><%= time_ago_in_words message.created_at %>. ago</p>
+          </div>
+        <% end %>
+      </li>
+    <% end %>
+  <% end %>
+  <li>
+    <hr class="dropdown-divider">
+  </li>
+  <li class="dropdown-footer">
+    <%= link_to 'Show all messages', messages_path %>
+  </li>
+</ul>
+<!-- End Messages Dropdown Items -->

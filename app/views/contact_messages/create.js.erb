@@ -1,0 +1,5 @@
+var contactFormContainer = document.querySelector('#contact-form');
+var successMsgContainer = document.querySelector('#success-message');
+
+contactFormContainer.innerHTML = "<%= j render('contact_messages/form') %>";
+successMsgContainer.innerHTML = "<%= j render('shared/alerts') %>";

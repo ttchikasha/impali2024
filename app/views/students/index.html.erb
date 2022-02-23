@@ -1,0 +1,90 @@
+<div class="section-title">
+  <p>Students</p>
+  <h2><%= current_user.classroom.name %></h2>
+</div>
+<section class="section dashboard">
+  <div class="row">
+    <div class="col-12">
+      <div class="col-12">
+        <div class="card top-selling overflow-auto">
+          <div class="filter">
+            <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
+            <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+              <li class="dropdown-header text-start">
+                <h6>Filter</h6>
+              </li>
+              <li>
+                <%= link_to 'All', students_path, class: 'dropdown-item' %>
+              </li>
+              <li>
+                <%= link_to 'Paid', students_path(payment_status: 'Paid', gender: params[:gender]), class: 'dropdown-item' %>
+              </li>
+              <li>
+                <%= link_to 'Not Paid', students_path(payment_status: 'Not Paid', gender: params[:gender]), class: 'dropdown-item' %>
+              </li>
+              <li>
+                <%= link_to 'Partial Payment', students_path(payment_status: 'Paid Partially', gender: params[:gender]), class: 'dropdown-item' %>
+              </li>
+            </ul>
+          </div>
+          <div class="card-body pb-0">
+            <h5 class="card-title"><%= pluralize @students.count, 'Student' %> <span>| <%= params[:payment_status] || 'All' %></span>
+              <% if params[:gender] %>
+                <span>| <%= params[:gender] %></span>
+              <% end %>
+            </h5>
+            <table class="table table-borderless">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Name</th>
+                  <th scope="col">Payment Status</th>
+                  <th scope="col">Gender</th>
+                  <th scope="col">Start Date</th>
+                  <th scope="col">Present today?</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% cache @students do  %>
+                  <% @students.each do |user| %>
+                    <% cache [user, user.attendance] do %>
+                      <tr>
+                        <th scope='row'>
+                          <a href="#">
+                            <% if user.avatar.attached? %>
+                              <img src="<%= user.avatar_path %>" alt="">
+                            <% else %>
+                              <%= image_tag 'user.png' %>
+                            <% end %>
+                          </a>
+                        </th>
+                        <td>
+                          <%= link_to user.full_name, user, class: 'text-primary fw-bold' %>
+                        </td>
+                        <td>
+                          <span class="badge bg-<%= user.payment_tag %>">
+                            <%= user.payment_status %>
+                          </span>
+                        </td>
+                        <td>
+                          <%= link_to user.gender, students_path(gender: user.gender, payment_status: params[:payment_status]), class: "badge rounded-pill text-decoration-none #{user.gender == User::MALE ? 'bg-info': 'bg-warning'}" %>
+                        </td>
+                        <td class="fw-bold"><%= user.start_date %></td>
+                        <td>
+                          <div id='<%= "user-#{user.id}-attendance-marker" %>'>
+                            <%= render 'student_attendances/attendance_marker', user: user %>
+                          </div>
+                        </td>
+                      </tr>
+                    <% end %>
+                  <% end %>
+                </tbody>
+              <% end %>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</section>

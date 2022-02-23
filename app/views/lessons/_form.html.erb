@@ -1,0 +1,8 @@
+<%= bootstrap_form_with(model: [lesson.topic, lesson]) do |form| %>
+  <%= render 'shared/form_alert', resource: lesson %>
+  <%= form.text_field :title %>
+  <%= form.rich_text_area :content %>
+  <%= form.file_field :banner_image %>
+  <%= form.file_field :video %>
+  <%= form.primary %>
+<% end %>

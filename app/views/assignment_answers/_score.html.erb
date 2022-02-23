@@ -1,0 +1,3 @@
+<button disabled class='btn btn-lg <%= "btn-#{score > 50 ? 'success' : 'danger'}" %> submit-answer-btn'>
+  <%= number_to_percentage(score, :precision => 0) %>
+</button>

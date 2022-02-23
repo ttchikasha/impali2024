@@ -1,0 +1,5 @@
+var messagesEl = document.querySelector('#messages');
+// messagesEl.innerHTML = '<%= j render(@messages) %>';
+messagesEl.scrollTo({ top: messagesEl.innerHTML.length });
+var messageInputEl = document.querySelector('.message-form-wrapper form textarea');
+messageInputEl.value = '';

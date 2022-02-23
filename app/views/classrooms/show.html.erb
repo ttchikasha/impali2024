@@ -1,0 +1,84 @@
+<div class="pagetitle">
+  <nav>
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item">
+        <%= link_to 'Classes', classrooms_path %>
+      </li>
+      <li class="breadcrumb-item active"><%= @classroom.name %></li>
+    </ol>
+  </nav>
+</div>
+<section class="section profile">
+  <div class="row">
+    <div class="col-xl-4">
+      <div class="card">
+        <div class="card-body pt-4 pb-0">
+          <h1><%= @classroom.name %></h1>
+          <div class="mt-3 d-flex align-items-center justify-content-between">
+            <h6><%= @classroom.students.count %> Students</h6>
+            <h6><%= @classroom.subjects.count %> Subjects</h6>
+          </div>
+        </div>
+        <div class="card-footer">
+          <span class='fw-bold text-uppercase small mb-2 d-block'>Teacher</span>
+          <div class="d-flex align-items-center">
+            <%= image_tag @classroom.teacher.avatar_path, class: 'teacher-avatar me-2' %>
+            <%= @classroom.teacher_name %>
+          </div>
+        </div>
+        <% if current_user.admin? %>
+          <div class="card-footer">
+            <%= link_to 'Edit', edit_classroom_path(@classroom) %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+    <div class="col-xl-8">
+      <div class="card">
+        <div class="card-body pt-3">
+          <ul class="nav nav-tabs nav-tabs-bordered">
+            <li class="nav-item">
+              <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#classroom-subjects">Subjects</button>
+            </li>
+            <li class="nav-item">
+              <button class="nav-link"" data-bs-toggle="tab" data-bs-target="#classroom-students">Students</button>
+            </li>
+          </ul>
+          <div class="tab-content pt-2">
+            <div class="tab-pane fade show active classroom-subjects" id="classroom-subjects">
+              <ol class="list-group list-group-flush list-group-numbered">
+                <% @classroom.classroom_subjects.each do |csub| %>
+                  <li class='list-group-item list-group-item-action'>
+                    <%= link_to csub.name, csub, class: 'fw-bold text-success' %>
+                  </li>
+                <% end %>
+              </ol>
+            </div>
+            <div class="tab-pane fade classroom-students pt-3" id="classroom-students">
+              <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <th scope='col'>#</th>
+                    <th scope='col'>Name</th>
+                    <th scope='col'>Gender</th>
+                    <th scope='col'>Date of Birth</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% @classroom.students.each.with_index do |student, index| %>
+                    <tr>
+                      <td><%= index + 1 %></td>
+                      <td><%= link_to student.full_name, student, class: '' %></td>
+                      <td><%= student.gender %></td>
+                      <td><%= student.date_of_birth.to_s(:long) %></td>
+                    </tr>
+                  <% end %>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

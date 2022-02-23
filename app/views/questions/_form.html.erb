@@ -1,0 +1,18 @@
+<%= bootstrap_form_with(model: [question.questionable, question]) do |form| %>
+  <%= render 'shared/form_alert', resource: question %>
+  <%= form.rich_text_area :text, hide_label: true %>
+  <div data-controller='answers'>
+    <button data-answers-target='btn' data-action="click->answers#toggleForm" class='btn btn-sm btn-outline-success mb-2'>Answer Choices</button>
+    <div data-answers-target='form'>
+      <h5 class="card-title fw-bold border-bottom">Answers</h5>
+      <% letters = ('A'..'D').to_a %>
+      <% count = 0  %>
+      <%= form.fields_for :allowed_answers do |allowed_answers_form| %>
+        <label class="form-label"><%= "Answer #{letters[count]}" %></label>
+        <%= allowed_answers_form.rich_text_area :content, hide_label: true  %>
+        <% count += 1 %>
+      <% end %>
+    </div>
+  </div>
+  <%= form.primary %>
+<% end %>

@@ -1,0 +1,5 @@
+Dear <%= @payment.user.full_name %>
+This is to inform you that your payment (<%= number_to_currency @payment.amount %>) was <%= @payment.accepted ? 'successful' : 'rejected' %>
+<% unless @payment.accepted %>
+  Please visit/contact the school for more infomation on why your payment was rejected
+<% end %>

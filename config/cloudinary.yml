@@ -1,0 +1,19 @@
+---
+development:
+  cloud_name: blessed-sibanda
+  api_key: '974366665484234'
+  api_secret: _-hULf3rgWOoshPAim0T2IOkjZY
+  enhance_image_tag: true
+  static_file_support: false
+production:
+  cloud_name: blessed-sibanda
+  api_key: '974366665484234'
+  api_secret: _-hULf3rgWOoshPAim0T2IOkjZY
+  enhance_image_tag: true
+  static_file_support: true
+test:
+  cloud_name: blessed-sibanda
+  api_key: '974366665484234'
+  api_secret: _-hULf3rgWOoshPAim0T2IOkjZY
+  enhance_image_tag: true
+  static_file_support: false

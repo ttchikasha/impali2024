@@ -1,0 +1,49 @@
+<div class="section-title">
+  <div class="d-flex align-items-center justify-content-between">
+    <p><%= current_user.full_name %></p>
+  </div>
+  <h2>Reports & Marks</h2>
+</div>
+<div class="section dashboard">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card top-selling">
+        <div class="card-body">
+          <h5 class="card-title">Marks</h5>
+          <table class="table table-borderless">
+            <thead>
+              <th>#</th>
+              <th>Due Date</th>
+              <th>Name</th>
+              <th>Questions</th>
+              <th>Score</th>
+            </thead>
+            <tbody>
+              <% cache @answers do %>
+                <% @answers.each do |answer| %>
+                  <% cache [answer, answer.assignment] do %>
+                    <tr>
+                      <td><%= answer.id %></td>
+                      <td><%= answer.assignment.due.to_s(:long) %></td>
+                      <% name = answer.assignment.classroom_subject.name + " Assignment " + answer.assignment.number.to_s %>
+                      <td><%= link_to name, assignment_assignment_answer_url(answer.assignment, answer) %></td>
+                      <td>
+                        <span class="badge bg-secondary">
+                          <%= pluralize answer.assignment.questions.count, 'Question' %>
+                        </span>
+                      </td>
+                      <td class='<%= answer.score < 50 ? 'text-danger' : 'text-success' %>'>
+                        <%= number_to_percentage answer.score, precision: 0 %>
+                      </td>
+                    </tr>
+                  <% end %>
+                <% end %>
+              <% end %>
+            </tbody>
+          </table>
+          <%= will_paginate @answers %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

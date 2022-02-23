@@ -1,0 +1,34 @@
+<% cache @assignment do %>
+  <header id='header'>
+    <h2>
+      <%= @assignment.classroom_subject.classroom.name %>
+    </h2>
+    <h3>
+      <%= @assignment.classroom_subject.name %>
+    </h3>
+  </header>
+  <h4>Assignment <%= @assignment.number %></h4>
+  <p>Due: <%= @assignment.due.to_s(:short) %></p>
+  <br>
+  <ol>
+    <% @assignment.questions.each do |question| %>
+      <li>
+        <div>
+          <strong><%= question.text %></strong>
+          <% letters = ('A'..'D').to_a  %>
+          <ul>
+            <% question.allowed_answers.each.with_index do |answer, index| %>
+              <div style='margin: 0.5em'>
+                <span style='float: left;'>
+                  <%= letters[index] %>.&nbsp;&nbsp;
+                </span>
+                <%= answer.content %>
+              </div>
+            <% end %>
+          </ul>
+        </div>
+      </li>
+      <br>
+    <% end %>
+  </ol>
+<% end %>

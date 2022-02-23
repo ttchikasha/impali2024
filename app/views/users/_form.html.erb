@@ -1,0 +1,53 @@
+<%= bootstrap_form_with(model: user, url: users_url, html: {data: {controller: 'user-form'}}) do |f| %>
+  <%= f.alert_message "Please fix the errors below.", error_summary: false %>
+  <div class="row">
+    <div class="col-md-6">
+      <%= f.text_field :first_name, floating: true %>
+    </div>
+    <div class="col-md-6">
+      <%= f.text_field :last_name, floating: true %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-4">
+      <%= f.text_field :phone, floating: true, help: 'For students, use parents\'s phone # ' %>
+    </div>
+    <div class="col-md-4">
+      <%= f.text_field :address, floating: true %>
+    </div>
+    <div class="col-md-4">
+      <%= f.text_field :city, floating: true %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-4">
+      <%= f.email_field :email, floating: true %>
+    </div>
+    <div class="col-md-4">
+      <%= f.text_field :id_no, floating: true, label: 'National ID # or Birth Certificate #' %>
+    </div>
+    <div class="col-md-4">
+      <%= f.select :gender, User::GENDER_TYPES, floating: true %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <%= f.date_field :start_date, floating: true %>
+    </div>
+    <div class="col-md-6">
+      <%= f.date_field :date_of_birth, floating: true %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-4">
+      <%= f.select :role, User.roles.keys, floating: true, wrapper: { data: { 'user-form-target' => 'role' } } %>
+    </div>
+    <div class="col-md-4">
+      <%= f.select :grade, User.grades.keys, floating: true, wrapper: { data: { 'user-form-target' => 'grade' } } %>
+    </div>
+    <div class="col-md-4">
+      <%= f.select :room, Rooms::TYPES, floating: true, wrapper: { data: { 'user-form-target' => 'room' } } %>
+    </div>
+  </div>
+  <%= f.primary 'Submit' %>
+<% end %>

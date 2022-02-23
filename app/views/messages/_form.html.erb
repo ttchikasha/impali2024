@@ -1,0 +1,6 @@
+<%= bootstrap_form_with(model: [message.threadable, message], html: {class: 'd-flex align-items-start justify-content-between pb-1 message-form'}, data: {remote: true}) do |form| %>
+  <%= form.text_area :content, hide_label: :true, wrapper: {class: 'w-75 ms-2'}, required: true %>
+  <%= form.hidden_field :threadable_id, value: message.threadable.id %>
+  <%= form.hidden_field :threadable_type, value: message.threadable_type %>
+  <%= form.submit 'Send', class: 'btn btn-primary w-25 mx-3' %>
+<% end %>

@@ -1,0 +1,39 @@
+<h5 class="card-title">Profile Details</h5>
+<div class="row">
+  <div class="col-lg-3 col-md-4 label ">Full Name</div>
+  <div class="col-lg-9 col-md-8"><%= user.full_name %></div>
+</div>
+<div class="row">
+  <div class="col-lg-3 col-md-4 label">Login ID</div>
+  <div class="col-lg-9 col-md-8"><%= user.login_id %></div>
+</div>
+<div class="row">
+  <div class="col-lg-3 col-md-4 label">Start Date</div>
+  <div class="col-lg-9 col-md-8"><%= user.start_date.to_s(:medium) %></div>
+</div>
+<div class="row">
+  <div class="col-lg-3 col-md-4 label">Role</div>
+  <div class="col-lg-9 col-md-8"><%= user.role %></div>
+</div>
+<div class="row">
+  <div class="col-lg-3 col-md-4 label">Gender</div>
+  <div class="col-lg-9 col-md-8"><%= user.gender %></div>
+</div>
+<div class="row">
+  <div class="col-lg-3 col-md-4 label">City</div>
+  <div class="col-lg-9 col-md-8"><%= user.city %></div>
+</div>
+<div class="row">
+  <div class="col-lg-3 col-md-4 label">Address</div>
+  <div class="col-lg-9 col-md-8"><%= user.address %></div>
+</div>
+<% if user.phone %>
+  <div class="row">
+    <div class="col-lg-3 col-md-4 label">Phone</div>
+    <div class="col-lg-9 col-md-8"><%= user.phone %></div>
+  </div>
+<% end %>
+<div class="row">
+  <div class="col-lg-3 col-md-4 label">Email</div>
+  <div class="col-lg-9 col-md-8"><%= user.email %></div>
+</div>

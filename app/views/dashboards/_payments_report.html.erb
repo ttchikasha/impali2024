@@ -1,0 +1,20 @@
+<div class="card">
+  <div class="filter">
+    <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
+    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+      <li class="dropdown-header text-start">
+        <h6>Filter</h6>
+      </li>
+      <li>
+        <%= link_to 'Monthly', dashboard_path(payment: 'Monthly'), class: 'dropdown-item' %>
+      </li>
+      <li>
+        <%= link_to 'Weekly', dashboard_path(payment: 'Weekly'), class: 'dropdown-item' %>
+      </li>
+    </ul>
+  </div>
+  <div class="card-body">
+    <h5 class="card-title">Payments <span>/<%= params[:payment] || 'Monthly' %></span></h5>
+    <%= line_chart @payments_data, prefix: "$", round: 2, zeros: true %>
+  </div>
+</div>

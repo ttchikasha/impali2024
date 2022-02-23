@@ -1,0 +1,14 @@
+.btn-close {
+  background-size: 25%;
+}
+.btn-close:focus {
+  outline: 0;
+  box-shadow: none;
+}
+
+.btn.submit-answer-btn,
+.student-result {
+  position: fixed;
+  right: 1em;
+  bottom: 1em;
+}

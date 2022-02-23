@@ -1,0 +1,146 @@
+<%= stylesheet_link_tag "pricing", media: "all", 'data-turbolinks-track': "reload" %>
+<div class="section-title">
+  <div class="d-flex justify-content-md-between align-items-md-center">
+    <p>Payments</p>
+    <% if current_user.admin? %>
+      <%= link_to 'Update Payments', edit_school_payment_path(SchoolPayment.first), class: 'btn btn-outline-primary' %>
+    <% end %>
+  </div>
+  <h2><%= Date.today.year %> Payments & Fees</h2>
+</div>
+</div>
+<section id="pricing" class="pricing">
+  <div class="row">
+    <div class="col-lg-4 col-md-6" data-aos="zoom-im" data-aos-delay="100">
+      <div class="box">
+        <h3>Tuition</h3>
+        <h4><sup>$</sup><%= number_to_currency SchoolPayment.current.tution, unit: '', precision: 0 %><span> / term</span></h4>
+        <% unless current_user.admin? %>
+          <div class="btn-wrap">
+            <a data-bs-toggle="modal" data-bs-target="#paymentModal" href="#" class="btn-buy">Make Payment</a>
+          </div>
+        <% end %>
+      </div>
+    </div>
+    <div class="col-lg-4 col-md-6 mt-4 mt-md-0" data-aos="zoom-in" data-aos-delay="100">
+      <div class="box featured">
+        <h3>Levy</h3>
+        <h4><sup>$</sup><%= number_to_currency SchoolPayment.current.levy, unit: '', precision: 0 %><span> / term</span></h4>
+        <% unless current_user.admin? %>
+          <div class="btn-wrap">
+            <a data-bs-toggle="modal" data-bs-target="#paymentModal" href="#" class="btn-buy">Make Payment</a>
+          </div>
+        <% end %>
+      </div>
+    </div>
+    <div class="col-lg-4 col-md-6 mt-4 mt-lg-0" data-aos="zoom-in" data-aos-delay="100">
+      <% if current_user.admin? %>
+        <div class="box">
+          <h3>Total this Term</h3>
+          <h4>
+            <sup>$</sup>
+            <%= number_to_currency SchoolPayment.total_this_term, unit: '', precision: 0 %><span> / term</span>
+          </h4>
+        </div>
+      <% else %>
+        <div class="box text-start py-3">
+          <h3>Summary</h3>
+          <ul class="list-group list-group-flush text-start">
+            <li class="list-group-item">Previous Balance<span class="float-end"><%= number_to_currency 0 %></span></li>
+            <li class="list-group-item">Current Total
+              <span class="float-end"><%= number_to_currency SchoolPayment.total_this_term %></span>
+            </li>
+            <li class="list-group-item">Total Paid<span class="float-end">
+                <%= number_to_currency current_user.total_paid %></span>
+            </li>
+            <li class="list-group-item">
+              Current Balance<span class="float-end">
+                <%= number_to_currency current_user.current_balance %>
+              </span>
+            </li>
+          </ul>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</section>
+<%= render 'payments/modal_form' %>
+<br>
+<section class="section dashboard">
+  <div class="row">
+    <div class="col-12">
+      <div class="card top-selling overflow-auto">
+        <div class="filter">
+          <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
+          <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+            <li class="dropdown-header text-start">
+              <h6>Filter</h6>
+            </li>
+            <li>
+              <%= link_to 'All', payments_path, class: 'dropdown-item' %>
+            </li>
+            <li>
+              <%= link_to 'Accepted', payments_path(accepted: true), class: 'dropdown-item' %>
+            </li>
+            <li>
+              <%= link_to 'Rejected', payments_path(rejected: true), class: 'dropdown-item' %>
+            </li>
+            <li>
+              <%= link_to 'Pending', payments_path(pending: true), class: 'dropdown-item' %>
+            </li>
+          </ul>
+        </div>
+        <div class="card-body pb-0">
+          <h5 class="card-title">
+            Payment History <span>| <%= @filter %></span>
+          </h5>
+          <table class='table table-borderless'>
+            <thead>
+              <tr>
+                <th scope='col'>#</th>
+                <th scope="col">Date</th>
+                <% if current_user.admin? %>
+                  <th scope="col">Student</th>
+                <% end %>
+                <th scope="col">Term</th>
+                <th scope="col">Year</th>
+                <th scope="col">Amount</th>
+                <th scope="col">Status</th>
+                <% if current_user.student? %>
+                  <th scope="col">Action</th>
+                <% end %>
+              </tr>
+            </thead>
+            <tbody>
+              <% cache @payments do %>
+                <% @payments.each do |payment| %>
+                  <% cache payment do %>
+                    <tr>
+                      <td><%= payment.id %></td>
+                      <td><%= payment.created_at.localtime.to_s(:short) %></td>
+                      <% if current_user.admin? %>
+                        <td><%= link_to payment.user.full_name, payment, class: 'fw-bold' %></td>
+                      <% end %>
+                      <td><%= payment.term %></td>
+                      <td><%= payment.year %></td>
+                      <td><%= number_to_currency payment.amount %></td>
+                      <td>
+                        <span class="badge <%= payment.status_class %>">
+                          <%= payment.status %>
+                        </span>
+                      </td>
+                      <% if current_user.student? %>
+                        <td><%= link_to 'View', payment %></td>
+                      <% end %>
+                    </tr>
+                  <% end %>
+                <% end %>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<br>

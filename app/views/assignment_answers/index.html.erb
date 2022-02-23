@@ -1,0 +1,38 @@
+<div class="section-title">
+  <div class="d-flex align-items-center justify-content-between">
+    <p><%= current_user.classroom.name %></p>
+  </div>
+  <h2><%= @assignment.classroom_subject.name %> Assignment  <%= @assignment.number %></h2>
+</div>
+<div class="section dashboard">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card top-selling">
+        <div class="card-body">
+          <h5 class="card-title">Assignment Submissions</h5>
+          <table class="table table-borderless">
+            <thead>
+              <th>Student</th>
+              <th>Assignment</th>
+              <th>Score</th>
+            </thead>
+            <tbody>
+              <% @answers.each do |answer| %>
+                <% unless answer.user.teacher? %>
+                  <tr>
+                    <td><%= answer.user.full_name %></td>
+                    <td><%= link_to 'Review', assignment_assignment_answer_url(@assignment, answer) %></td>
+                    <td>
+                      <%= number_to_percentage answer.score, precision: 0 %>
+                    </td>
+                  </tr>
+                <% end %>
+              <% end %>
+            </tbody>
+          </table>
+          <%= will_paginate @answers %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

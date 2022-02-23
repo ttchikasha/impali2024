@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Classroom subject:</strong>
+  <%= @report.classroom_subject_id %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @report.user_id %>
+</p>
+
+<p>
+  <strong>Actual mark:</strong>
+  <%= @report.actual_mark %>
+</p>
+
+<p>
+  <strong>Total marks:</strong>
+  <%= @report.total_marks %>
+</p>
+
+<p>
+  <strong>Report type:</strong>
+  <%= @report.report_type %>
+</p>
+
+<%= link_to 'Edit', edit_report_path(@report) %> |
+<%= link_to 'Back', reports_path %>

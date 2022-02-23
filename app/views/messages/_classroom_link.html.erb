@@ -1,0 +1,14 @@
+<% unless current_user.admin? %>
+  <% if current_user.classroom %>
+    <li class="nav-heading">Classroom Chat</li>
+    <li class="nav-item">
+      <%= link_to chat_room_classroom_path(current_user.classroom), class: "nav-link chat-list-item border-0 collapsed" do %>
+        <%= image_tag current_user.classroom.teacher.avatar_path %>
+        <div>
+          <p class='name'><%= current_user.classroom.name %></p>
+          <p class='message'>Velit asperiores et ducimus soluta..</p>
+        </div>
+      <% end %>
+    </li>
+  <% end %>
+<% end %>

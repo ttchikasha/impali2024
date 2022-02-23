@@ -1,0 +1,20 @@
+<%= bootstrap_form_with(model: school_payment) do |form| %>
+  <%= render 'shared/form_alert', resource: school_payment %>
+  <div class="row">
+    <div class="col-md-6">
+      <%= form.text_field :levy, floating: true %>
+    </div>
+    <div class="col-md-6">
+      <%= form.text_field :tution, floating: true %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <%= form.select :year, SchoolPayment.years, floating: true %>
+    </div>
+    <div class="col-md-6">
+      <%= form.select :term, SchoolPayment.terms.keys, floating: true %>
+    </div>
+  </div>
+  <%= form.primary 'Update' %>
+<% end %>

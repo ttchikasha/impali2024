@@ -1,0 +1,18 @@
+<% cache assignment do %>
+  <% if assignment.started? || current_user.teacher? %>
+    <div class="col-md-6 d-flex align-items-stretch">
+      <div class="card">
+        <div class="card-img">
+          <%= image_tag assignment.banner_image_path %>
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">
+            <%= link_to assignment.classroom_subject.name, assignment %>
+          </h5>
+          <p class='card-text text-center'>Assignment <%= assignment.number %></p>
+          <p class="fst-italic fs-6 text-center"><strong>Due:</strong> <%= assignment.due.to_s(:long) %></p>
+        </div>
+      </div>
+    </div>
+  <% end %>
+<% end %>

@@ -1,0 +1,109 @@
+<header id="header" class="header fixed-top d-flex align-items-center">
+  <div class="d-flex align-items-center justify-content-between">
+    <%= link_to root_path, class: 'logo d-flex align-items-center' do %>
+      <%# <img src="assets/img/logo.png" alt=""> %>
+      <span class="d-none d-lg-block">Impali</span>
+    <% end %>
+    <i data-action="click->toggle-sidebar#toggle" class="bi bi-list toggle-sidebar-btn"></i>
+  </div>
+  <!-- End Logo -->
+  <div class="search-bar">
+    <%= bootstrap_form_tag url: users_url, method: :get do |f| %>
+      <div class='search-form d-flex align-items-center'>
+        <input type="text" name="query" placeholder="Search <%= current_user.student? ? 'Students' : 'Users' %>.." title="Enter search keyword">
+        <button type="submit" title="Search"><i class="bi bi-search"></i></button>
+      </div>
+    <% end %>
+  </div>
+  <!-- End Search Bar -->
+  <nav class="header-nav ms-auto">
+    <ul class="d-flex align-items-center">
+      <li class="nav-item d-block d-lg-none">
+        <a class="nav-link nav-icon search-bar-toggle " href="#">
+          <i class="bi bi-search"></i>
+        </a>
+      </li>
+      <!-- End Search Icon-->
+      <li class="nav-item dropdown">
+        <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
+          <i class="bi bi-bell"></i>
+          <% if current_user.unread_notifications.any? %>
+            <span class="badge bg-primary badge-number">
+              <%= current_user.unread_notifications.count %>
+            </span>
+          <% end %>
+        </a><!-- End Notification Icon -->
+        <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
+          <li class="dropdown-header">
+            <% if current_user.unread_notifications.any? %>
+              You have <%= current_user.unread_notifications.count %> new 
+              <%= 'notification'.pluralize current_user.unread_notifications.count %>
+            <% else %>
+              Recently posted notifications
+            <% end %>
+            <%= link_to notifications_path do %>
+              <span class="badge rounded-pill bg-primary p-2 ms-2">View all</span>
+            <% end %>
+          </li>
+          <% Notification.recent.each do |notice| %>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+            <li class="notification-item">
+              <i class="bi bi-<%= notice.icon %> text-<%= notice.tag %>"></i>
+              <div>
+                <h4><%= notice.title %></h4>
+                <p><%= truncate notice.content, length: 38 %></p>
+                <p><%= time_ago_in_words notice.created_at %>. ago</p>
+              </div>
+            </li>
+          <% end %>
+          <li>
+            <hr class="dropdown-divider">
+          </li>
+          <li class="dropdown-footer">
+            <%= link_to 'Show all notifications', notifications_path %>
+          </li>
+        </ul>
+        <!-- End Notification Dropdown Items -->
+      </li>
+      <!-- End Notification Nav -->
+      <li id='messages-dropdown' class="nav-item dropdown">
+        <%= render 'private_threads/messages_dropdown' %>
+      </li>
+      <!-- End Messages Nav -->
+      <li class="nav-item dropdown pe-3">
+        <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
+          <%= image_tag current_user.avatar_path, class: 'rounded-circle' %>
+          <span class="d-none d-md-block dropdown-toggle ps-2"><%= current_user.display_name %></span>
+        </a><!-- End Profile Iamge Icon -->
+        <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
+          <li class="dropdown-header">
+            <h6><%= current_user.full_name %></h6>
+            <span><%= current_user.role %></span>
+          </li>
+          <li>
+            <hr class="dropdown-divider">
+          </li>
+          <li>
+            <%= link_to profile_users_path, class: 'dropdown-item d-flex align-items-center' do %>
+              <i class="bi bi-gear"></i>
+              <span>Account Settings</span>
+            <% end %>
+          </li>
+          <li>
+            <hr class="dropdown-divider">
+          </li>
+          <li>
+            <%= link_to destroy_user_session_path, class: 'dropdown-item d-flex align-items-center', method: :delete do %>
+              <i class="bi bi-box-arrow-right"></i>
+              <span>Sign Out</span>
+            <% end %>
+          </li>
+        </ul>
+        <!-- End Profile Dropdown Items -->
+      </li>
+      <!-- End Profile Nav -->
+    </ul>
+  </nav><!-- End Icons Navigation -->
+</header>

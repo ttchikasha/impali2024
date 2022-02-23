@@ -1,0 +1,12 @@
+<%= bootstrap_form_with(model: online_application) do |form| %>
+  <%= render 'shared/form_alert', resource: online_application %>
+  <%= form.text_field :first_name %>
+  <%= form.text_field :last_name %>
+  <%= form.text_field :phone %>
+  <%= form.text_field :email %>
+  <%= form.number_field :grade %>
+  <%= form.text_field :gender %>
+  <%= form.text_field :address %>
+  <%= form.text_field :city %>
+  <%= form.primary %>
+<% end %>

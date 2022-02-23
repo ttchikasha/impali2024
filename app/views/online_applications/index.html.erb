@@ -1,0 +1,73 @@
+<div class="section-title">
+  <p>Applications</p>
+  <h2>Online Applications</h2>
+</div>
+<section class="section dashboard">
+  <div class="row">
+    <div class="col-12">
+      <div class="col-12">
+        <div class="card top-selling overflow-auto">
+          <div class="filter">
+            <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
+            <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+              <li class="dropdown-header text-start">
+                <h6>Filter</h6>
+              </li>
+              <li>
+                <%= link_to 'All', online_applications_path, class: 'dropdown-item' %>
+              </li>
+              <li>
+                <%= link_to 'Accepted', online_applications_path(state: 'Accept'), class: 'dropdown-item' %>
+              </li>
+              <li>
+                <%= link_to 'Pending', online_applications_path(state: 'Wait'), class: 'dropdown-item' %>
+              </li>
+              <li>
+                <%= link_to 'Rejected', online_applications_path(state: 'Reject'), class: 'dropdown-item' %>
+              </li>
+            </ul>
+          </div>
+          <div class="card-body pb-0">
+            <h5 class="card-title">
+              Applications <span>| 
+                <%= params[:state] ? params[:state] + 'ed' : 'All' %></span>
+            </h5>
+            <table class='table table-borderless'>
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Date</th>
+                  <th>Grade</th>
+                  <th>Gender</th>
+                  <th>State</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% cache @online_applications do %>
+                  <% @online_applications.each do |online_application| %>
+                    <% cache online_application do %>
+                      <tr>
+                        <td>
+                          <%= link_to online_application.full_name, online_application %>
+                        </td>
+                        <td><%= online_application.created_at.localtime.strftime('%a %d %b, %Y - %H:%M') %></td>
+                        <td><%= online_application.grade %></td>
+                        <td><%= online_application.gender %></td>
+                        <td>
+                          <span class="badge bg-<%= online_application.css_class %>">
+                            <%= online_application.state_name %>
+                          </span>
+                        </td>
+                      </tr>
+                    <% end %>
+                  <% end %>
+                <% end %>
+              </tbody>
+            </table>
+            <%= will_paginate @online_applications %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

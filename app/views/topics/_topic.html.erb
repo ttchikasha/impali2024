@@ -1,0 +1,18 @@
+<% cache topic do %>
+  <div class="d-flex align-items-stretch mb-3">
+    <div class="course-item">
+      <%# 
+    <%= image_tag topic.banner_image_path, class: 'img-fluid topic-image' %>
+      <div class="course-content pb-0">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <h4><%= link_to topic.classroom_subject.name, topic.classroom_subject, class: 'text-white' %></h4>
+          <span class="badge bg-secondary">
+            <%= pluralize topic.lessons.count, 'lesson' %>
+          </span>
+        </div>
+        <h3><%= link_to topic.title, classroom_subject_topic_path(topic.classroom_subject, topic) %></h3>
+        <p><%= truncate topic.description, length: 80 %></p>
+      </div>
+    </div>
+  </div>
+<% end %>

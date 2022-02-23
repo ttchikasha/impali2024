@@ -1,0 +1,36 @@
+<aside id="sidebar" class="sidebar">
+  <ul class="sidebar-nav chat-sidebar-nav" id="sidebar-nav">
+    <li class="nav-heading"><%= current_user.teacher? ? "Teacher" : current_user.admin? ? 'Admin' : 'Students' %> Portal</li>
+    <li class="nav-item">
+      <%= link_to dashboard_path, class: "nav-link #{'collapsed' unless on_dashboard?}" do %>
+        <i class="bi bi-grid"></i>
+        <span>Dashboard</span>
+      <% end %>
+    </li>
+    <li class="nav-item">
+      <%= link_to contact_messages_path, class: "nav-link #{'collapsed' unless on_contact_messages?}" do %>
+        <i class="bi bi-chat"></i>
+        <span>Site Messages</span>
+      <% end %>
+    </li>
+    <%= render 'messages/classroom_link' %>
+    <li class="nav-heading">Private Chats</li>
+    <%= cache current_user.chat_people do %>
+      <% current_user.chat_people.each do |person| %>
+        <% unless person == current_user %>
+          <% cache person do %>
+            <li class="nav-item">
+              <%= link_to private_threads_path(user_id: person.id), class: "nav-link chat-list-item collapsed", method: :post do %>
+                <%= image_tag person.avatar_path %>
+                <div>
+                  <p class='name'><%= person.full_name %></p>
+                  <p class='message'>Velit asperiores et ducimus soluta..</p>
+                </div>
+              <% end %>
+            </li>
+          <% end %>
+        <% end %>
+      <% end %>
+    <% end %>
+  </ul>
+</aside>

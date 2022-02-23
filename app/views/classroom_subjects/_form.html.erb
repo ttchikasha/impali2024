@@ -1,0 +1,27 @@
+<%= form_with(model: classroom_subject) do |form| %>
+  <% if classroom_subject.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(classroom_subject.errors.count, "error") %> prohibited this classroom_subject from being saved:</h2>
+      <ul>
+        <% classroom_subject.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="field">
+    <%= form.label :subject_id %>
+    <%= form.text_field :subject_id %>
+  </div>
+  <div class="field">
+    <%= form.label :classroom_id %>
+    <%= form.text_field :classroom_id %>
+  </div>
+  <div class="field">
+    <%= form.label :teacher_id %>
+    <%= form.text_field :teacher_id %>
+  </div>
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

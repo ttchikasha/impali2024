@@ -1,0 +1,17 @@
+<div class="section-title mt-3">
+  <div class="d-flex align-items-center justify-content-between">
+    <p>Question <%= @question.number %></p>
+    <p><%= @question.classroom_name %></p>
+  </div>
+  <h2>
+    <%= @question.questionable.classroom_subject.name %>
+    - Assignment 
+    <%= @question.questionable.number %>
+  </h2>
+</div>
+<div class="card">
+  <div class="card-body">
+    <h3 class="card-title">Edit Question</h3>
+    <%= render 'form', question: @question %>
+  </div>
+</div>

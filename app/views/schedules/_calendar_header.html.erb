@@ -1,0 +1,35 @@
+<% if current_user&.admin? %>
+  <div class="d-flex justify-content-around align-items-center mb-2">
+    <div class='me-auto'>
+      <button data-action="click->calendar#prev" class="btn btn-sm btn-secondary">Prev</button>
+      <button data-action="click->calendar#today" class="btn btn-sm btn-success">Today</button>
+      <button data-action="click->calendar#next" class="btn btn-sm btn-secondary">Next</button>
+    </div>
+    <h4 data-calendar-target='header'></h4>
+    <div class='ms-auto'>
+      <button data-calendar-target="month" data-action="click->calendar#setMonthView" class="btn btn-sm btn-secondary">Month</button>
+      <button data-calendar-target="monthActive" data-action="click->calendar#setMonthView" class="btn btn-sm btn-primary">Month</button>
+      <button data-calendar-target="week" data-action="click->calendar#setWeekView" class="btn btn-sm btn-secondary">Week</button>
+      <button data-calendar-target="weekActive" data-action="click->calendar#setWeekView" class="btn btn-sm btn-primary">Week</button>
+      <button data-calendar-target="day" data-action="click->calendar#setDayView" class="btn btn-sm btn-secondary">Day</button>
+      <button data-calendar-target="dayActive" data-action="click->calendar#setDayView" class="btn btn-sm btn-primary">Day</button>
+    </div>
+  </div>
+<% else %>
+  <div class="d-flex justify-content-around align-items-center mb-2">
+    <div class='me-auto'>
+      <button data-action="click->readonly-calendar#prev" class="btn btn-sm btn-secondary">Prev</button>
+      <button data-action="click->readonly-calendar#today" class="btn btn-sm btn-success">Today</button>
+      <button data-action="click->readonly-calendar#next" class="btn btn-sm btn-secondary">Next</button>
+    </div>
+    <h4 data-readonly-calendar-target='header'></h4>
+    <div class='ms-auto'>
+      <button data-readonly-calendar-target="month" data-action="click->readonly-calendar#setMonthView" class="btn btn-sm btn-secondary">Month</button>
+      <button data-readonly-calendar-target="monthActive" data-action="click->calendar#setMonthView" class="btn btn-sm btn-primary">Month</button>
+      <button data-readonly-calendar-target="week" data-action="click->readonly-calendar#setWeekView" class="btn btn-sm btn-secondary">Week</button>
+      <button data-readonly-calendar-target="weekActive" data-action="click->readonly-calendar#setWeekView" class="btn btn-sm btn-primary">Week</button>
+      <button data-readonly-calendar-target="day" data-action="click->readonly-calendar#setDayView" class="btn btn-sm btn-secondary">Day</button>
+      <button data-readonly-calendar-target="dayActive" data-action="click->readonly-calendar#setDayView" class="btn btn-sm btn-primary">Day</button>
+    </div>
+  </div>
+<% end %>

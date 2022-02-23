@@ -1,0 +1,16 @@
+<div class="private-thread">
+  <div class='thread-header'>
+    <div class='d-flex align-items-center'>
+      <div class="ms-2 fs-5 fw-bold"><%= @classroom.name %> Chat Room</div>
+    </div>
+  </div>
+  <div data-controller='messages' id="messages">
+    <% messages = @classroom.messages.select {|m| m.persisted? } %>
+    <% cache messages do %>
+      <%= render messages %>
+    <% end %>
+  </div>
+  <div class="message-form-wrapper">
+    <%= render 'messages/form', message: @message %>
+  </div>
+</div>

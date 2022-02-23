@@ -1,0 +1,27 @@
+@import 'trix/dist/trix.css';
+
+.pdf {
+  table,
+  th,
+  td {
+    border: 1px solid black;
+    border-collapse: collapse;
+  }
+  table {
+    width: 100%;
+  }
+
+  header#header {
+    color: blue;
+    display: flex;
+    display: -webkit-flex;
+    -webkit-align-items: center;
+    align-items: center;
+    -webkit-justify-content: space-between;
+    justify-content: space-between;
+  }
+
+  #content {
+    display: flex;
+  }
+}

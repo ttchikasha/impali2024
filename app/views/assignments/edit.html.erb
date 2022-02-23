@@ -1,0 +1,10 @@
+<div class="section-title">
+  <p><%= @assignment.classroom_subject.name %></p>
+  <h2>Assignment <%= @assignment.number %></h2>
+</div>
+<div class="card">
+  <div class="card-body">
+    <h3 class="card-title fw-bold">Edit Assignment</h3>
+    <%= render 'form', assignment: @assignment %>
+  </div>
+</div>
