@@ -1,4 +1,7 @@
-User.create first_name: "Blessed", last_name: "Sibanda", email: "blessedsibanda.me@gmail.com", date_of_birth: Date.new(1996, 8, 15), start_date: Date.new(2022, 1, 10), gender: "Male", phone: "+263777330363", id_no: "08-2035675L53", role: "Admin", password: "secret", city: "Gweru", address: "2517 Woodlands", grade: "Grade 7", room: "Yellow"
+User.create first_name: "Blessed", last_name: "Sibanda", email: "blessedsibanda.me@gmail.com",
+            date_of_birth: Date.new(1996, 8, 15), start_date: Date.new(2022, 1, 10), gender: "Male",
+            phone: "+263777330363", id_no: "08-2035675L53", role: "Admin",
+            password: "secret", city: "Gweru", address: "2517 Woodlands", grade: "Grade 7", room: "Yellow"
 
 subjects = ["Maths", "English", "Shona", "Computers", "Science", "Agriculture", "Physical Education"]
 
