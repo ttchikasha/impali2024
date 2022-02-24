@@ -35,7 +35,11 @@ class StudentAttendancesController < ApplicationController
 
   # POST /student_attendances or /student_attendances.json
   def create
-    @student_attendance = StudentAttendance.new(student_attendance_params)
+    @student_attendance = StudentAttendance.new(
+      date: Date.today,
+      user_id: params[:user_id],
+      present: params[:present] || false,
+    )
 
     respond_to do |format|
       if @student_attendance.save
@@ -82,7 +86,7 @@ class StudentAttendancesController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def student_attendance_params
-    params.permit(:date, :present, :user_id)
+    params.permit(:present, :user_id)
   end
 
   def verify_not_student
