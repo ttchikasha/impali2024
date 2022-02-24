@@ -59,8 +59,14 @@
               </div>
             <% end %>
             <% if user.student? %>
-              <div class="tab-pane fade pt-3" id="parent-details">
-                <%= render 'parents/form', parent: user.parent || Parent.new(user: user) %>
+              <div class="tab-pane fade pt-2 profile-overview" id="parent-details">
+                <% if user&.parent&.persisted? %>
+                  <%= render user.parent %>
+                <% else %>
+                  <% if current_user.admin? || current_user.teacher? %>
+                    <%= render 'parents/form', parent: Parent.new(user: user) %>
+                  <% end %>
+                <% end %>
               </div>
             <% end %>
           </div>

@@ -1,0 +1,19 @@
+<div class="row">
+  <div class="col-lg-3 col-md-4 label ">Name</div>
+  <div class="col-lg-9 col-md-8"><%= parent.title %> <%= parent.name %></div>
+</div>
+<div class="row">
+  <div class="col-lg-3 col-md-4 label">Email</div>
+  <div class="col-lg-9 col-md-8"><%= parent.email %></div>
+</div>
+<div class="row">
+  <div class="col-lg-3 col-md-4 label">Phone Number</div>
+  <div class="col-lg-9 col-md-8"><%= parent.phone %></div>
+</div>
+<div class="row">
+  <div class="col-lg-3 col-md-4 label">ID Number</div>
+  <div class="col-lg-9 col-md-8"><%= parent.id_no %></div>
+</div>
+<% if current_user.teacher? || current_user.admin? %>
+  <%= link_to 'Edit Parent Details', edit_parent_path(parent), class: 'btn btn-primary' %>
+<% end %>

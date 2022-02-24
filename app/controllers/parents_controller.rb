@@ -1,5 +1,6 @@
 class ParentsController < ApplicationController
   before_action :set_parent, only: %i[ show edit update destroy ]
+  before_action :authorize_teacher_or_admin
 
   # GET /parents or /parents.json
   def index
@@ -67,5 +68,11 @@ class ParentsController < ApplicationController
   # Only allow a list of trusted parameters through.
   def parent_params
     params.require(:parent).permit(:user_id, :name, :title, :phone, :email, :occupation, :id_no)
+  end
+
+  def authorize_teacher_or_admin
+    if current_user.student?
+      redirect_to dashboard_path, alert: "Only teacher or admin is authorized"
+    end
   end
 end
