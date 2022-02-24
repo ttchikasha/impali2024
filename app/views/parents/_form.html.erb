@@ -1,0 +1,25 @@
+<%= bootstrap_form_with(model: parent) do |form| %>
+  <%= render 'shared/form_alert', resource: parent %>
+  <%= form.hidden_field :user_id, value: parent.user.id %>
+  <div class="row">
+    <div class="col-md-6">
+      <%= form.select :title, Parent::ALLOWED_TITLES, floating: true, required: true %>
+    </div>
+    <div class="col-md-6">
+      <%= form.text_field :name, floating: true, required: true %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <%= form.telephone_field :phone, floating: true, required: true, placeholder: 'XXXX' %>
+    </div>
+    <div class="col-md-6">
+      <%= form.email_field :email, floating: true, required: true %>
+    </div>
+  </div>
+  <%= form.text_field :occupation, floating: true %>
+  <%= form.text_field :id_no, floating: true, label: 'National Identity Number', required: true %>
+  <div class="actions">
+    <%= form.primary %>
+  </div>
+<% end %>

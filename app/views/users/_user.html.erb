@@ -38,6 +38,11 @@
                 <button class="nav-link <%= 'active' if @edit_password %>"  data-bs-toggle="tab" data-bs-target="#profile-change-password">Change Password</button>
               </li>
             <% end %>
+            <% if user.student? %>
+              <li class="nav-item">
+                <button data-bs-toggle="tab" data-bs-target="#parent-details" class="nav-link">Parent Details</button>
+              </li>
+            <% end %>
           </ul>
           <div class="tab-content pt-2">
             <div class="tab-pane fade <%= 'show active' unless @edit %> profile-overview" id="profile-overview">
@@ -51,6 +56,11 @@
             <% if user == current_user %>
               <div class="tab-pane fade pt-3 <%= 'show active' if @edit_password %>" id="profile-change-password">
                 <%= render 'users/change_password_form', user: user %>
+              </div>
+            <% end %>
+            <% if user.student? %>
+              <div class="tab-pane fade pt-3" id="parent-details">
+                <%= render 'parents/form', parent: user.parent || Parent.new(user: user) %>
               </div>
             <% end %>
           </div>

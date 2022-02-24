@@ -1414,6 +1414,7 @@ GEM
     pg_search (2.3.6)
       activerecord (>= 5.2)
       activesupport (>= 5.2)
+    phonelib (0.6.57)
     popper_js (2.9.3)
     premailer (1.15.0)
       addressable
@@ -1600,6 +1601,7 @@ DEPENDENCIES
   media_embed
   pg (~> 1.1)
   pg_search (~> 2.3)
+  phonelib
   premailer-rails (~> 1.11)
   puma (~> 5.0)
   rack-mini-profiler (~> 2.0)

@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :parents
   resources :student_attendances
   get "students/index"
   if Rails.env.development?

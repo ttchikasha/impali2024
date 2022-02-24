@@ -58,6 +58,7 @@ class User < ApplicationRecord
   has_many :payments, dependent: :destroy
   has_many :user_payments
   has_many :student_attendances
+  has_one :parent
 
   enum role: {
          "Student": 0,
