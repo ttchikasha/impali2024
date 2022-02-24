@@ -22,7 +22,7 @@
         <div class="card-footer">
           <span class='fw-bold text-uppercase small mb-2 d-block'>Teacher</span>
           <div class="d-flex align-items-center">
-            <%= image_tag @classroom.teacher.avatar_path, class: 'teacher-avatar me-2' %>
+            <%= image_tag @classroom&.teacher&.avatar_path || 'user.png', class: 'teacher-avatar me-2' %>
             <%= @classroom.teacher_name %>
           </div>
         </div>
