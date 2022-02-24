@@ -5,6 +5,7 @@
 #  id         :bigint           not null, primary key
 #  order      :bigint           default(0)
 #  title      :string
+#  video_url  :string
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #  topic_id   :bigint           not null
