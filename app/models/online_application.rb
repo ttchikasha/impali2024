@@ -38,7 +38,7 @@ class OnlineApplication < ApplicationRecord
 
   after_update do
     OnlineApplicationMailer.respond(self).deliver_later
-    SendSmsJob.perform_later phone, comment
+    SendSmsJob.perform_later phone, "Hi #{first_name} #{last_name}. " + comment + " Impali School"
   end
 
   STATES = [
