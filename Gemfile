@@ -75,6 +75,7 @@ group :production do
   gem "cloudinary"
   gem "wkhtmltopdf-heroku"
   gem "aws-sdk"
+  gem "sidekiq"
 end
 gem "react-rails", "~> 2.6"
 gem "premailer-rails", "~> 1.11"
