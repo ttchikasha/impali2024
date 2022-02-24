@@ -80,3 +80,4 @@ end
 gem "react-rails", "~> 2.6"
 gem "premailer-rails", "~> 1.11"
 gem "groupdate", "~> 6.0.1"
+gem "twilio-ruby", "~> 5.65.0"

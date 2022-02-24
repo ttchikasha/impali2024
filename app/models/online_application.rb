@@ -36,7 +36,10 @@ class OnlineApplication < ApplicationRecord
     end
   end
 
-  after_update { OnlineApplicationMailer.respond(self).deliver_later }
+  after_update do
+    OnlineApplicationMailer.respond(self).deliver_later
+    SendSmsJob.perform_later phone, comment
+  end
 
   STATES = [
     ACCEPT = "Accept",
