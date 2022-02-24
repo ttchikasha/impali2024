@@ -42,12 +42,14 @@
                 <%= @payment.created_at.localtime.strftime('%a %d %b, %Y - %H:%M') %>
               </td>
             </tr>
-            <tr>
-              <td colspan='2'>
-                <h6>Bank Deposit Slip</h6>
-                <%= image_tag url_for(@payment.deposit_slip), class: 'img-fluid' %>
-              </td>
-            </tr>
+            <% if @payment.deposit_slip.attached? %>
+              <tr>
+                <td colspan='2'>
+                  <h6>Bank Deposit Slip</h6>
+                  <%= image_tag url_for(@payment.deposit_slip), class: 'img-fluid' %>
+                </td>
+              </tr>
+            <% end %>
           </tbody>
         </table>
       </div>
