@@ -2,29 +2,29 @@
   <%= f.alert_message "Please fix the errors below.", error_summary: false %>
   <div class="row">
     <div class="col-md-6">
-      <%= f.text_field :first_name, floating: true %>
+      <%= f.text_field :first_name, floating: true, required: true %>
     </div>
     <div class="col-md-6">
-      <%= f.text_field :last_name, floating: true %>
+      <%= f.text_field :last_name, floating: true, required: true %>
     </div>
   </div>
   <div class="row">
     <div class="col-md-4">
-      <%= f.text_field :phone, floating: true, help: 'For students, use parents\'s phone # ' %>
+      <%= f.text_field :phone, floating: true, help: 'For students, use parents\'s phone # ', required: true %>
     </div>
     <div class="col-md-4">
-      <%= f.text_field :address, floating: true %>
+      <%= f.text_field :address, floating: true, required: true %>
     </div>
     <div class="col-md-4">
-      <%= f.text_field :city, floating: true %>
+      <%= f.text_field :city, floating: true, required: true %>
     </div>
   </div>
   <div class="row">
     <div class="col-md-4">
-      <%= f.email_field :email, floating: true %>
+      <%= f.email_field :email, floating: true, required: true %>
     </div>
     <div class="col-md-4">
-      <%= f.text_field :id_no, floating: true, label: 'National ID # or Birth Certificate #' %>
+      <%= f.text_field :id_no, floating: true, label: 'National ID # or Birth Certificate #', required: true %>
     </div>
     <div class="col-md-4">
       <%= f.select :gender, User::GENDER_TYPES, floating: true %>
@@ -32,10 +32,10 @@
   </div>
   <div class="row">
     <div class="col-md-6">
-      <%= f.date_field :start_date, floating: true %>
+      <%= f.date_field :start_date, floating: true, required: true %>
     </div>
     <div class="col-md-6">
-      <%= f.date_field :date_of_birth, floating: true %>
+      <%= f.date_field :date_of_birth, floating: true, required: true %>
     </div>
   </div>
   <div class="row">

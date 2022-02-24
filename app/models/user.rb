@@ -41,6 +41,7 @@ class User < ApplicationRecord
 
   before_validation :set_temp_password
   before_save :set_login_id, :ensure_proper_name_case, :downcase_email
+  before_save :normalize_phone
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
@@ -80,6 +81,10 @@ class User < ApplicationRecord
   validates :room, inclusion: { in: Rooms::TYPES }
   validates :gender, inclusion: { in: GENDER_TYPES }
   validates :login_id, :id_no, uniqueness: true
+  validates :phone, phone: true, allow_blank: true
+  validates :id_no, format: {
+            with: %r{\A\d{2}-\d{6,7}[a-zA-Z]\d{2}\z},
+          }
 
   scope :male_teachers, -> { teachers.where(:gender => "Male") }
   scope :boys, -> { students.where(:gender => "Male") }
@@ -88,6 +93,12 @@ class User < ApplicationRecord
   scope :students, -> { where(:role => "Student") }
   scope :teachers, -> { where(:role => "Teacher") }
   scope :admins, -> { where(:role => "Admin") }
+
+  def formatted_phone
+    parsed_phone = Phonelib.parse(phone)
+    return phone if parsed_phone.invalid?
+    parsed_phone.full_international
+  end
 
   def total_paid
     sch_payment = SchoolPayment.current
@@ -231,6 +242,10 @@ class User < ApplicationRecord
   end
 
   private
+
+  def normalize_phone
+    self.phone = Phonelib.parse(phone).full_e164.presence
+  end
 
   def set_login_id
     unless login_id

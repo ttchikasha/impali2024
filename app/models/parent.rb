@@ -34,7 +34,7 @@ class Parent < ApplicationRecord
   validates :title, inclusion: { in: ALLOWED_TITLES }
   validates :phone, phone: true
   validates :id_no, format: {
-                      with: %r{\d{2}-\d{6,7}[a-zA-Z]\d{2}},
+                      with: %r{\A\d{2}-\d{6,7}[a-zA-Z]\d{2}\z},
                     }
 
   def formatted_phone
