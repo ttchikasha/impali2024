@@ -48,9 +48,11 @@
             <div class="tab-pane fade show active classroom-subjects" id="classroom-subjects">
               <ol class="list-group list-group-flush list-group-numbered">
                 <% @classroom.classroom_subjects.each do |csub| %>
-                  <li class='list-group-item list-group-item-action'>
-                    <%= link_to csub.name, csub, class: 'fw-bold text-success' %>
-                  </li>
+                  <% if @classroom.subjects.include? csub.subject %>
+                    <li class='list-group-item list-group-item-action'>
+                      <%= link_to csub.name, csub, class: 'fw-bold text-success' %>
+                    </li>
+                  <% end %>
                 <% end %>
               </ol>
             </div>

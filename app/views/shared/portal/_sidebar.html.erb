@@ -35,11 +35,13 @@
       </a>
       <ul id="assignments-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
         <% current_user.classroom_subjects&.each do |csub| %>
-          <li>
-            <%= link_to classroom_subject_assignments_path(csub) do %>
-              <i class="bi bi-circle"></i><span><%= csub.name %></span>
-            <% end %>
-          </li>
+          <% if current_user.classroom.subjects.include? csub.subject %>
+            <li>
+              <%= link_to classroom_subject_assignments_path(csub) do %>
+                <i class="bi bi-circle"></i><span><%= csub.name %></span>
+              <% end %>
+            </li>
+          <% end %>
         <% end %>
       </ul>
     </li>
@@ -49,11 +51,13 @@
       </a>
       <ul id="subjects-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
         <% current_user.classroom_subjects&.each do |csub| %>
-          <li>
-            <%= link_to csub do %>
-              <i class="bi bi-circle"></i><span><%= csub.name %></span>
-            <% end %>
-          </li>
+          <% if current_user.classroom.subjects.include? csub.subject %>
+            <li>
+              <%= link_to csub do %>
+                <i class="bi bi-circle"></i><span><%= csub.name %></span>
+              <% end %>
+            </li>
+          <% end %>
         <% end %>
       </ul>
     </li>
