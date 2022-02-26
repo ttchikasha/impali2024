@@ -19,7 +19,7 @@
 #
 FactoryBot.define do
   factory :topic do
-    title { Faker::Company.bs }
+    title { Faker::Company.bs.capitalize }
     description { Faker::Lorem.paragraphs.join }
     classroom_subject { ClassroomSubject.all.sample || build(:classroom_subject) }
   end

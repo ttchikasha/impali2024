@@ -14,7 +14,7 @@
 #
 FactoryBot.define do
   factory :question do
-    text { nil }
+    text { Faker::Lorem.paragraphs.join }
     questionable { build :assignment }
   end
 end

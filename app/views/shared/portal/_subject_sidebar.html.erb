@@ -19,7 +19,7 @@
     <% @classroom_subject.topics.each.with_index do |topic, index| %>
       <% if topic.persisted? %>
         <li class="nav-item">
-          <%= link_to classroom_subject_topic_path(@classroom_subject, topic), class: "nav-link #{'collapsed' unless on_dashboard?}" do %>
+          <%= link_to classroom_subject_topic_path(@classroom_subject, topic), class: "nav-link #{'collapsed' unless on_dashboard?} #{'active' if @topic&.id == topic.id}" do %>
             <span class="topic-number"><%= index + 1 %></span>
             <span><%= truncate topic.title, length: 25 %></span>
           <% end %>

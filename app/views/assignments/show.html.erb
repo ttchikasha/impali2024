@@ -49,8 +49,10 @@
         </div>
       </div>
     <% end %>
-    <% unless @assignment.late? %>
-      <%= form.primary 'Submit Answers' %>
+    <% unless current_user.parent? || current_user.admin? %>
+      <% unless @assignment.late? %>
+        <%= form.primary 'Submit Answers', class: 'btn btn-lg btn-primary submit-answer-btn' %>
+      <% end %>
     <% end %>
   <% end %>
 <% end %>

@@ -1,6 +1,6 @@
 <% cache lesson do %>
   <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
-    <div class="course-item">
+    <div class="course-item my-3">
       <%= image_tag lesson.banner_image_path, class: 'img-fluid lesson-image' %>
       <div class="course-content">
         <% unless lesson.topic == @topic %>
@@ -10,7 +10,7 @@
         <% end %>
         <h3><%= link_to truncate(lesson.title, length: 25), topic_lesson_path(lesson.topic, lesson) %></h3>
         <div class="trainer d-flex justify-content-between align-items-center">
-          <span>Lesson <%= lesson.order %></span>
+          <span>Lesson <%= lesson.number %></span>
           <span class="text-muted fs-6"><%= lesson.created_at.to_s(:short) %></span>
         </div>
       </div>

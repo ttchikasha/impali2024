@@ -15,7 +15,7 @@
   </div>
   <div class="courses">
     <div class="row">
-      <% if current_user.recent_assignments.any? %>
+      <% if current_user.recent_assignments(5).any? %>
         <div class="col-md-7">
           <div class="section-title">
             <h2>Recent Assignments</h2>

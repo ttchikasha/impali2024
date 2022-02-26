@@ -3,7 +3,7 @@ class UsersController < ApplicationController
   respond_to :html, :xml, :json
   before_action :set_user, only: %i[show update]
   before_action :authorize_admin, only: %i[create new edit]
-  before_action :authorize_teacher_or_admin, only: :show
+  before_action :authorize_teacher_or_admin_or_parent, only: :show
 
   def index
     base_query = current_user.student? ? User.students : User
@@ -80,8 +80,9 @@ class UsersController < ApplicationController
     end
   end
 
-  def authorize_teacher_or_admin
-    unless current_user.teacher? || current_user.admin?
+  def authorize_teacher_or_admin_or_parent
+    is_parent = current_user.parent? && @user.parent == current_user
+    unless current_user.teacher? || current_user.admin? || is_parent || current_user == @user
       redirect_to dashboard_path, alert: "Not Authorized"
     end
   end

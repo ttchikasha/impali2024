@@ -41,7 +41,7 @@
               </li>
             <% end %>
             <% if user.student?  %>
-              <% if current_user == user.teacher_account || current_user==user || current_user.admin? %>
+              <% if current_user == user.teacher_account || current_user==user || current_user.admin? || user == current_user.student %>
                 <li class="nav-item">
                   <button data-bs-toggle="tab" data-bs-target="#parent-details" class="nav-link">Parent Details</button>
                 </li>

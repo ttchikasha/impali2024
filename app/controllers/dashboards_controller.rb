@@ -10,7 +10,7 @@ class DashboardsController < ApplicationController
       @payments_data = data.sum(:amount).select { |k, v| v != 0 }
       @revenue = Payment.total_revenue params[:revenue]
     else
-      @topics = current_user.recent_topics.take 9
+      @topics = current_user.recent_topics.take 5
     end
   end
 end

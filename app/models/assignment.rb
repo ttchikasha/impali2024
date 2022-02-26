@@ -30,8 +30,13 @@ class Assignment < ApplicationRecord
   after_create :add_banner_image
 
   before_validation do
-    rest = questions.slice(1, questions.length).select { |q| !q.text.body.to_plain_text.blank? }
-    self.questions = [questions.first].concat(rest)
+    unless start
+      self.start = Time.now
+    end
+    if questions.any?
+      rest = questions.slice(1, questions.length).select { |q| !q.text.body.to_plain_text.blank? }
+      self.questions = [questions.first].concat(rest)
+    end
   end
 
   def number

@@ -21,7 +21,8 @@
 FactoryBot.define do
   factory :lesson do
     topic { Topic.all.sample || build(:topic) }
-    title { Faker::Lorem.words }
+    title { Faker::Lorem.words.join }
+    content { Faker::Lorem.paragraphs.join }
     video_url { "" }
   end
 end

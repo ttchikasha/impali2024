@@ -22,12 +22,11 @@
 class Lesson < ApplicationRecord
   include BannerImage
 
+  before_save { title&.capitalize! }
+
   belongs_to :topic
   has_rich_text :content
   has_one_attached :banner_image
-
-  after_create :update_lessons_order
-  after_destroy :update_lessons_order
 
   validates :title, presence: true
   validates :video_url, url: { allow_blank: true, allow_nil: true }
@@ -36,14 +35,7 @@ class Lesson < ApplicationRecord
     add_banner_image unless banner_image.attached?
   end
 
-  private
-
-  def update_lessons_order
-    topic.lessons.each.with_index do |lesson, index|
-      if lesson.persisted?
-        lesson.order = index + 1
-        lesson.save
-      end
-    end
+  def number
+    topic.lessons.index(self) + 1
   end
 end

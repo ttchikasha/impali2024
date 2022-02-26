@@ -1,6 +1,6 @@
 <div class="section-title">
   <div class="d-flex align-items-center justify-content-between">
-    <p><%= current_user.full_name %></p>
+    <p><%= current_user.parent? ? current_user.student.full_name : current_user.full_name %></p>
   </div>
   <h2>Reports & Marks</h2>
 </div>

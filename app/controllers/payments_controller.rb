@@ -5,7 +5,7 @@ class PaymentsController < ApplicationController
 
   # GET /payments or /payments.json
   def index
-    base_query = current_user.admin? ? Payment : current_user.payments
+    base_query = current_user.admin? ? Payment : current_user.student.payments
     accepted = params[:accepted]
     rejected = params[:rejected]
     pending = params[:pending]

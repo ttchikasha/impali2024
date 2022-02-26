@@ -24,6 +24,6 @@ FactoryBot.define do
     subject { Subject.all.sample }
     grade { rand(0..7) }
     room { Rooms::TYPES.sample }
-    teacher_id { Teacher.all.sample }
+    teacher_id { nil }
   end
 end

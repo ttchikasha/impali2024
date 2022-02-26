@@ -20,6 +20,6 @@
 FactoryBot.define do
   factory :assignment do
     classroom_subject { ClassroomSubject.all.sample }
-    due { "2022-02-10 12:00:00" }
+    due { 2.days.from_now }
   end
 end

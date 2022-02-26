@@ -25,6 +25,12 @@ class Payment < ApplicationRecord
   has_one_attached :deposit_slip
   has_many :user_payments
 
+  before_create do
+    if user.parent?
+      self.user = user.student
+    end
+  end
+
   enum term: {
     "Term 1": 1,
     "Term 2": 2,

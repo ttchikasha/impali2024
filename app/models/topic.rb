@@ -27,4 +27,8 @@ class Topic < ApplicationRecord
   validates :title, presence: true
 
   after_create :add_banner_image
+
+  def number
+    classroom_subject.topics.index(self) + 1
+  end
 end

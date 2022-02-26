@@ -55,6 +55,7 @@ FactoryBot.define do
     address { Faker::Address.street_address }
     date_of_birth { Faker::Date.birthday }
     password { id_no }
+    login_id { nil }
 
     after :build do |user|
       if user.gender == "Male"
@@ -74,11 +75,18 @@ FactoryBot.define do
     email { "student-#{SecureRandom.hex(3)}@example.com" }
     start_date { Faker::Date.between from: date_of_birth + 6.years, to: 1.month.ago }
     room { Rooms::TYPES.sample }
-    grade { User.grades.keys.sample }
+    grade { User.grades.keys.reject { |g| g == "None" }.sample }
   end
 
   trait :teacher do
     role { "Teacher" }
+    room { Rooms::TYPES.sample }
+    grade { User.grades.keys.sample }
+    staff
+  end
+
+  trait :parent do
+    role { "Parent" }
     room { Rooms::TYPES.sample }
     grade { User.grades.keys.sample }
     staff

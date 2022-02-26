@@ -177,8 +177,8 @@ class User < ApplicationRecord
   def avatar_path
     if avatar.attached?
       if errors.any?
-        u = User.find id 
-        u.avatar_path 
+        u = User.find id
+        u.avatar_path
       else
         Rails.application.routes.url_helpers.rails_representation_url(
           avatar.variant(resize_to_limit: [300, 300]).processed, only_path: true,
@@ -204,7 +204,11 @@ class User < ApplicationRecord
   end
 
   def classroom_subjects
-    classroom&.classroom_subjects
+    if parent?
+      student.classroom&.classroom_subjects
+    else
+      classroom&.classroom_subjects
+    end
   end
 
   def recent_topics

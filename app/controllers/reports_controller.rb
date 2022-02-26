@@ -4,7 +4,8 @@ class ReportsController < ApplicationController
   # GET /reports or /reports.json
   def index
     @reports = Report.all
-    @answers = current_user.assignment_answers.all.order(created_at: :desc).paginate(page: params[:page])
+    base_query = current_user.parent? ? current_user.student : current_user
+    @answers = base_query.assignment_answers.all.order(created_at: :desc).paginate(page: params[:page])
   end
 
   # GET /reports/1 or /reports/1.json

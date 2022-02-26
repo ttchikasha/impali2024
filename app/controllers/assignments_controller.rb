@@ -107,5 +107,8 @@ class AssignmentsController < ApplicationController
     if current_user.student? && current_user.current_balance > 0
       redirect_to dashboard_path, alert: "Only paid students can access assignments"
     end
+    if current_user.parent? && current_user.student.current_balance > 0
+      redirect_to dashboard_path, alert: "Only paid students can access assignments"
+    end
   end
 end

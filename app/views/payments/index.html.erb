@@ -51,11 +51,11 @@
               <span class="float-end"><%= number_to_currency SchoolPayment.total_this_term %></span>
             </li>
             <li class="list-group-item">Total Paid<span class="float-end">
-                <%= number_to_currency current_user.total_paid %></span>
+                <%= number_to_currency current_user.student.total_paid %></span>
             </li>
             <li class="list-group-item">
               Current Balance<span class="float-end">
-                <%= number_to_currency current_user.current_balance %>
+                <%= number_to_currency current_user.student.current_balance %>
               </span>
             </li>
           </ul>

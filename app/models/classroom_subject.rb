@@ -25,11 +25,20 @@ class ClassroomSubject < ApplicationRecord
   has_many :topics
   has_many :assignments
 
+  before_create do
+    classroom.subjects << subject
+  end
+
+  before_destroy do
+    classroom.subjects.delete subject
+  end
+
   validates :room, inclusion: { in: Rooms::TYPES }
 
   enum grade: Grades::GRADES_HASH
 
   validates :grade, inclusion: { in: grades.keys }
+  validates_uniqueness_of :subject_id, scope: :teacher_id
 
   before_validation do
     self.teacher = classroom&.teacher if teacher.nil?

@@ -20,7 +20,7 @@ class AssignmentAnswersController < ApplicationController
     @answer = @assignment.assignment_answers.find params[:id]
     if !@answer
       redirect_to @assignment, alert: "Assignment Answer Not Found"
-    elsif @answer.user == current_user || current_user.teacher?
+    elsif @answer.user == current_user || current_user.teacher? || @answer.user == current_user.student
       render "assignment_answers/show"
     else
       redirect_to dashboard_path, alert: "Access not authorized"
