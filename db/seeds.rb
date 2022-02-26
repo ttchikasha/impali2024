@@ -10,14 +10,17 @@ subjects.each do |name|
 end
 
 Grades::GRADES_HASH.values.each do |grade|
-  unless grade == "None"
+  unless grade == -1
     Rooms::TYPES.each do |room|
       Classroom.create room: room, grade: grade, teacher: FactoryBot.create(:user, :teacher)
     end
   end
 end
 
-40.times do
+40.times do |i|
   grades = Grades::GRADES_HASH.values.reject { |g| g == -1 }
-  FactoryBot.create_list :user, 40, :student, grade: grades.sample
+  FactoryBot.create :user, :student, grade: grades.sample
+  print "." if i % 10 == 0
 end
+
+SchoolPayment.create year: Date.today.year, term: "Term 1", levy: 85, tution: 10

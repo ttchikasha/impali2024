@@ -65,6 +65,7 @@ class User < ApplicationRecord
          "Student": 0,
          "Teacher": 1,
          "Admin": 2,
+         "Parent": 3,
        }
 
   enum grade: Grades::GRADES_HASH
@@ -82,9 +83,6 @@ class User < ApplicationRecord
   validates :gender, inclusion: { in: GENDER_TYPES }
   validates :login_id, :id_no, uniqueness: true
   validates :phone, phone: true, allow_blank: true
-  validates :id_no, format: {
-            with: %r{\A\d{2}-\d{6,7}[a-zA-Z]\d{2}\z},
-          }
 
   scope :male_teachers, -> { teachers.where(:gender => "Male") }
   scope :boys, -> { students.where(:gender => "Male") }
@@ -93,6 +91,7 @@ class User < ApplicationRecord
   scope :students, -> { where(:role => "Student") }
   scope :teachers, -> { where(:role => "Teacher") }
   scope :admins, -> { where(:role => "Admin") }
+  scope :parents, -> { where(:role => "Parent") }
 
   def formatted_phone
     parsed_phone = Phonelib.parse(phone)
@@ -154,6 +153,10 @@ class User < ApplicationRecord
 
   def teacher?
     role == "Teacher"
+  end
+
+  def parent?
+    role == "Parent"
   end
 
   def full_name

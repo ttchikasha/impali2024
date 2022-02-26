@@ -4,8 +4,9 @@
 #
 #  id         :bigint           not null, primary key
 #  email      :string
+#  first_name :string
 #  id_no      :string
-#  name       :string
+#  last_name  :string
 #  occupation :string
 #  phone      :string
 #  title      :string
@@ -23,13 +24,32 @@
 #
 class Parent < ApplicationRecord
   before_save :normalize_phone, :uppercase_id
-  belongs_to :user
+  belongs_to :student, class_name: "User", foreign_key: "user_id"
+
+  before_create do
+    User.create! first_name: first_name, last_name: last_name,
+                 email: email, phone: phone, id_no: id_no,
+                 gender: title == MR ? "Male" : "Female",
+                 password: id_no, role: "Parent",
+                 city: student.city, address: student.address,
+                 date_of_birth: student.date_of_birth,
+                 start_date: student.start_date,
+                 grade: student.grade, room: student.room
+  end
+
+  before_update do
+    if id_no_changed?
+      user = User.find_by id_no: id_no_was
+      user.update_column :id_no, id_no
+      user.password = id_no
+      user.save!
+    end
+  end
 
   ALLOWED_TITLES = [
     MR = "Mr",
     MRS = "Mrs",
     MS = "Ms",
-    DR = "Dr",
   ]
   validates :title, inclusion: { in: ALLOWED_TITLES }
   validates :phone, phone: true
@@ -41,6 +61,14 @@ class Parent < ApplicationRecord
     parsed_phone = Phonelib.parse(phone)
     return phone if parsed_phone.invalid?
     parsed_phone.full_international
+  end
+
+  def name
+    "#{first_name} #{last_name}"
+  end
+
+  def associated_user
+    User.find_by id_no: id_no
   end
 
   private

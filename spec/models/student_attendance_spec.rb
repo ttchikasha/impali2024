@@ -3,7 +3,7 @@
 # Table name: student_attendances
 #
 #  id         :bigint           not null, primary key
-#  date       :date             default(Tue, 22 Feb 2022), not null
+#  date       :date             default(Thu, 24 Feb 2022), not null
 #  present    :boolean          default(FALSE)
 #  created_at :datetime         not null
 #  updated_at :datetime         not null

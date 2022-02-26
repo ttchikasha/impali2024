@@ -26,7 +26,7 @@ class ParentsController < ApplicationController
 
     respond_to do |format|
       if @parent.save
-        format.html { redirect_to @parent.user, notice: "Parent was successfully created." }
+        format.html { redirect_to @parent.student, notice: "Parent was successfully created." }
         format.json { render :show, status: :created, location: @parent }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -39,7 +39,7 @@ class ParentsController < ApplicationController
   def update
     respond_to do |format|
       if @parent.update(parent_params)
-        format.html { redirect_to @parent.user, notice: "Parent was successfully updated." }
+        format.html { redirect_to @parent.student, notice: "Parent was successfully updated." }
         format.json { render :show, status: :ok, location: @parent }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -67,7 +67,7 @@ class ParentsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def parent_params
-    params.require(:parent).permit(:user_id, :name, :title, :phone, :email, :occupation, :id_no)
+    params.require(:parent).permit(:user_id, :first_name, :last_name, :title, :phone, :email, :occupation, :id_no)
   end
 
   def authorize_teacher_or_admin

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_02_24_122428) do
+ActiveRecord::Schema.define(version: 2022_02_26_041923) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -178,7 +178,6 @@ ActiveRecord::Schema.define(version: 2022_02_24_122428) do
 
   create_table "parents", force: :cascade do |t|
     t.bigint "user_id", null: false
-    t.string "name"
     t.string "title"
     t.string "phone"
     t.string "email"
@@ -186,6 +185,8 @@ ActiveRecord::Schema.define(version: 2022_02_24_122428) do
     t.string "id_no"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "first_name"
+    t.string "last_name"
     t.index ["user_id"], name: "index_parents_on_user_id"
   end
 
@@ -259,7 +260,7 @@ ActiveRecord::Schema.define(version: 2022_02_24_122428) do
   end
 
   create_table "student_attendances", force: :cascade do |t|
-    t.date "date", default: "2022-02-22", null: false
+    t.date "date", default: "2022-02-24", null: false
     t.boolean "present", default: false
     t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
