@@ -29,19 +29,23 @@
               <button class="nav-link <%= 'active' unless @edit  %>" data-bs-toggle="tab" data-bs-target="#profile-overview">Overview</button>
             </li>
             <% if user == current_user || current_user.admin? %>
-              <li class="nav-item">
-                <button class="nav-link <%= 'active' if (@edit && !@edit_password)  %>"" data-bs-toggle="tab" data-bs-target="#profile-edit">Edit Profile</button>
-              </li>
+              <% unless current_user.parent? %>
+                <li class="nav-item">
+                  <button class="nav-link <%= 'active' if (@edit && !@edit_password)  %>"" data-bs-toggle="tab" data-bs-target="#profile-edit">Edit Profile</button>
+                </li>
+              <% end %>
             <% end %>
             <% if user == current_user %>
               <li class="nav-item">
                 <button class="nav-link <%= 'active' if @edit_password %>"  data-bs-toggle="tab" data-bs-target="#profile-change-password">Change Password</button>
               </li>
             <% end %>
-            <% if user.student? %>
-              <li class="nav-item">
-                <button data-bs-toggle="tab" data-bs-target="#parent-details" class="nav-link">Parent Details</button>
-              </li>
+            <% if user.student?  %>
+              <% if current_user == user.teacher_account || current_user==user || current_user.admin? %>
+                <li class="nav-item">
+                  <button data-bs-toggle="tab" data-bs-target="#parent-details" class="nav-link">Parent Details</button>
+                </li>
+              <% end %>
             <% end %>
           </ul>
           <div class="tab-content pt-2">
@@ -49,9 +53,11 @@
               <%= render 'users/profile_overview', user: user %>
             </div>
             <% if user == current_user || current_user.admin? %>
-              <div class="tab-pane fade <%= 'show active' if (@edit && !@edit_password) %> profile-edit pt-3" id="profile-edit">
-                <%= render 'users/profile_edit_form', user: user %>
-              </div>
+              <% unless current_user.parent? %>
+                <div class="tab-pane fade <%= 'show active' if (@edit && !@edit_password) %> profile-edit pt-3" id="profile-edit">
+                  <%= render 'users/profile_edit_form', user: user %>
+                </div>
+              <% end %>
             <% end %>
             <% if user == current_user %>
               <div class="tab-pane fade pt-3 <%= 'show active' if @edit_password %>" id="profile-change-password">
@@ -59,15 +65,17 @@
               </div>
             <% end %>
             <% if user.student? %>
-              <div class="tab-pane fade pt-2 profile-overview" id="parent-details">
-                <% if user&.parent&.persisted? %>
-                  <%= render user.parent %>
-                <% else %>
-                  <% if current_user.admin? || current_user.teacher? %>
-                    <%= render 'parents/form', parent: Parent.new(user: user) %>
+              <% if current_user.admin? || current_user == user || current_user == user.parent || current_user == user.teacher_account %>
+                <div class="tab-pane fade pt-2 profile-overview" id="parent-details">
+                  <% if user&.parent&.persisted? %>
+                    <%= render 'parents/parent', parent: user.parent %>
+                  <% else %>
+                    <% if current_user.admin? || current_user.teacher? || current_user.parent? %>
+                      <%= link_to 'Add Parent Details', new_user_student_parent_path(user), class: 'btn btn-primary btn-lg' %>
+                    <% end %>
                   <% end %>
-                <% end %>
-              </div>
+                </div>
+              <% end %>
             <% end %>
           </div>
         </div>

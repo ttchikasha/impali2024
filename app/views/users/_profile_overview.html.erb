@@ -3,6 +3,14 @@
   <div class="col-lg-3 col-md-4 label ">Full Name</div>
   <div class="col-lg-9 col-md-8"><%= user.full_name %></div>
 </div>
+<% if user.parent? %>
+  <div class="row">
+    <div class="col-lg-3 col-md-4 label ">Child Details</div>
+    <div class="col-lg-9 col-md-8">
+      <%= link_to user.student.full_name, user.student %>
+    </div>
+  </div>
+<% end %>
 <div class="row">
   <div class="col-lg-3 col-md-4 label">Login ID</div>
   <div class="col-lg-9 col-md-8"><%= user.login_id %></div>

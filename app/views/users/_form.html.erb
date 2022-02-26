@@ -39,9 +39,11 @@
     </div>
   </div>
   <div class="row">
-    <div class="col-md-4">
-      <%= f.select :role, User.roles.keys, floating: true, wrapper: { data: { 'user-form-target' => 'role' } } %>
-    </div>
+    <% unless user.parent? %>
+      <div class="col-md-4">
+        <%= f.select :role, User.roles.keys.reject {|r| r == 'Parent' }, floating: true, wrapper: { data: { 'user-form-target' => 'role' } } %>
+      </div>
+    <% end %>
     <div class="col-md-4">
       <%= f.select :grade, User.grades.keys, floating: true, wrapper: { data: { 'user-form-target' => 'grade' } } %>
     </div>

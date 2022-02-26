@@ -41,8 +41,10 @@ class Parent < ApplicationRecord
     if id_no_changed?
       user = User.find_by id_no: id_no_was
       user.update_column :id_no, id_no
-      user.password = id_no
-      user.save!
+      if user.valid_password? id_no_was
+        user.password = id_no
+        user.save!
+      end
     end
   end
 

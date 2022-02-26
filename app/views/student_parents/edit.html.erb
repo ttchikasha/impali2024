@@ -1,0 +1,10 @@
+<div class="section-title">
+  <p><%= @student_parent.student.full_name %></p>
+  <h2>Edit Parent</h2>
+</div>
+<div class="card">
+  <div class="card-body">
+    <h3 class="card-title">Edit "<%= @student_parent.student.full_name %>" Parent Details</h3>
+    <%= render 'form', student_parent: @student_parent %>
+  </div>
+</div>

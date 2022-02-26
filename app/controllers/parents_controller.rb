@@ -13,7 +13,9 @@ class ParentsController < ApplicationController
 
   # GET /parents/new
   def new
-    @parent = Parent.new
+    # @parent = Parent.new
+    @user = User.new
+    render "users/new"
   end
 
   # GET /parents/1/edit
@@ -62,7 +64,7 @@ class ParentsController < ApplicationController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_parent
-    @parent = Parent.find(params[:id])
+    @parent = User.find(params[:id])
   end
 
   # Only allow a list of trusted parameters through.

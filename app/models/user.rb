@@ -59,7 +59,10 @@ class User < ApplicationRecord
   has_many :payments, dependent: :destroy
   has_many :user_payments
   has_many :student_attendances
-  has_one :parent
+  has_one :student_parent, foreign_key: :student_id
+  has_one :parent_student, class_name: "StudentParent", foreign_key: :parent_id
+  has_one :parent, through: :student_parent
+  has_one :student, through: :parent_student
 
   enum role: {
          "Student": 0,
@@ -97,6 +100,10 @@ class User < ApplicationRecord
     parsed_phone = Phonelib.parse(phone)
     return phone if parsed_phone.invalid?
     parsed_phone.full_international
+  end
+
+  def teacher_account
+    classroom&.teacher
   end
 
   def total_paid
@@ -169,9 +176,14 @@ class User < ApplicationRecord
 
   def avatar_path
     if avatar.attached?
-      Rails.application.routes.url_helpers.rails_representation_url(
-        avatar.variant(resize_to_limit: [300, 300]).processed, only_path: true,
-      )
+      if errors.any?
+        u = User.find id 
+        u.avatar_path 
+      else
+        Rails.application.routes.url_helpers.rails_representation_url(
+          avatar.variant(resize_to_limit: [300, 300]).processed, only_path: true,
+        )
+      end
     else
       return "user.png"
     end

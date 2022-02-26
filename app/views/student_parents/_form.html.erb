@@ -1,0 +1,30 @@
+<%= bootstrap_form_with(model: [student_parent.student, student_parent]) do |f| %>
+  <%= render 'shared/form_alert', resource: student_parent %>
+  <%= f.fields_for :parent do |parent_form| %>
+    <div class="row">
+      <div class="col-md-6">
+        <%= parent_form.text_field :first_name, floating: true, required: true %>
+      </div>
+      <div class="col-md-6">
+        <%= parent_form.text_field :last_name, floating: true, required: true %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-5">
+        <%= parent_form.text_field :phone, floating: true, required: true %>
+      </div>
+      <div class="col-md-7">
+        <%= parent_form.email_field :email, floating: true, required: true %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-8">
+        <%= parent_form.text_field :id_no, floating: true, label: 'National ID # or Birth Certificate #', required: true %>
+      </div>
+      <div class="col-md-4">
+        <%= parent_form.select :gender, User::GENDER_TYPES, floating: true %>
+      </div>
+    </div>
+  <% end %>
+  <%= f.primary 'Submit' %>
+<% end %>

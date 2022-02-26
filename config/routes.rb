@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get "student_parents/new"
+  get "student_parents/edit"
   resources :parents
   resources :student_attendances
   get "students/index"
@@ -47,6 +49,7 @@ Rails.application.routes.draw do
     resources :payments
     resources :notifications
     resources :users do
+      resources :student_parents
       collection do
         get :profile
         get :teachers_autocomplete

@@ -1,0 +1,10 @@
+<div class="section-title">
+  <p><%= @student.full_name %></p>
+  <h2>Add Parent</h2>
+</div>
+<div class="card">
+  <div class="card-body">
+    <h3 class="card-title">Fill the form below to create student parent</h3>
+    <%= render 'form', student_parent: @student_parent %>
+  </div>
+</div>

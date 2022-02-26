@@ -23,6 +23,9 @@
                 <%= link_to 'Teachers', users_path(role: 'Teacher', gender: params[:gender]), class: 'dropdown-item' %>
               </li>
               <li>
+                <%= link_to 'Parents', users_path(role: 'Parent', gender: params[:gender]), class: 'dropdown-item' %>
+              </li>
+              <li>
                 <%= link_to 'Admins', users_path(role: 'Admin', gender: params[:gender]), class: 'dropdown-item' %>
               </li>
             </ul>
