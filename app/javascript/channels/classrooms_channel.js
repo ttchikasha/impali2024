@@ -24,18 +24,6 @@ consumer.subscriptions.create('ClassroomsChannel', {
     let threadableId = div.querySelector('#threadable_id').textContent;
 
     if (threadableId == data.classroom_id.toString()) {
-      let name = div.querySelector('#current-user').textContent;
-
-      let newMessage = document.getElementById('new-message').querySelector('div');
-
-      if (name == data.sender) {
-        newMessage.classList.toggle('other');
-        newMessage.classList.add('me');
-      } else {
-        newMessage.classList.toggle('me');
-        newMessage.classList.add('other');
-      }
-
       div = document.getElementById('new-message');
       div.outerHTML = div.innerHTML;
 

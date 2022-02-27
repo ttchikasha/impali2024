@@ -1,6 +1,6 @@
 <% cache message do %>
   <% if message.persisted? %>
-    <div class="message <%= message.user == current_user ? 'me' : 'other' %> ">
+    <div data-controller='message' data-message-sender-id-value="<%= message.user.id %>"  class="message">
       <span id='current-user' class='d-none'><%= current_user.full_name %></span>
       <span id='threadable_id' class='d-none'><%= message.threadable.id %></span>
       <strong><%= message.user.full_name %></strong>

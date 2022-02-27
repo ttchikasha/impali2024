@@ -34,20 +34,6 @@ export default class extends Controller {
             element.appendChild(div);
             div.innerHTML = data.html;
 
-            let name = document.querySelector('#chatee-name').textContent;
-
-            let newMessage = document
-              .getElementById('new-message')
-              .querySelector('div');
-
-            if (name == data.sender) {
-              newMessage.classList.toggle('me');
-              newMessage.classList.add('other');
-            } else {
-              newMessage.classList.toggle('other');
-              newMessage.classList.add('me');
-            }
-
             div = document.getElementById('new-message');
             div.outerHTML = div.innerHTML;
 
