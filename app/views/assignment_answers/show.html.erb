@@ -92,7 +92,7 @@
                       </div>
                       <% if current_user.teacher? %>
                         <%= react_component("QuestionMarker", { url: question_answer_path(question_answer, format: :js), mark: question_answer.mark }) %>
-                      <% elsif current_user.parent? %>
+                      <% else %>
                         <% if @answer.assignment.late? %>
                           <button disabled class="my-2 rounded-0 btn btn-sm btn-outline-<%= question_answer.mark < 50 ? 'danger' : 'success' %>">
                             <%= question_answer.mark %>%

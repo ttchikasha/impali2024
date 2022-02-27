@@ -276,9 +276,7 @@ class User < ApplicationRecord
   end
 
   def set_temp_password
-    if encrypted_password.blank? || password.blank?
-      self.password = id_no
-    end
+    self.password = id_no if encrypted_password.blank?
   end
 
   def downcase_email
