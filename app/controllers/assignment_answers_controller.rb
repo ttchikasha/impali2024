@@ -34,23 +34,27 @@ class AssignmentAnswersController < ApplicationController
   end
 
   def update_or_create
-    params[:assignment][:questions_attributes].keys.each do |key|
-      question_attribute = params[:assignment][:questions_attributes][key]
-      answer = current_user.question_answers.find_or_create_by question_id: question_attribute[:id].to_i
+    if current_user.parent?
+      redirect_to dashboard_path, alert: "Parents cannot answer questions"
+    else
+      params[:assignment][:questions_attributes].keys.each do |key|
+        question_attribute = params[:assignment][:questions_attributes][key]
+        answer = current_user.question_answers.find_or_create_by question_id: question_attribute[:id].to_i
 
-      k = question_attribute[:question_answers_attributes]&.keys&.first
-      if k
-        answer_attributes = question_attribute[:question_answers_attributes][k]
+        k = question_attribute[:question_answers_attributes]&.keys&.first
+        if k
+          answer_attributes = question_attribute[:question_answers_attributes][k]
 
-        if answer_attributes[:selected_answer_id]
-          answer.update_column :selected_answer_id, answer_attributes[:selected_answer_id].to_i
-        else
-          answer.answer = answer_attributes[:answer]
-          answer.save!
+          if answer_attributes[:selected_answer_id]
+            answer.update_column :selected_answer_id, answer_attributes[:selected_answer_id].to_i
+          else
+            answer.answer = answer_attributes[:answer]
+            answer.save!
+          end
         end
       end
+      @answer = @assignment.assignment_answers.find_or_create_by user_id: current_user.id
+      redirect_to assignment_assignment_answer_path(@assignment, @answer)
     end
-    @answer = @assignment.assignment_answers.find_or_create_by user_id: current_user.id
-    redirect_to assignment_assignment_answer_path(@assignment, @answer)
   end
 end

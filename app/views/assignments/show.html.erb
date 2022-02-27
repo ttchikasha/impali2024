@@ -20,6 +20,11 @@
           <i class="bi bi-file-earmark-pdf"></i>
           <span>Download as PDF</span>
         <% end %>
+        <% if current_user.parent? %>
+          <% if ans = current_user.student&.assignment_answers.find_by(assignment_id: @assignment.id) %>
+            <%= link_to 'Child Answer', assignment_assignment_answer_path(@assignment, ans), class: 'btn btn-sm btn-warning ms-md-2 mb-md-0 mb-2' %>
+          <% end %>
+        <% end %>
         <% if ans = current_user.assignment_answers.find_by(assignment_id: @assignment.id) %>
           <%= link_to current_user.teacher? ? 'Marking Scheme' : 'My Answer' , assignment_assignment_answer_path(@assignment, ans), class: 'btn btn-sm btn-warning ms-md-2 mb-md-0 mb-2' %>
         <% end %>

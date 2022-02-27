@@ -22,6 +22,8 @@ class Question < ApplicationRecord
   accepts_nested_attributes_for :allowed_answers
   accepts_nested_attributes_for :question_answers
 
+  default_scope { order(:created_at) }
+
   before_validation do
     rest = allowed_answers&.select { |a| !a.content.body.to_plain_text.blank? }
 

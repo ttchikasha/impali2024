@@ -41,9 +41,9 @@
             <%= render question, locals: {readonly: true} %>
             <%= question_form.fields_for :question_answers do |question_answer_form| %>
               <% qa = question_answer_form.object %>
-              <% if qa.user == current_user %>
+              <% if qa.user == current_user || qa.user == current_user.student %>
                 <% if question.allowed_answers.any? %>
-                  <% if @answer.user == current_user && !@answer.assignment.late?  %>
+                  <% if (@answer.user == current_user && !@answer.assignment.late?) || (current_user.teacher? && @answer.user == current_user)  %>
                     <%= question_answer_form.collection_radio_buttons :selected_answer_id, question.allowed_answers, :id, :content, label: 'Select Answer' %>
                   <% else %>
                     <% question.allowed_answers.each.with_index do |answer, index| %>
@@ -57,30 +57,48 @@
                           <% end %>
                         </div>
                         <div><%= answer.content %></div>
-                        <% if correct  %>
-                          <span class="badge bg-success ms-5">
-                            Correct
-                            <i class="bi bi-check-circle"></i>
-                          </span>
-                        <% elsif answer.id == question_answer.selected_answer_id %>
-                          <span class="badge bg-danger ms-5">
-                            Wrong
-                            <i class="bi bi-x-circle"></i>
-                          </span>
+                        <% if @answer.assignment.late? || current_user.teacher? %>
+                          <% if correct  %>
+                            <span class="badge bg-success ms-5">
+                              Correct
+                              <i class="bi bi-check-circle"></i>
+                            </span>
+                          <% elsif answer.id == question_answer.selected_answer_id %>
+                            <span class="badge bg-danger ms-5">
+                              Wrong
+                              <i class="bi bi-x-circle"></i>
+                            </span>
+                          <% end %>
                         <% end %>
                       </div>
                     <% end %>
                   <% end %>
                 <% else %>
-                  <% if @answer.user == current_user && !@answer.assignment.late? %>
+                  <% if (@answer.user == current_user && !@answer.assignment.late?) || (current_user.teacher? && @answer.user == current_user) %>
                     <%= question_answer_form.rich_text_area :answer %>
                   <% else %>
+                    <% condition1 = current_user.teacher? && !question.correct_answer.answer.body.to_plain_text.blank? %>
+                    <% condition2 = @answer.assignment.late? && !question.correct_answer.answer.body.to_plain_text.blank?  %>
+                    <% if condition1 || condition2 %>
+                      <span class="badge bg-info rounded-0">Teacher's Answer/Explanation</span>
+                      <div class='border text-info bg-light p-2'>
+                        <div class='ms-2'><%= question.correct_answer.answer %></div>
+                      </div>
+                    <% end %>
                     <% unless question_answer.answer.body.to_plain_text.blank? %>
-                      <span class="badge bg-success rounded-0">Answer</span>
+                      <span class="badge bg-success rounded-0">Student's Answer</span>
                       <div class='border text-success bg-light p-2'>
                         <div class='ms-2'><%= question_answer.answer %></div>
                       </div>
-                      <%= react_component("QuestionMarker", { url: question_answer_path(question_answer, format: :js), mark: question_answer.mark }) %>
+                      <% if current_user.teacher? %>
+                        <%= react_component("QuestionMarker", { url: question_answer_path(question_answer, format: :js), mark: question_answer.mark }) %>
+                      <% elsif current_user.parent? %>
+                        <% if @answer.assignment.late? %>
+                          <button disabled class="my-2 rounded-0 btn btn-sm btn-outline-<%= question_answer.mark < 50 ? 'danger' : 'success' %>">
+                            <%= question_answer.mark %>%
+                          </button>
+                        <% end %>
+                      <% end %>
                     <% else %>
                       <p class='fw-bold text-danger'>No Answer Provided (0%)</p>
                     <% end %>
@@ -91,7 +109,7 @@
           </div>
         </div>
       <% end %>
-      <% if @answer.user == current_user && !@answer.assignment.late? %>
+      <% if (@answer.user == current_user && !@answer.assignment.late?) || (current_user.teacher? && @answer.user == current_user) %>
         <%= form.submit 'Update Answers', class: 'btn btn-lg btn-success submit-answer-btn' %>
       <% elsif current_user.teacher? && @answer.user.student? %>
         <div id="answer-score">
