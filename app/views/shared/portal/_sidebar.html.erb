@@ -13,7 +13,7 @@
         <span>Notifications</span>
       <% end %>
     </li>
-    <li class="nav-heading"><%= current_user.teacher? ? 'Manage Students' : 'Learn' %></li>
+    <li class="nav-heading"><%= current_user.teacher? ? 'Teaching' : 'Learning' %></li>
     <% if current_user.student? || current_user.parent? %>
       <li class="nav-item">
         <%= link_to reports_path, class: "nav-link #{'collapsed' unless on_reports_index?}" do %>

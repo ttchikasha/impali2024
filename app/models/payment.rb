@@ -59,6 +59,10 @@ class Payment < ApplicationRecord
     PaymentMailer.received(self).deliver_later
   end
 
+  def payment_id
+    "##{id}-#{user.login_id}"
+  end
+
   def status
     return "Accepted" if accepted
     return "Rejected" if rejected

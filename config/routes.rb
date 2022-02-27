@@ -14,7 +14,7 @@ Rails.application.routes.draw do
   authenticate :user do
     resources :students
     resources :school_payments, only: %i[edit update]
-    resources :assignments do
+    resources :assignments, except: :index do
       resources :questions
     end
     resources :private_threads do
@@ -28,7 +28,7 @@ Rails.application.routes.draw do
       resources :topics
       resources :assignments
     end
-    resources :assignments do
+    resources :assignments, except: :index do
       resources :assignment_answers, only: %i[update index show create]
     end
     resources :topics do
@@ -46,7 +46,7 @@ Rails.application.routes.draw do
     end
     resources :subjects
     resources :messages, only: :index
-    resources :payments
+    resources :payments, except: [:edit, :new]
     resources :notifications
     resources :users do
       resources :student_parents
