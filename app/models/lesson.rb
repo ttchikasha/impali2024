@@ -3,6 +3,7 @@
 # Table name: lessons
 #
 #  id         :bigint           not null, primary key
+#  draft      :boolean
 #  order      :bigint           default(0)
 #  title      :string
 #  video_url  :string
@@ -30,6 +31,9 @@ class Lesson < ApplicationRecord
 
   validates :title, presence: true
   validates :video_url, url: { allow_blank: true, allow_nil: true }
+
+  scope :published, -> { where(:draft => false) }
+  scope :draft, -> { where(:draft => true) }
 
   after_save do
     add_banner_image unless banner_image.attached?

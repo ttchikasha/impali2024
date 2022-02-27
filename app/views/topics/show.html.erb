@@ -13,10 +13,11 @@
   <div><%= @topic.description %></div>
 </div>
 <div class="section-title mt-4">
-  <h2>Lessons</h2>
+  <h2 class='py-0 my-0'>Lessons</h2>
 </div>
-<div class="courses">
+<div class="courses mt-0">
   <div class="row">
-    <%= render @topic.lessons %>
+    <% lessons = current_user.teacher? ? @topic.lessons : @topic.lessons.published %>
+    <%= render lessons %>
   </div>
 </div>

@@ -3,6 +3,7 @@ class LessonsController < ApplicationController
   before_action :set_lesson, only: %i[ show edit update destroy ]
   before_action :authorize_teacher, only: %i[edit update destroy create new]
   before_action :authorize_paid_students, only: :show
+  before_action :allow_published_lessons, only: :show
 
   # GET /lessons or /lessons.json
   def index
@@ -69,7 +70,7 @@ class LessonsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def lesson_params
-    params.require(:lesson).permit(:content, :title, :video_url, :banner_image)
+    params.require(:lesson).permit(:content, :title, :video_url, :banner_image, :draft)
   end
 
   def set_topic
@@ -88,6 +89,12 @@ class LessonsController < ApplicationController
     end
     if current_user.parent? && current_user.student.current_balance > 0
       redirect_to dashboard_path, alert: "Only paid students can access lessons"
+    end
+  end
+
+  def allow_published_lessons
+    if !current_user.teacher? && @lesson.draft?
+      redirect_to dashboard_path, alert: "Only the teacher can access draft lessons"
     end
   end
 end

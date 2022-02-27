@@ -21,7 +21,8 @@
         <% end %>
       <% end %>
     </li>
-    <% @topic.lessons.each.with_index do |lesson, index| %>
+    <% lessons = current_user.teacher? ? @topic.lessons : @topic.lessons.published  %>
+    <% lessons.each.with_index do |lesson, index| %>
       <% if lesson.persisted? %>
         <li class="nav-item">
           <%= link_to topic_lesson_path(@topic, lesson), class: "nav-link #{'collapsed' unless on_dashboard?} #{'active' if @lesson&.id == lesson.id}" do %>

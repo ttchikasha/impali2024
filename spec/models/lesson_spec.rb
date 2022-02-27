@@ -3,6 +3,7 @@
 # Table name: lessons
 #
 #  id         :bigint           not null, primary key
+#  draft      :boolean
 #  order      :bigint           default(0)
 #  title      :string
 #  video_url  :string
