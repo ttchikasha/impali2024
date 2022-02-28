@@ -217,10 +217,8 @@ class User < ApplicationRecord
   def classroom_subjects
     if parent?
       student.classroom&.classroom_subjects
-    elsif parent?
-      teaching_subjects
     else
-      classroom&.classroom_subjects
+      (classroom&.classroom_subjects + teaching_subjects).uniq
     end
   end
 

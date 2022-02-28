@@ -38,7 +38,7 @@ class ClassroomSubject < ApplicationRecord
   enum grade: Grades::GRADES_HASH
 
   validates :grade, inclusion: { in: grades.keys }
-  validates_uniqueness_of :subject_id, scope: :teacher_id
+  validates_uniqueness_of :subject_id, scope: [:teacher_id, :grade, :room]
 
   before_validation do
     self.teacher = classroom&.teacher if teacher.nil?

@@ -42,6 +42,7 @@ class ClassroomSubjectsController < ApplicationController
         format.html { redirect_to @classroom_subject.classroom, notice: "Classroom subject was successfully updated." }
         format.json { render :show, status: :ok, location: @classroom_subject }
       else
+        debugger
         format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @classroom_subject.errors, status: :unprocessable_entity }
       end
