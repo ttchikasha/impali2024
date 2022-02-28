@@ -217,8 +217,10 @@ class User < ApplicationRecord
   def classroom_subjects
     if parent?
       student.classroom&.classroom_subjects
+    elsif teacher?
+      (teaching_subjects + classroom&.classroom_subjects).uniq
     else
-      (classroom&.classroom_subjects + teaching_subjects).uniq
+      classroom&.classroom_subjects
     end
   end
 
