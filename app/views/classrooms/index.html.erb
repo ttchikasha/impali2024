@@ -42,7 +42,9 @@
                       <% end %>
                     </th>
                     <td class='text-center'><%= classroom.students.count %></td>
-                    <td class='text-center'><%= classroom.subjects.count %></td>
+                    <td class='text-center'>
+                      <%= classroom.classroom_subjects.count %>
+                    </td>
                     <td>
                       <div class="d-flex align-items-center">
                         <%= link_to 'Show', classroom %>
