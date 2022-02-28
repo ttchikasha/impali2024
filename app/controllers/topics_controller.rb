@@ -1,6 +1,7 @@
 class TopicsController < ApplicationController
   before_action :set_classroom_subject
   before_action :set_topic, only: %i[ show edit update destroy ]
+  before_action :authorize_subject_teacher, only: %i[new create edit update destroy]
 
   # GET /topics or /topics.json
   def index
@@ -72,5 +73,11 @@ class TopicsController < ApplicationController
 
   def set_classroom_subject
     @classroom_subject = ClassroomSubject.find params[:classroom_subject_id]
+  end
+
+  def authorize_subject_teacher
+    unless @classroom_subject.teacher == current_user
+      redirect_to dashboard_path, alert: "Only subject teacher is authorized"
+    end
   end
 end

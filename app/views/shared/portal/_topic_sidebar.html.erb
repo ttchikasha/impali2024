@@ -15,7 +15,7 @@
     </li>
     <li class="nav-heading">
       <%= truncate @topic.title, length: 22 %> - Lessons
-      <% if current_user.teacher? %>
+      <% if current_user.teacher? && @topic.classroom_subject.teacher == current_user %>
         <%= link_to new_topic_lesson_path(@topic) do %>
           <i class="bi bi-plus-circle float-end text-secondary"></i>
         <% end %>

@@ -35,12 +35,25 @@
       </a>
       <ul id="assignments-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
         <% current_user.classroom_subjects&.each do |csub| %>
-          <% if current_user.classroom.subjects.include? csub.subject %>
+          <% if current_user.teacher? %>
             <li>
               <%= link_to classroom_subject_assignments_path(csub) do %>
-                <i class="bi bi-circle"></i><span><%= csub.name %></span>
+                <i class="bi bi-circle"></i>
+                <span>
+                  <% option1 = "(#{Classroom.grades[csub.classroom.grade]} #{csub.classroom.room})"  %>
+                  <% option2 = csub.teacher == current_user ? "" : "(#{csub.teacher.display_name})" %>
+                  <%= csub.name %> <%= csub.classroom != current_user.classroom ? option1 : option2 %>
+                </span>
               <% end %>
             </li>
+          <% else %>
+            <% if current_user.classroom.subjects.include? csub.subject %>
+              <li>
+                <%= link_to classroom_subject_assignments_path(csub) do %>
+                  <i class="bi bi-circle"></i><span><%= csub.name %></span>
+                <% end %>
+              </li>
+            <% end %>
           <% end %>
         <% end %>
       </ul>
@@ -51,12 +64,25 @@
       </a>
       <ul id="subjects-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
         <% current_user.classroom_subjects&.each do |csub| %>
-          <% if current_user.classroom.subjects.include? csub.subject %>
+          <% if current_user.teacher? %>
             <li>
               <%= link_to csub do %>
-                <i class="bi bi-circle"></i><span><%= csub.name %></span>
+                <i class="bi bi-circle"></i>
+                <span>
+                  <% option1 = "(#{Classroom.grades[csub.classroom.grade]} #{csub.classroom.room})"  %>
+                  <% option2 = csub.teacher == current_user ? "" : "(#{csub.teacher.display_name})" %>
+                  <%= csub.name %> <%= csub.classroom != current_user.classroom ? option1 : option2 %>
+                </span>
               <% end %>
             </li>
+          <% else %>
+            <% if current_user.classroom.subjects.include? csub.subject %>
+              <li>
+                <%= link_to csub do %>
+                  <i class="bi bi-circle"></i><span><%= csub.name %></span>
+                <% end %>
+              </li>
+            <% end %>
           <% end %>
         <% end %>
       </ul>

@@ -1,5 +1,6 @@
 class SchedulesController < ApplicationController
   before_action :set_schedule, only: %i[ show edit update destroy ]
+  before_action :verify_admin, only: [:create, :update, :destroy]
 
   # GET /schedules or /schedules.json
   def index
@@ -67,5 +68,11 @@ class SchedulesController < ApplicationController
   # Only allow a list of trusted parameters through.
   def schedule_params
     params.permit(:title, :calendar_id, :start, :end, :location)
+  end
+
+  def verify_admin
+    unless current_user.admin?
+      redirect_to root_path, alert: "Only admin is authorized"
+    end
   end
 end

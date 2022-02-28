@@ -9,8 +9,8 @@
     </div>
   </div>
   <div data-controller="autocomplete" data-autocomplete-url-value="<%= teachers_autocomplete_users_path %>">
-    <%= form.text_field :teacher_name, floating: true, data: {'autocomplete-target' => 'input'}, required: true %>
-    <%= form.hidden_field :teacher_id, data: {'autocomplete-target' => 'hidden'} %>
+    <%= form.text_field :teacher_name, floating: true, data: {'autocomplete-target' => 'input'}, required: true, class: "#{'is-invalid' if classroom.errors[:teacher_id].any?}" %>
+    <%= form.text_field :teacher_id, data: {'autocomplete-target' => 'hidden'}, hide_label: true %>
     <div class="list-group" data-autocomplete-target="results"></div>
   </div>
   <%= form.collection_check_boxes(:subject_ids, Subject.all, :id,
@@ -19,3 +19,11 @@
   <% end %>
   <%= form.primary %>
 <% end %>
+<style>
+  #classroom_teacher_id {
+    display: none;
+  }
+  .invalid-feedback {
+    margin-top: -0.65em;
+  }
+</style>

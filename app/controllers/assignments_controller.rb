@@ -3,6 +3,7 @@ class AssignmentsController < ApplicationController
   before_action :set_assignment, only: %i[ show edit update destroy ]
   before_action :authorize_teacher, only: %i[new create edit update destroy]
   before_action :authorize_paid_students, only: :show
+  before_action :authorize_subject_teacher, only: [:new, :edit, :create, :update, :destroy]
 
   # GET /assignments or /assignments.json
   def index
@@ -109,6 +110,13 @@ class AssignmentsController < ApplicationController
     end
     if current_user.parent? && current_user.student.current_balance > 0
       redirect_to dashboard_path, alert: "Only paid students can access assignments"
+    end
+  end
+
+  def authorize_subject_teacher
+    csub = @assignment&.classroom_subject || @classroom_subject
+    unless csub.teacher == current_user
+      redirect_to dashboard_path, alert: "Only subject teacher is authorized"
     end
   end
 end

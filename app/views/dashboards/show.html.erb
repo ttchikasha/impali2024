@@ -17,6 +17,39 @@
     <div class="row">
       <% if current_user.recent_assignments(5).any? %>
         <div class="col-md-7">
+          <% if current_user.teacher? %>
+            <div class="section-title">
+              <h2>My Classes</h2>
+            </div>
+            <div id="accordionFlush" class="accordion accordion-flush pb-5 mb-2">
+              <% current_user.classroom_subjects.each do |csub| %>
+                <div class="accordion-item px-4">
+                  <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse-<%= csub.id %>" aria-expanded="false">
+                      <span class='fw-bold fs-5'><%= csub.name %></span>
+                      <span class="mx-sm-1"></span>
+                      <small class='small text-muted fw-light'>
+                        (<%= csub.classroom.name %>)
+                      </small>
+                    </button>
+                  </h2>
+                  <div id="flush-collapse-<%= csub.id %>" class="accordion-collapse collapse" data-bs-parent="#accordionFlush">
+                    <div class="accordion-body">
+                      <p>
+                        <% label = pluralize(csub.topics.count, 'Topic') %>
+                        <%= link_to label, csub %>
+                      </p>
+                      <p><%= pluralize csub.lessons.count, 'Lesson' %></p>
+                      <p>
+                        <% label = pluralize(csub.assignments.count, 'Assignment') %>
+                        <%= link_to label, classroom_subject_assignments_path(csub) %>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              <% end %>
+            </div>
+          <% end %>
           <div class="section-title">
             <h2>Recent Assignments</h2>
           </div>

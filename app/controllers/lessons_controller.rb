@@ -4,6 +4,7 @@ class LessonsController < ApplicationController
   before_action :authorize_teacher, only: %i[edit update destroy create new]
   before_action :authorize_paid_students, only: :show
   before_action :allow_published_lessons, only: :show
+  before_action :authorize_subject_teacher, only: %i[new create edit update destroy]
 
   # GET /lessons or /lessons.json
   def index
@@ -95,6 +96,12 @@ class LessonsController < ApplicationController
   def allow_published_lessons
     if !current_user.teacher? && @lesson.draft?
       redirect_to dashboard_path, alert: "Only the teacher can access draft lessons"
+    end
+  end
+
+  def authorize_subject_teacher
+    unless @topic.classroom_subject.teacher == current_user
+      redirect_to dashboard_path, alert: "Only subject teacher is authorized"
     end
   end
 end

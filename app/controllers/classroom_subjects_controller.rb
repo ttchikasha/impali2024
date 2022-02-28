@@ -39,7 +39,7 @@ class ClassroomSubjectsController < ApplicationController
   def update
     respond_to do |format|
       if @classroom_subject.update(classroom_subject_params)
-        format.html { redirect_to classroom_subject_url(@classroom_subject), notice: "Classroom subject was successfully updated." }
+        format.html { redirect_to @classroom_subject.classroom, notice: "Classroom subject was successfully updated." }
         format.json { render :show, status: :ok, location: @classroom_subject }
       else
         format.html { render :edit, status: :unprocessable_entity }

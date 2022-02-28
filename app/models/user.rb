@@ -63,6 +63,7 @@ class User < ApplicationRecord
   has_one :parent_student, class_name: "StudentParent", foreign_key: :parent_id
   has_one :parent, through: :student_parent
   has_one :student, through: :parent_student
+  has_many :teaching_subjects, class_name: "ClassroomSubject", foreign_key: "teacher_id"
 
   enum role: {
          "Student": 0,
@@ -216,6 +217,8 @@ class User < ApplicationRecord
   def classroom_subjects
     if parent?
       student.classroom&.classroom_subjects
+    elsif parent?
+      teaching_subjects
     else
       classroom&.classroom_subjects
     end

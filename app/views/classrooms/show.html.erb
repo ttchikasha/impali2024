@@ -51,6 +51,10 @@
                   <% if @classroom.subjects.include? csub.subject %>
                     <li class='list-group-item list-group-item-action'>
                       <%= link_to csub.name, csub, class: 'fw-bold text-success' %>
+                      <% if current_user.admin? %>
+                        <small class="float-end ms-2"><%= link_to 'Edit', edit_classroom_subject_path(csub) %></small>
+                      <% end %>
+                      <small class='float-end'><strong>Teacher</strong> <%= csub.teacher.display_name %></small>
                     </li>
                   <% end %>
                 <% end %>

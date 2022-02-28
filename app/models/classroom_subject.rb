@@ -44,6 +44,14 @@ class ClassroomSubject < ApplicationRecord
     self.teacher = classroom&.teacher if teacher.nil?
   end
 
+  def lessons
+    Lesson.where(topic_id: [topic_ids])
+  end
+
+  def teacher_name
+    teacher&.full_name
+  end
+
   def name
     subject.name
   end

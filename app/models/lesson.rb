@@ -42,4 +42,8 @@ class Lesson < ApplicationRecord
   def number
     topic.lessons.index(self) + 1
   end
+
+  def is_teacher?(user)
+    topic.classroom_subject.teacher == user
+  end
 end

@@ -24,7 +24,7 @@ Rails.application.routes.draw do
     resource :dashboard, only: :show
     resources :teacher
     resources :student
-    resources :classroom_subjects do
+    resources :classroom_subjects, except: :index do
       resources :topics
       resources :assignments
     end

@@ -27,6 +27,7 @@ class Classroom < ApplicationRecord
 
   validates :grade, inclusion: { in: grades.keys }
   validates_uniqueness_of :grade, scope: [:room]
+  validates_uniqueness_of :teacher_id, if: -> { !teacher.nil? }
 
   def teacher_name
     teacher&.full_name

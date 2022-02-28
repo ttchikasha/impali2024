@@ -1,6 +1,11 @@
-<h1>Editing Classroom Subject</h1>
-
-<%= render 'form', classroom_subject: @classroom_subject %>
-
-<%= link_to 'Show', @classroom_subject %> |
-<%= link_to 'Back', classroom_subjects_path %>
+<div class="section-title">
+  <p><%= @classroom_subject.classroom.name %></p>
+  <h2>Edit <%= @classroom_subject.name %></h2>
+</div>
+<div class="card">
+  <div class="card-body">
+    <h3 class="card-title">Edit Classroom Subject Teacher</h3>
+    <%= render 'form', classroom_subject: @classroom_subject %>
+  </div>
+</div>
+<%= link_to 'Back', @classroom_subject.classroom %>
