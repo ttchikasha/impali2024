@@ -1,15 +1,19 @@
 <div class="section-title">
   <div class="d-flex align-items-center justify-content-between">
-    <p>Notifications</p>
+    <p>Notices</p>
     <% if current_user.admin? %>
-      <%= link_to 'New Notification', new_notification_path, class: 'btn btn-outline-primary btn-sm' %>
+      <%= link_to 'New Notice', new_notification_path, class: 'btn btn-outline-primary btn-sm' %>
     <% end %>
   </div>
   <h2>All</h2>
 </div>
 <div class="row">
-  <% cache @notifications do %>
-    <%= render @notifications %>
+  <% if @notifications.any? %>
+    <% cache @notifications do %>
+      <%= render @notifications %>
+    <% end %>
+    <%= will_paginate @notifications %>
+  <% else %>
+    <h3>You don't have any notices yet!</h3>
   <% end %>
-  <%= will_paginate @notifications %>
 </div>

@@ -124,7 +124,17 @@ class User < ApplicationRecord
   end
 
   def unread_notifications
-    Notification.where.not(id: [notifications.pluck(:id)])
+    base_query = case role
+      when "Student"
+        Notification.students_only
+      when "Parent"
+        Notification.parents_only
+      when "Teacher"
+        Notification.teachers_only
+      when "Admin"
+        Notification
+      end
+    base_query.where.not(id: [notifications.pluck(:id)])
   end
 
   def unread_messages

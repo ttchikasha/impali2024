@@ -1,6 +1,6 @@
 <aside id="sidebar" class="sidebar">
   <ul class="sidebar-nav" id="sidebar-nav">
-    <li class="nav-heading"><%= current_user.teacher? ? "Teacher" : 'Students' %> Portal</li>
+    <li class="nav-heading"><%= current_user.role.capitalize %> Portal</li>
     <li class="nav-item">
       <%= link_to dashboard_path, class: "nav-link #{'collapsed' unless on_dashboard?}" do %>
         <i class="bi bi-grid"></i>
@@ -14,7 +14,7 @@
       <% end %>
     </li>
     <li class="nav-heading">
-      <%= truncate @topic.title, length: 25 %> - Lessons
+      <%= truncate @topic.title, length: 22 %> - Lessons
       <% if current_user.teacher? %>
         <%= link_to new_topic_lesson_path(@topic) do %>
           <i class="bi bi-plus-circle float-end text-secondary"></i>
@@ -27,7 +27,7 @@
         <li class="nav-item">
           <%= link_to topic_lesson_path(@topic, lesson), class: "nav-link #{'collapsed' unless on_dashboard?} #{'active' if @lesson&.id == lesson.id}" do %>
             <span class="topic-number"><%= index + 1 %></span>
-            <span><%= truncate lesson.title, length: 25 %></span>
+            <span><%= truncate lesson.title, length: 22 %></span>
           <% end %>
         </li>
       <% end %>

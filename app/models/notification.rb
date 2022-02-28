@@ -34,16 +34,52 @@ class Notification < ApplicationRecord
     "danger": 3,
   }
   validates :tag, inclusion: tags.keys
+  validates :title, presence: true
 
   enum to: {
     "Everyone": 0,
     "Students": 1,
     "Teachers": 2,
+    "Parents": 3,
   }
 
   validates :to, inclusion: tos.keys
 
-  scope :recent, ->(count = 4) { order(created_at: :desc).take(count) }
+  scope :recent, ->(user, count = 4) { for_user(user).order(created_at: :desc).take(count) }
+  scope :students_only, -> { where(:to => "Students").or(where(to: "Everyone")) }
+  scope :teachers_only, -> { where(:to => "Teachers").or(where(to: "Everyone")) }
+  scope :parents_only, -> { where(:to => "Parents").or(where(to: "Everyone")) }
+
+  class << self
+    def for_user(user)
+      case user.role
+      when "Teacher"
+        teachers_only
+      when "Parent"
+        parents_only
+      when "Student"
+        students_only
+      when "Admin"
+        all
+      end
+    end
+  end
+
+  def user_authorized?(user)
+    return true if user.admin?
+    case to
+    when "Everyone"
+      true
+    when "Students"
+      user.student? ? true : false
+    when "Parents"
+      user.parent? ? true : false
+    when "Teachers"
+      user.teacher? ? true : false
+    else
+      false
+    end
+  end
 
   def icon
     case tag

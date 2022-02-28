@@ -47,7 +47,7 @@ Rails.application.routes.draw do
     resources :subjects
     resources :messages, only: :index
     resources :payments, except: [:edit, :new]
-    resources :notifications
+    resources :notifications, path: "notices"
     resources :users do
       resources :student_parents
       collection do

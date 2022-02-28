@@ -6,4 +6,8 @@ module ApplicationHelper
   def on_topic?
     controller_path == "lessons" || (controller_path == "topics" && action_name != "new")
   end
+
+  def recent_notifications(count = 3)
+    Notification.recent(current_user, count)
+  end
 end

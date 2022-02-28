@@ -4,7 +4,17 @@ class NotificationsController < ApplicationController
 
   # GET /notifications or /notifications.json
   def index
-    @notifications = Notification.paginate(page: params[:page], per_page: 20).order(created_at: :desc)
+    base_query = case current_user.role
+      when "Student"
+        Notification.students_only
+      when "Parent"
+        Notification.parents_only
+      when "Teacher"
+        Notification.teachers_only
+      else
+        Notification
+      end
+    @notifications = base_query.paginate(page: params[:page], per_page: 20).order(created_at: :desc)
     current_user.notifications << @notifications
   end
 
@@ -65,6 +75,9 @@ class NotificationsController < ApplicationController
   # Use callbacks to share common setup or constraints between actions.
   def set_notification
     @notification = Notification.find(params[:id])
+    unless @notification.user_authorized? current_user
+      redirect_to notifications_path, alert: "You are not authorized to view this notice"
+    end
   end
 
   # Only allow a list of trusted parameters through.
