@@ -26,10 +26,11 @@
         </div>
         <div class="ps-3">
           <h6><%= number_to_currency @revenue, precision: 0 %></h6>
+          <% total_paid = Payment.total_students_paid(params[:revenue]) %>
           <span class="text-success small pt-1 fw-bold">
-            <%= Payment.total_students_paid params[:revenue] %>
+            <%= total_paid %>
           </span>
-          <span class="text-muted small pt-2 ps-1">students paid</span>
+          <span class="text-muted small pt-2 ps-1"><%= 'student'.pluralize(total_paid) %> paid</span>
         </div>
       </div>
     </div>

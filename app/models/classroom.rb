@@ -41,7 +41,7 @@ class Classroom < ApplicationRecord
   end
 
   def classroom_subjects
-    ClassroomSubject.where(grade: grade, room: room)
+    ClassroomSubject.where(grade: grade, room: room, subject_id: [subjects.ids])
   end
 
   private
