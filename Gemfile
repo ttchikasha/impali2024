@@ -84,3 +84,5 @@ gem "twilio-ruby", "~> 5.65.0"
 gem "validate_url"
 gem "media_embed"
 gem "phonelib"
+
+gem "roo", "~> 2.8"
