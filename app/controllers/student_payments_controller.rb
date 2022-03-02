@@ -10,6 +10,7 @@ class StudentPaymentsController < ApplicationController
     @payment = Payment.new payment_params
     @payment.user = @student
     @payment.accepted = true
+    @payment.pay_type = "Direct"
 
     respond_to do |format|
       if @payment.save

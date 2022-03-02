@@ -124,7 +124,7 @@
                         <%= link_to payment.pay_type, payments_url(pay_type: payment.pay_type), class: 'badge rounded-pill text-decoration-none bg-secondary' %>
                       </td>
                       <% if current_user.admin? %>
-                        <td><%= link_to payment.user.full_name, payment, class: 'fw-bold' %></td>
+                        <td><%= link_to payment.user.full_name, payment.user, class: 'fw-bold' %></td>
                       <% end %>
                       <td><%= payment.term %></td>
                       <td><%= payment.year %></td>
