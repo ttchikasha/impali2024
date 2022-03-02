@@ -57,6 +57,9 @@ FactoryBot.define do
     date_of_birth { Faker::Date.birthday }
     password { id_no }
     login_id { nil }
+    start_date { Faker::Date.between from: 2.years.ago, to: 1.month.ago }
+    room { Rooms::TYPES.sample }
+    grade { User.grades.keys.reject { |g| g == "None" }.sample }
 
     after :build do |user|
       if user.gender == "Male"

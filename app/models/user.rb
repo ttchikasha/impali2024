@@ -58,7 +58,7 @@ class User < ApplicationRecord
   has_many :assignment_answers
   has_many :question_answers
   has_many :payments, dependent: :destroy
-  has_many :user_payments
+
   has_many :student_attendances
   has_one :student_parent, foreign_key: :student_id
   has_one :parent_student, class_name: "StudentParent", foreign_key: :parent_id

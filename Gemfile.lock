@@ -1520,6 +1520,8 @@ GEM
       rexml (~> 3.2, >= 3.2.5)
       rubyzip (>= 1.2.2)
     semantic_range (3.0.0)
+    shoulda-matchers (5.1.0)
+      activesupport (>= 5.2.0)
     sidekiq (6.4.1)
       connection_pool (>= 2.2.2)
       rack (~> 2.0)
@@ -1615,6 +1617,7 @@ DEPENDENCIES
   rspec-rails
   sass-rails (>= 6)
   selenium-webdriver
+  shoulda-matchers (~> 5.1)
   sidekiq
   spring
   turbolinks (~> 5)
