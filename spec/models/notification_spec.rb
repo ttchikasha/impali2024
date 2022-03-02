@@ -22,8 +22,36 @@
 #  fk_rails_...  (classroom_subject_id => classroom_subjects.id)
 #  fk_rails_...  (user_id => users.id)
 #
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe Notification, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  describe "associations" do
+    it { should belong_to(:user) }
+    it { should have_and_belong_to_many(:users) }
+  end
+
+  describe "validations" do
+    it { should validate_presence_of(:title) }
+
+    describe "tag validation" do
+      it "accepts a valid tag" do
+        ["info", "success", "warning", "danger"].each do |t|
+          u = build :notification, tag: t
+          expect(u).to be_valid
+        end
+      end
+
+      it "rejects an invalid tag" do
+        ["primary", SecureRandom.hex(3), "unknown"].each do |t|
+          expect { build(:notification, tag: t) }.to \
+            raise_error(ArgumentError, "'#{t}' is not a valid tag")
+        end
+      end
+
+      it "rejects a blank tag" do
+        u = build :notification, tag: ""
+        expect(u).to be_invalid
+      end
+    end
+  end
 end

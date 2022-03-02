@@ -28,6 +28,6 @@ FactoryBot.define do
     title { Faker::Lorem.paragraph }
     content { Faker::Lorem.paragraphs.join }
     tag { ["info", "success", "warning", "danger"].sample }
-    user { User.admins.sample }
+    user { create :user, :admin }
   end
 end

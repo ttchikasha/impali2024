@@ -17,8 +17,13 @@
 #
 #  fk_rails_...  (classroom_subject_id => classroom_subjects.id)
 #
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe Assignment, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  describe "associations" do
+    it { should belong_to(:classroom_subject) }
+    it { should have_many(:questions) }
+    it { should have_one_attached(:banner_image) }
+    it { should have_many(:assignment_answers) }
+  end
 end

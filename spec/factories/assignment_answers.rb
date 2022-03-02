@@ -20,7 +20,7 @@
 #
 FactoryBot.define do
   factory :assignment_answer do
-    assignment { nil }
-    user { nil }
+    assignment { create(:assignment) }
+    user { build :user }
   end
 end

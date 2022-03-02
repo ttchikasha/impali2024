@@ -15,8 +15,15 @@
 #
 #  fk_rails_...  (question_id => questions.id)
 #
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe AllowedAnswer, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  describe "validations" do
+    it { should validate_presence_of(:content) }
+  end
+
+  describe "associations" do
+    it { should belong_to(:question) }
+    it { should have_rich_text(:content) }
+  end
 end

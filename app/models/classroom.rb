@@ -26,7 +26,7 @@ class Classroom < ApplicationRecord
   enum grade: Grades::GRADES_HASH
 
   validates :grade, inclusion: { in: grades.keys }
-  validates_uniqueness_of :grade, scope: [:room]
+  validates :room, uniqueness: { case_sensitive: false, scope: :grade }
   validates_uniqueness_of :teacher_id, if: -> { !teacher.nil? }
 
   def teacher_name

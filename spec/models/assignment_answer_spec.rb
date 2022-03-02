@@ -18,8 +18,16 @@
 #  fk_rails_...  (assignment_id => assignments.id)
 #  fk_rails_...  (user_id => users.id)
 #
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe AssignmentAnswer, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  describe "validations" do
+    subject { build :assignment_answer }
+    it { should validate_uniqueness_of(:assignment_id).scoped_to(:user_id) }
+  end
+
+  describe "associations" do
+    it { should belong_to(:user) }
+    it { should belong_to(:assignment) }
+  end
 end

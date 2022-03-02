@@ -17,7 +17,7 @@ FactoryBot.define do
   factory :classroom do
     grade { User.grades.keys.last }
     room { Rooms::TYPES.sample }
-    teacher { User.teachers.sample }
+    teacher { create :user, :teacher }
     subject_ids { Subject.all.map(&:id).sample(rand(4..6)) }
   end
 end

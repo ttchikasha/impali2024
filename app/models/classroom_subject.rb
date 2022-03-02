@@ -26,11 +26,13 @@ class ClassroomSubject < ApplicationRecord
   has_many :assignments
 
   before_create do
-    classroom.subjects << subject
+    if classroom&.subjects
+      classroom&.subjects << subjecte
+    end
   end
 
   before_destroy do
-    classroom.subjects.delete subject
+    classroom&.subjects.delete subject
   end
 
   validates :room, inclusion: { in: Rooms::TYPES }

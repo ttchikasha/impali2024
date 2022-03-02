@@ -19,7 +19,7 @@
 #
 FactoryBot.define do
   factory :assignment do
-    classroom_subject { ClassroomSubject.all.sample }
+    classroom_subject { create(:classroom_subject) }
     due { 2.days.from_now }
   end
 end

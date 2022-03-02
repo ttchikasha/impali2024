@@ -172,7 +172,7 @@ RSpec.describe User, type: :model do
     it { should have_and_belong_to_many(:messages) }
     it { should have_many(:assignment_answers) }
     it { should have_many(:question_answers) }
-    it { should have_many(:payments) }
+    it { should have_many(:payments).dependent(:destroy) }
     it { should have_many(:student_attendances) }
     it { should have_one(:student_parent).with_foreign_key :student_id }
     it { should have_one(:parent_student).class_name("StudentParent").with_foreign_key(:parent_id) }

@@ -22,6 +22,6 @@ FactoryBot.define do
   factory :student_attendance do
     date { Faker::Date.between from: 3.months.ago, to: 1.second.ago }
     present { [true, false, true, true].sample }
-    user { User.students.sample }
+    user { create :user, :student }
   end
 end
