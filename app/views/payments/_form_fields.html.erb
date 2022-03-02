@@ -6,5 +6,7 @@
     <%= form.select :term, SchoolPayment.terms.keys %>
   </div>
 </div>
-<%= form.file_field :deposit_slip, label: 'Bank Deposit Slip', required: true %>
+<% unless controller_name == 'student_payments' %>
+  <%= form.file_field :deposit_slip, label: 'Bank Deposit Slip', required: true %>
+<% end %>
 <%= form.text_field :amount, prepend: "$", required: true %>

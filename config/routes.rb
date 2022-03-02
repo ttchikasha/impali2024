@@ -1,9 +1,6 @@
 Rails.application.routes.draw do
-  get "student_parents/new"
-  get "student_parents/edit"
   resources :parents
   resources :student_attendances
-  get "students/index"
   if Rails.env.development?
     mount LetterOpenerWeb::Engine, at: "/letter_opener"
   end
@@ -46,10 +43,11 @@ Rails.application.routes.draw do
     end
     resources :subjects
     resources :messages, only: :index
-    resources :payments, except: [:edit, :new]
+    resources :payments, except: [:edit]
     resources :notifications, path: "notices"
     resources :users do
       resources :student_parents
+      resources :student_payments, only: %i[new create]
       collection do
         get :profile
         get :teachers_autocomplete

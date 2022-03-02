@@ -1,5 +1,6 @@
 class HomeController < ApplicationController
   def index
+    @price = SchoolPayment.current
   end
 
   def about

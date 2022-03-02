@@ -23,7 +23,6 @@
 class Payment < ApplicationRecord
   belongs_to :user
   has_one_attached :deposit_slip
-  has_many :user_payments
 
   before_create do
     if user.parent?

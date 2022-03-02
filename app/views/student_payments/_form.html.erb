@@ -1,4 +1,4 @@
-<%= bootstrap_form_with(model: payment) do |form| %>
+<%= bootstrap_form_with(model: payment, url: user_student_payments_url(@student)) do |form| %>
   <%= render 'shared/form_alert', resource: payment %>
   <%= render 'payments/form_fields', form: form %>
   <%= form.primary %>

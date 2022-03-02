@@ -1,43 +1,45 @@
      <!-- ======= Pricing Section ======= -->
-<section id="pricing" class="pricing">
-  <div class="container" data-aos="fade-up">
-    <div class="section-title">
-      <h2><%= Date.today.year %> Payments & Fees</h2>
-      <div>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</div>
+<%= cache @price do %>
+  <section id="pricing" class="pricing">
+    <div class="container" data-aos="fade-up">
+      <div class="section-title">
+        <h2><%= Date.today.year %> Payments & Fees</h2>
+        <div>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</div>
+      </div>
+      <div class="row">
+        <div class="col-lg-4 col-md-6" data-aos="zoom-im" data-aos-delay="100">
+          <div class="box">
+            <h3>Tuition</h3>
+            <h4><sup>$</sup>
+              <%= number_to_currency @price.tution, unit: '', precision: 0 %>
+              <span> / term</span></h4>
+            <div class="btn-wrap">
+              <%= link_to 'Make Payment', payments_path, class: 'btn-buy' %>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6 mt-4 mt-md-0" data-aos="zoom-in" data-aos-delay="100">
+          <div class="box featured">
+            <h3>Levy</h3>
+            <h4><sup>$</sup>
+              <%= number_to_currency @price.levy, unit: '', precision: 0 %>
+              <span> / term</span></h4>
+            <div class="btn-wrap">
+              <%= link_to 'Make Payment', payments_path, class: 'btn-buy' %>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6 mt-4 mt-lg-0" data-aos="zoom-in" data-aos-delay="100">
+          <div class="box">
+            <h3>Events</h3>
+            <h4><sup>$</sup>14<span> / term</span></h4>
+            <div class="btn-wrap">
+              <%= link_to 'Make Payment', payments_path, class: 'btn-buy' %>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="row">
-      <div class="col-lg-4 col-md-6" data-aos="zoom-im" data-aos-delay="100">
-        <div class="box">
-          <h3>Tuition</h3>
-          <h4><sup>$</sup>
-            <%= number_to_currency SchoolPayment.current.tution, unit: '', precision: 0 %>
-            <span> / term</span></h4>
-          <div class="btn-wrap">
-            <%= link_to 'Make Payment', payments_path, class: 'btn-buy' %>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-4 col-md-6 mt-4 mt-md-0" data-aos="zoom-in" data-aos-delay="100">
-        <div class="box featured">
-          <h3>Levy</h3>
-          <h4><sup>$</sup>
-            <%= number_to_currency SchoolPayment.current.levy, unit: '', precision: 0 %>
-            <span> / term</span></h4>
-          <div class="btn-wrap">
-            <%= link_to 'Make Payment', payments_path, class: 'btn-buy' %>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-4 col-md-6 mt-4 mt-lg-0" data-aos="zoom-in" data-aos-delay="100">
-        <div class="box">
-          <h3>Events</h3>
-          <h4><sup>$</sup>14<span> / term</span></h4>
-          <div class="btn-wrap">
-            <%= link_to 'Make Payment', payments_path, class: 'btn-buy' %>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+  </section>
+<% end %>
 <!-- End Pricing Section -->

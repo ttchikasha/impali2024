@@ -19,6 +19,9 @@
         <%= button_to private_threads_path(user_id: user.id), class: 'btn btn-outline-primary w-100' do %>
           Message
         <% end %>
+        <% if current_user.admin? %>
+          <%= link_to 'Add Payment', new_user_student_payment_path(user), class: 'btn btn-outline-success w-100 mt-3' %>
+        <% end %>
       <% end %>
     </div>
     <div class="col-xl-8 mt-3 mt-md-0">
