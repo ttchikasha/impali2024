@@ -1,4 +1,5 @@
 class StudentPaymentsController < ApplicationController
+  before_action :authorize_admin_only
   before_action :set_student
 
   def new
@@ -29,5 +30,11 @@ class StudentPaymentsController < ApplicationController
 
   def payment_params
     params.require(:payment).permit(:term, :year, :amount)
+  end
+
+  def authorize_admin_only
+    unless current_user.admin?
+      redirect_to dashboard_path, alert: "Only admin user can add payments"
+    end
   end
 end

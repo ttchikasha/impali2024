@@ -5,6 +5,7 @@
 #  id         :bigint           not null, primary key
 #  accepted   :boolean          default(FALSE)
 #  amount     :decimal(8, 2)
+#  pay_type   :integer          default(0)
 #  rejected   :boolean          default(FALSE)
 #  term       :integer
 #  year       :integer
@@ -36,6 +37,12 @@ class Payment < ApplicationRecord
     "Term 3": 3,
   }
   validates :term, inclusion: terms.keys
+
+  enum pay_type: {
+    "Online": 0,
+    "Direct": 1,
+  }
+  validates :pay_type, inclusion: pay_types.keys
 
   scope :accepted, -> { where(:accepted => true) }
   scope :revenues, ->(period = nil) do

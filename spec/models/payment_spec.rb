@@ -5,6 +5,7 @@
 #  id         :bigint           not null, primary key
 #  accepted   :boolean          default(FALSE)
 #  amount     :decimal(8, 2)
+#  pay_type   :integer          default(0)
 #  rejected   :boolean          default(FALSE)
 #  term       :integer
 #  year       :integer

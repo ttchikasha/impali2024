@@ -80,25 +80,27 @@
               <%= link_to 'All', payments_path, class: 'dropdown-item' %>
             </li>
             <li>
-              <%= link_to 'Accepted', payments_path(accepted: true), class: 'dropdown-item' %>
+              <%= link_to 'Accepted', payments_path(accepted: true, pay_type: params[:pay_type]), class: 'dropdown-item' %>
             </li>
             <li>
-              <%= link_to 'Rejected', payments_path(rejected: true), class: 'dropdown-item' %>
+              <%= link_to 'Rejected', payments_path(rejected: true, pay_type: params[:pay_type]), class: 'dropdown-item' %>
             </li>
             <li>
-              <%= link_to 'Pending', payments_path(pending: true), class: 'dropdown-item' %>
+              <%= link_to 'Pending', payments_path(pending: true, pay_type: params[:pay_type]), class: 'dropdown-item' %>
             </li>
           </ul>
         </div>
         <div class="card-body pb-0">
           <h5 class="card-title">
-            Payment History <span>| <%= @filter %></span>
+            Payment History <span>| <%= @filter %>
+              <% if params[:pay_type] %>|  <%= params[:pay_type] %><% end %></span>
           </h5>
           <table class='table table-borderless'>
             <thead>
               <tr>
                 <th scope='col'>#</th>
                 <th scope="col">Date</th>
+                <th scope="col">Pay Type</th>
                 <% if current_user.admin? %>
                   <th scope="col">Student</th>
                 <% end %>
@@ -118,6 +120,9 @@
                     <tr>
                       <td><%= link_to payment.payment_id, payment, class: 'fw-bold' %></td>
                       <td><%= payment.created_at.localtime.to_s(:short) %></td>
+                      <td>
+                        <%= link_to payment.pay_type, payments_url(pay_type: payment.pay_type), class: 'badge rounded-pill text-decoration-none bg-secondary' %>
+                      </td>
                       <% if current_user.admin? %>
                         <td><%= link_to payment.user.full_name, payment, class: 'fw-bold' %></td>
                       <% end %>

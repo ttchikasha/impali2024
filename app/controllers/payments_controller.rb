@@ -6,6 +6,9 @@ class PaymentsController < ApplicationController
   # GET /payments or /payments.json
   def index
     base_query = current_user.admin? ? Payment : current_user.student.payments
+    if pay_type = params[:pay_type]
+      base_query = base_query.where(pay_type: pay_type)
+    end
     accepted = params[:accepted]
     rejected = params[:rejected]
     pending = params[:pending]
