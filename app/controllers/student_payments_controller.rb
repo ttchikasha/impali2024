@@ -22,6 +22,12 @@ class StudentPaymentsController < ApplicationController
     end
   end
 
+  def update_owing
+    @student.update student_owing_params
+    flash[:notice] = "Student owings updated successfully"
+    redirect_to @student
+  end
+
   private
 
   def set_student
@@ -30,6 +36,10 @@ class StudentPaymentsController < ApplicationController
 
   def payment_params
     params.require(:payment).permit(:term, :year, :amount)
+  end
+
+  def student_owing_params
+    params.require(:user).permit(:previous_owing)
   end
 
   def authorize_admin_only

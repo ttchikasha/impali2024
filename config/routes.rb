@@ -47,7 +47,9 @@ Rails.application.routes.draw do
     resources :notifications, path: "notices"
     resources :users do
       resources :student_parents
-      resources :student_payments, only: %i[new create]
+      resources :student_payments, only: %i[new create] do
+        collection { patch :update_owing }
+      end
       collection do
         get :profile
         get :teachers_autocomplete

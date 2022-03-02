@@ -14,6 +14,7 @@
 #  id_no                  :string           default(""), not null
 #  last_name              :string           default(""), not null
 #  phone                  :string
+#  previous_owing         :decimal(8, 2)    default(0.0)
 #  remember_created_at    :datetime
 #  reset_password_sent_at :datetime
 #  reset_password_token   :string
@@ -113,7 +114,7 @@ class User < ApplicationRecord
   end
 
   def current_balance
-    SchoolPayment.total_this_term - total_paid
+    previous_owing + SchoolPayment.total_this_term - total_paid
   end
 
   def private_threads
