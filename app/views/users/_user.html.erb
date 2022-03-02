@@ -52,10 +52,12 @@
                 </li>
               <% end %>
             <% end %>
-            <% if current_user==user || current_user.admin? %>
-              <li class="nav-item">
-                <button data-bs-toggle="tab" data-bs-target="#payment-details" class="nav-link">Payments</button>
-              </li>
+            <% if user.student? %>
+              <% if current_user==user || current_user.admin? %>
+                <li class="nav-item">
+                  <button data-bs-toggle="tab" data-bs-target="#payment-details" class="nav-link">Payments</button>
+                </li>
+              <% end %>
             <% end %>
           </ul>
           <div class="tab-content pt-2">
@@ -87,21 +89,23 @@
                 </div>
               <% end %>
             <% end %>
-            <% if user==current_user || current_user.admin? %>
-              <div data-controller='payment-details' class="tab-pane fade pt-2 profile-overview" id="payment-details">
-                <div data-payment-details-target='owing'>
-                  <%= render 'users/payment_summary', user: user %>
-                </div>
-                <% if user.student? && current_user.admin? %>
-                  <div class='d-none' data-payment-details-target='form'>
-                    <%= bootstrap_form_with(model: user, url: update_owing_user_student_payments_url(user)) do |f| %>
-                      <%# this is a temporary field & will be removed after the system is in motion %>
-                      <%= f.text_field :previous_owing, help: 'Amount owed prior in previous terms' %>
-                      <%= f.primary 'Update Owing Amount' %>
-                    <% end %>
+            <% if user.student? %>
+              <% if user==current_user || current_user.admin? %>
+                <div data-controller='payment-details' class="tab-pane fade pt-2 profile-overview" id="payment-details">
+                  <div data-payment-details-target='owing'>
+                    <%= render 'users/payment_summary', user: user %>
                   </div>
-                <% end %>
-              </div>
+                  <% if user.student? && current_user.admin? %>
+                    <div class='d-none' data-payment-details-target='form'>
+                      <%= bootstrap_form_with(model: user, url: update_owing_user_student_payments_url(user)) do |f| %>
+                        <%# this is a temporary field & will be removed after the system is in motion %>
+                        <%= f.text_field :previous_owing, help: 'Amount owed prior in previous terms' %>
+                        <%= f.primary 'Update Owing Amount' %>
+                      <% end %>
+                    </div>
+                  <% end %>
+                </div>
+              <% end %>
             <% end %>
           </div>
         </div>
