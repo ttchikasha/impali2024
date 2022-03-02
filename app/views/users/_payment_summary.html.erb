@@ -1,0 +1,44 @@
+<div class="row">
+  <div class="col-sm-4">Previous Owings</div>
+  <div class="col-sm-6">
+    <%= number_to_currency user.previous_owing %>
+  </div>
+  <div class="col-sm-2">
+    <% if current_user.admin? %>
+      <button data-action="click->payment-details#toggleForm" class='btn btn-primary btn-sm'>Edit</button>
+    <% end %>
+  </div>
+</div>
+<div class="row">
+  <% sch_payment = SchoolPayment.current  %>
+  <div class="col-sm-4">Tuition (This Term)</div>
+  <div class="col-sm-6">
+    <%= number_to_currency sch_payment.tution %>
+  </div>
+</div>
+<div class="row">
+  <div class="col-sm-4">Levy (This Term)</div>
+  <div class="col-sm-6">
+    <%= number_to_currency sch_payment.levy %>
+  </div>
+</div>
+<hr>
+<div class="row">
+  <div class="col-sm-4">Total</div>
+  <div class="col-sm-6">
+    <%= number_to_currency sch_payment.levy + sch_payment.tution + user.previous_owing %>
+  </div>
+</div>
+<div class="row">
+  <div class="col-sm-4">Total Paid (This Term)</div>
+  <div class="col-sm-6">
+    <%= number_to_currency user.total_paid %>
+  </div>
+</div>
+<hr>
+<div class="row">
+  <div class="col-sm-4">Balance</div>
+  <div class="col-sm-6 fw-bold">
+    <%= number_to_currency user.current_balance %>
+  </div>
+</div>
