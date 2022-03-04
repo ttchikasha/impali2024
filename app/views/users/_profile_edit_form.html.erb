@@ -29,8 +29,10 @@
       <div class="col-md-4"><%= f.select :gender, User::GENDER_TYPES %></div>
     </div>
     <div class="row">
-      <div class="col-md-6"><%= f.date_field :start_date, required: true %></div>
-      <div class="col-md-6"><%= f.date_field :date_of_birth, required: true %></div>
+      <% if current_user.admin? %>
+        <div class="col-md-6"><%= f.date_field :start_date, required: true %></div>
+      <% end %>
+      <div class="col"><%= f.date_field :date_of_birth, required: true %></div>
     </div>
     <% if current_user.admin? %>
       <div class="row">
