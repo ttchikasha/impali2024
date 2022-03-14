@@ -1,0 +1,10 @@
+infants dpt ->
+
+categorize departments ->
+
+structure departments ->
+
+it department
+sports department
+
+head of departments to manage their staff
