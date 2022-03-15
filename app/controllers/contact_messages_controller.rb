@@ -1,4 +1,5 @@
 class ContactMessagesController < ApplicationController
+  before_action :authenticate_user!, except: :create
   before_action :set_contact_message, only: %i[ show edit update destroy ]
 
   # GET /contact_messages or /contact_messages.json

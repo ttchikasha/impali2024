@@ -1,6 +1,4 @@
 Rails.application.routes.draw do
-  resources :parents
-  resources :student_attendances
   if Rails.env.development?
     mount LetterOpenerWeb::Engine, at: "/letter_opener"
   end
@@ -9,6 +7,7 @@ Rails.application.routes.draw do
   resources :online_applications
   resources :schedules
   authenticate :user do
+    resources :student_attendances
     resources :students
     resources :school_payments, only: %i[edit update]
     resources :assignments, except: :index do
