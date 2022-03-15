@@ -5,7 +5,7 @@ Rails.application.routes.draw do
     mount LetterOpenerWeb::Engine, at: "/letter_opener"
   end
 
-  resources :contact_messages
+  resources :contact_messages, except: %i[edit destroy], path: "site-messages"
   resources :online_applications
   resources :schedules
   authenticate :user do
