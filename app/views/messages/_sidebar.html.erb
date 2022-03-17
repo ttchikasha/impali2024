@@ -1,6 +1,6 @@
 <aside id="sidebar" class="sidebar">
   <ul class="sidebar-nav chat-sidebar-nav" id="sidebar-nav">
-    <li class="nav-heading"><%= current_user.teacher? ? "Teacher" : current_user.admin? ? 'Admin' : 'Students' %> Portal</li>
+    <li class="nav-heading"><%= current_user.role.pluralize %> Portal</li>
     <li class="nav-item">
       <%= link_to dashboard_path, class: "nav-link #{'collapsed' unless on_dashboard?}" do %>
         <i class="bi bi-grid"></i>
