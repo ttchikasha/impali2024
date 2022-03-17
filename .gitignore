@@ -39,3 +39,4 @@ yarn-debug.log*
 .~lock.users.xlsx#
 
 spec/examples.txt
+.tool-versions

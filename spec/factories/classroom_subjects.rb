@@ -21,7 +21,7 @@
 #
 FactoryBot.define do
   factory :classroom_subject do
-    subject { build :subject }
+    subject { Subject.all.sample || build(:subject) }
     grade { rand(0..7) }
     room { Rooms::TYPES.sample }
     teacher { create :user, :teacher }

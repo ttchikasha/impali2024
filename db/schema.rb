@@ -248,7 +248,7 @@ ActiveRecord::Schema.define(version: 2022_03_02_082206) do
   end
 
   create_table "student_attendances", force: :cascade do |t|
-    t.date "date", default: "2022-02-24", null: false
+    t.date "date", default: -> { "now()" }, null: false
     t.boolean "present", default: false
     t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
