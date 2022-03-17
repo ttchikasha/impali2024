@@ -27,7 +27,7 @@ class ClassroomSubject < ApplicationRecord
 
   before_create do
     if classroom&.subjects
-      classroom&.subjects << subjecte
+      classroom&.subjects << subject
     end
   end
 
