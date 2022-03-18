@@ -1,14 +1,17 @@
     <!-- ======= Header ======= -->
 <header id="header" class="fixed-top">
   <div class="container d-flex align-items-center justify-content-between">
-    <h1 class="logo">
-      <%= link_to 'Impali School', root_path %>
+    <h1 class="logo d-flex align-items-center">
+      <%= link_to root_path, class: "logo" do %>
+        <%= image_tag "impali-logo.svg", class: "img-fluid" %>
+      <% end %>
+      <%= link_to "Impali School", root_path %>
     </h1>
     <!-- Uncomment below if you prefer to use an image logo -->
     <!-- <a href="index.html" class="logo"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
     <nav id="navbar" class="navbar">
       <ul>
-        <% if controller_name == 'home' %>
+        <% if controller_name == "home" %>
           <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
           <li><a class="nav-link scrollto" href="#about">About</a></li>
           <li><a class="nav-link scrollto" href="#services">Subjects</a></li>
@@ -17,12 +20,12 @@
           <li><a class="nav-link scrollto" href="#pricing">Fees</a></li>
           <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
         <% end %>
-        <li><%= link_to 'Calendar', schedules_path, class: 'nav-link', :"data-no-turbolink" => true %></li>
+        <li><%= link_to "Calendar", schedules_path, class: "nav-link", :"data-no-turbolink" => true %></li>
         <li>
           <% if current_user %>
-            <%= link_to 'Dashboard', dashboard_path, class: 'getstarted' %>
+            <%= link_to "Dashboard", dashboard_path, class: "getstarted" %>
           <% else %>
-            <%= link_to 'Login', new_user_session_path, class: 'getstarted' %>
+            <%= link_to "Login", new_user_session_path, class: "getstarted" %>
           <% end %>
         </li>
       </ul>

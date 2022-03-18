@@ -1,13 +1,13 @@
-@import 'vendor/aos/aos.css';
-@import 'vendor/bootstrap/css/bootstrap.min.css';
-@import 'vendor/bootstrap-icons/bootstrap-icons.css';
-@import 'vendor/boxicons/css/boxicons.css';
-@import 'vendor/glightbox/css/glightbox.min.css';
-@import 'vendor/remixicon/remixicon.css';
-@import 'vendor/swiper/swiper-bundle.min.css';
+@import "vendor/aos/aos.css";
+@import "vendor/bootstrap/css/bootstrap.min.css";
+@import "vendor/bootstrap-icons/bootstrap-icons.css";
+@import "vendor/boxicons/css/boxicons.css";
+@import "vendor/glightbox/css/glightbox.min.css";
+@import "vendor/remixicon/remixicon.css";
+@import "vendor/swiper/swiper-bundle.min.css";
 
 body {
-  font-family: 'Open Sans', sans-serif;
+  font-family: "Open Sans", sans-serif;
   color: #444444;
 }
 
@@ -27,7 +27,7 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: 'Raleway', sans-serif;
+  font-family: "Raleway", sans-serif;
 }
 
 .back-to-top {
@@ -72,7 +72,7 @@ h6 {
 }
 
 #preloader:before {
-  content: '';
+  content: "";
   position: fixed;
   top: calc(50% - 30px);
   left: calc(50% - 30px);
@@ -132,13 +132,16 @@ h6 {
   line-height: 1;
   font-weight: 300;
   letter-spacing: 0.5px;
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
 }
 #header .logo a {
   color: #16507b;
 }
 #header .logo img {
   max-height: 40px;
+  // max-height: 100px;
+  height: 40px;
+  margin-right: 0.4em;
 }
 @media (max-width: 992px) {
   #header .logo {
@@ -359,13 +362,16 @@ h6 {
   width: 100%;
   height: 100vh;
   position: relative;
-  background: url(home/hero-bg.jpg) top center;
+  // background: url(home/hero-bg.jpg) top center;
+  background: url(home/school-stadium.jpg) top center;
   background-size: cover;
   position: relative;
 }
+
 #hero:before {
-  content: '';
-  background: rgba(255, 255, 255, 0.8);
+  content: "";
+  // background: rgba(255, 255, 255, 0.8);
+  background: rgba(255, 255, 255, 0.45);
   position: absolute;
   bottom: 0;
   top: 0;
@@ -381,7 +387,7 @@ h6 {
   font-weight: 700;
   line-height: 72px;
   color: #124265;
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
 }
 #hero h2 {
   color: #5e5e5e;
@@ -389,7 +395,7 @@ h6 {
   font-size: 22px;
 }
 #hero .btn-get-started {
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
   font-weight: 500;
   font-size: 14px;
   letter-spacing: 0.5px;
@@ -530,7 +536,7 @@ section {
   margin-bottom: 0;
 }
 .about .content .btn-learn-more {
-  font-family: 'Raleway', sans-serif;
+  font-family: "Raleway", sans-serif;
   font-weight: 600;
   font-size: 14px;
   letter-spacing: 1px;
@@ -572,7 +578,7 @@ section {
 }
 .counts .count-box p {
   padding: 8px 0 0 0;
-  font-family: 'Raleway', sans-serif;
+  font-family: "Raleway", sans-serif;
   font-weight: 600;
   font-size: 14px;
   color: #1e6ca6;
@@ -620,7 +626,7 @@ section {
   overflow: hidden;
 }
 .about-video .play-btn::after {
-  content: '';
+  content: "";
   position: absolute;
   left: 50%;
   top: 50%;
@@ -634,7 +640,7 @@ section {
   transition: all 400ms cubic-bezier(0.55, 0.055, 0.675, 0.19);
 }
 .about-video .play-btn::before {
-  content: '';
+  content: "";
   position: absolute;
   width: 120px;
   height: 120px;
@@ -660,7 +666,7 @@ section {
   transform: scale(20);
 }
 .about-video .play-btn:hover::before {
-  content: '';
+  content: "";
   position: absolute;
   left: 50%;
   top: 50%;
@@ -846,7 +852,7 @@ section {
   color: #fff;
 }
 .cta .cta-btn {
-  font-family: 'Raleway', sans-serif;
+  font-family: "Raleway", sans-serif;
   font-weight: 600;
   font-size: 14px;
   letter-spacing: 1px;
@@ -903,7 +909,7 @@ section {
   z-index: 1;
 }
 .portfolio .portfolio-wrap::before {
-  content: '';
+  content: "";
   background: rgba(36, 135, 206, 0.6);
   position: absolute;
   left: 30px;
@@ -931,7 +937,7 @@ section {
 }
 .portfolio .portfolio-wrap .portfolio-info::before {
   display: block;
-  content: '';
+  content: "";
   width: 48px;
   height: 48px;
   position: absolute;
@@ -944,7 +950,7 @@ section {
 }
 .portfolio .portfolio-wrap .portfolio-info::after {
   display: block;
-  content: '';
+  content: "";
   width: 48px;
   height: 48px;
   position: absolute;
@@ -1131,7 +1137,7 @@ section {
 /*--------------------------------------------------------------
 # Pricing
 --------------------------------------------------------------*/
-@import 'pricing';
+@import "pricing";
 /*--------------------------------------------------------------
 # Frequently Asked Questions
 --------------------------------------------------------------*/
@@ -1154,7 +1160,7 @@ section {
 .faq .faq-list a {
   display: block;
   position: relative;
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
   font-size: 16px;
   line-height: 24px;
   font-weight: 500;
@@ -1276,7 +1282,7 @@ section {
   padding: 15px;
 }
 .contact .php-email-form .loading:before {
-  content: '';
+  content: "";
   display: inline-block;
   border-radius: 50%;
   width: 24px;
@@ -1304,7 +1310,7 @@ section {
 .contact .php-email-form textarea {
   padding: 10px 12px;
 }
-.contact .php-email-form button[type='submit'] {
+.contact .php-email-form button[type="submit"] {
   background: #2487ce;
   border: 0;
   padding: 10px 30px;
@@ -1312,7 +1318,7 @@ section {
   transition: 0.4s;
   border-radius: 4px;
 }
-.contact .php-email-form button[type='submit']:hover {
+.contact .php-email-form button[type="submit"]:hover {
   background: #3194db;
 }
 @-webkit-keyframes animate-loading {
@@ -1365,7 +1371,7 @@ section {
   display: inline-block;
   padding-right: 10px;
   color: #1a5e90;
-  content: '/';
+  content: "/";
 }
 @media (max-width: 768px) {
   .breadcrumbs .d-flex {
@@ -1406,7 +1412,7 @@ section {
   font-size: 14px;
   line-height: 24px;
   margin-bottom: 0;
-  font-family: 'Raleway', sans-serif;
+  font-family: "Raleway", sans-serif;
   color: #777777;
 }
 #footer .footer-top h4 {
@@ -1467,12 +1473,12 @@ section {
   text-align: left;
   border: 1px solid #cde5f6;
 }
-#footer .footer-newsletter form input[type='email'] {
+#footer .footer-newsletter form input[type="email"] {
   border: 0;
   padding: 4px 8px;
   width: calc(100% - 100px);
 }
-#footer .footer-newsletter form input[type='submit'] {
+#footer .footer-newsletter form input[type="submit"] {
   position: absolute;
   top: -1px;
   right: -2px;
@@ -1487,7 +1493,7 @@ section {
   border-radius: 0 5px 5px 0;
   box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.1);
 }
-#footer .footer-newsletter form input[type='submit']:hover {
+#footer .footer-newsletter form input[type="submit"]:hover {
   background: #3194db;
 }
 #footer .credits {

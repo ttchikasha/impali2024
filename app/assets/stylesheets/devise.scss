@@ -1,4 +1,4 @@
-@import 'vendor/bootstrap/css/bootstrap.min.css';
+@import "vendor/bootstrap/css/bootstrap.min.css";
 
 html,
 body {
@@ -28,13 +28,13 @@ body {
   z-index: 2;
 }
 
-.form-signin input[type='email'] {
+.form-signin input[type="email"] {
   margin-bottom: -1px;
   border-bottom-right-radius: 0;
   border-bottom-left-radius: 0;
 }
 
-.form-signin input[type='password'] {
+.form-signin input[type="password"] {
   margin-bottom: 10px;
   border-top-left-radius: 0;
   border-top-right-radius: 0;
@@ -52,4 +52,8 @@ body {
   .bd-placeholder-img-lg {
     font-size: 3.5rem;
   }
+}
+
+.login-logo {
+  max-height: 125px;
 }
