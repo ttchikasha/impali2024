@@ -88,3 +88,5 @@ gem "phonelib"
 gem "roo", "~> 2.8"
 
 gem "shoulda-matchers", "~> 5.1", :group => :test
+
+gem "view_component", "~> 2.53"

@@ -21,5 +21,7 @@ module ImpaliProject
     config.to_prepare do
       Devise::Mailer.layout "mailer"
     end
+
+    config.action_view.annotate_rendered_view_with_filenames = true
   end
 end

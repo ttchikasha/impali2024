@@ -1,0 +1,33 @@
+<%= bootstrap_form_with(model: parent) do |form| %>
+  <%= render 'shared/form_alert', resource: parent %>
+  <%= form.hidden_field :user_id, value: parent.user_id %>
+  <div class="row my-0 py-0">
+    <div class="col-md-2">
+      <%= form.select :title, Parent::ALLOWED_TITLES, floating: true, required: true %>
+    </div>
+    <div class="col-md-5">
+      <%= form.text_field :first_name, floating: true, required: true %>
+    </div>
+    <div class="col-md-5">
+      <%= form.text_field :last_name, floating: true, required: true %>
+    </div>
+  </div>
+  <div class="row my-0 py-0">
+    <div class="col-md-6">
+      <%= form.telephone_field :phone, floating: true, required: true, placeholder: 'XXXX' %>
+    </div>
+    <div class="col-md-6">
+      <%= form.email_field :email, floating: true, required: true %>
+    </div>
+  </div>
+  <%= form.text_field :occupation, floating: true %>
+  <%= form.text_field :id_no, floating: true, label: 'National Identity Number', required: true %>
+  <div class="actions">
+    <div class="d-flex align-items-md-center">
+      <%= form.primary %>
+      <% if parent.persisted? %>
+        <%= link_to 'Back', parent.student, class: 'btn btn-link' %>
+      <% end %>
+    </div>
+  </div>
+<% end %>

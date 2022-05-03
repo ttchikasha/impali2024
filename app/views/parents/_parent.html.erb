@@ -1,0 +1,31 @@
+<div class="row">
+  <div class="col-lg-3 col-md-4 label ">Name</div>
+  <div class="col-lg-9 col-md-8">
+    <% if current_user.student? %>
+      <%= parent.full_name %>
+    <% else %>
+      <%= link_to parent.full_name, parent, class: 'fw-bold' %>
+    <% end %>
+  </div>
+</div>
+<div class="row">
+  <div class="col-lg-3 col-md-4 label">Email</div>
+  <div class="col-lg-9 col-md-8"><%= parent.email %></div>
+</div>
+<div class="row">
+  <div class="col-lg-3 col-md-4 label">Login ID</div>
+  <div class="col-lg-9 col-md-8"><%= parent.login_id %></div>
+</div>
+<div class="row">
+  <div class="col-lg-3 col-md-4 label">Phone Number</div>
+  <div class="col-lg-9 col-md-8"><%= parent.phone %></div>
+</div>
+<div class="row">
+  <div class="col-lg-3 col-md-4 label">ID Number</div>
+  <div class="col-lg-9 col-md-8"><%= parent.id_no %></div>
+</div>
+<% if current_user.teacher? || current_user.admin? || current_user.parent? %>
+  <% if current_user.admin? || parent.student.teacher_account == current_user %>
+    <%= link_to 'Edit Parent Details', edit_user_student_parent_path(parent.student, parent.parent_student), class: 'btn btn-primary' %>
+  <% end %>
+<% end %>
