@@ -31,6 +31,8 @@ class Lesson < ApplicationRecord
 
   validates :title, presence: true
   validates :video_url, url: { allow_blank: true, allow_nil: true }
+  validates :banner_image, file_size: { less_than_or_equal_to: 300.kilobytes },
+                           file_content_type: { allow: ["image/jpeg", "image/png"] }
 
   scope :published, -> { where(:draft => false) }
   scope :draft, -> { where(:draft => true) }
