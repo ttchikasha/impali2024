@@ -3,12 +3,16 @@
   <%= form.text_field :title %>
   <div class="row">
     <div class="col-md-6"><%= form.text_field :video_url, help: 'Video is optional' %></div>
-    <div class="col-md-6"><%= form.file_field :banner_image, help: 'Banner image is optional' %></div>
-  </div>
-  <div class="ms-1 my-2 border-bottom d-flex justify-content-between align-items-center">
-    <%= form.check_box :draft, label: 'Mark as Draft' %>
-    <small class='text-muted'>Draft lessons are not shown to students</small>
-  </div>
-  <%= form.rich_text_area :content %>
-  <%= form.primary %>
-<% end %>
+    <div class="col-md-6"><%= form.file_field :banner_image, help: 'Banner image is optional', accept: 'image/*' %>
+    </div>
+    <div class="ms-1 my-2 border-bottom d-flex justify-content-between align-items-center">
+      <%= form.check_box :draft, label: 'Mark as Draft' %>
+      <small class='text-muted'>Draft lessons are not shown to students</small>
+    </div>
+    <%= form.rich_text_area :content %>
+    <% if lesson.document.attached? %>
+      <small><%= link_to @lesson.document.filename, url_for(@lesson.document) %></small>
+    <% end %>
+    <%= form.file_field :document, help: 'Document is optional', accept: 'application/pdf, application/msdoc' %>
+    <%= form.primary %>
+  <% end %>

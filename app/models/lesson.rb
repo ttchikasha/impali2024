@@ -28,11 +28,14 @@ class Lesson < ApplicationRecord
   belongs_to :topic
   has_rich_text :content
   has_one_attached :banner_image
+  has_one_attached :document
 
   validates :title, presence: true
   validates :video_url, url: { allow_blank: true, allow_nil: true }
-  validates :banner_image, file_size: { less_than_or_equal_to: 300.kilobytes },
+  validates :banner_image, file_size: { less_than_or_equal_to: 200.kilobytes },
                            file_content_type: { allow: ["image/jpeg", "image/png"] }
+  validates :document, file_size: { less_than_or_equal_to: 200.kilobytes },
+                       file_content_type: { allow: ["application/msword", "application/pdf"] }
 
   scope :published, -> { where(:draft => false) }
   scope :draft, -> { where(:draft => true) }

@@ -17,6 +17,13 @@
     <%= embed(@lesson.video_url, {width: '100%', height: '400px', allowfullscreen: true, rel: false}).html_safe %>
   <% end %>
 </div>
+<% if @lesson.document.attached? %>
+  <div class="mt-2">
+    <h6 class='fw-bold'>Resource</h6>
+    <%= link_to @lesson.document.filename, url_for(@lesson.document) %>
+  </div>
+  <hr>
+<% end %>
 <div class="lesson-content">
   <%= @lesson.content %>
 </div>

@@ -71,7 +71,7 @@ class LessonsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def lesson_params
-    params.require(:lesson).permit(:content, :title, :video_url, :banner_image, :draft)
+    params.require(:lesson).permit(:content, :title, :video_url, :banner_image, :draft, :document)
   end
 
   def set_topic
