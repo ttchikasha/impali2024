@@ -7,9 +7,9 @@ RSpec.describe IconBoxComponent, type: :component do
 
   it "renders something useful" do
     expect(
-      render_inline(described_class.new(title: "Honesty")) { "Hello, components!" }.css("p").to_html
+      render_inline(described_class.new(title: "Honesty", description: "Some Honesty Lines", icon: "box")).css("h4.title").to_html
     ).to include(
-      "Hello, components!"
+      "Honesty"
     )
   end
 end
