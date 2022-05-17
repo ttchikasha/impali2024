@@ -414,43 +414,25 @@ h6 {
   margin-top: 100px;
 }
 #hero .icon-box {
-  padding: 50px 30px;
-  position: relative;
-  overflow: hidden;
-  background: #fff;
-  box-shadow: 0 0 29px 0 rgba(18, 66, 101, 0.08);
-  transition: all 0.3s ease-in-out;
-  border-radius: 8px;
-  z-index: 1;
+  padding: 30px 20px;
+  transition: ease-in-out 0.3s;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  height: 100%;
+  text-align: center;
+  background-color: white;
 }
-#hero .icon-box .title {
+#hero .icon-box h3 {
   font-weight: 700;
-  margin-bottom: 15px;
-  font-size: 18px;
-}
-#hero .icon-box .title a {
-  color: #124265;
-  transition: 0.3s;
-}
-#hero .icon-box .description {
-  font-size: 15px;
-  line-height: 28px;
-  margin-bottom: 0;
-}
-#hero .icon-box .icon {
-  margin-bottom: 20px;
-  padding-top: 10px;
-  display: inline-block;
-  transition: all 0.3s ease-in-out;
-  font-size: 36px;
+  margin: 10px 0 0 0;
+  padding: 0;
   line-height: 1;
-  color: #2487ce;
+  font-size: 18px;
+  line-height: 26px;
 }
-#hero .icon-box:hover {
-  transform: scale(1.08);
-}
-#hero .icon-box:hover .title a {
-  color: #2487ce;
+#hero .icon-box i {
+  font-size: 32px;
+  line-height: 1;
+  color: #124265;
 }
 @media (min-width: 1024px) {
   #hero {
@@ -557,6 +539,10 @@ section {
   text-decoration: none;
 }
 
+.about p.justified {
+  text-align: justify;
+}
+
 /*--------------------------------------------------------------
 # Counts
 --------------------------------------------------------------*/
@@ -582,6 +568,14 @@ section {
   font-weight: 600;
   font-size: 14px;
   color: #1e6ca6;
+}
+
+.counts span.purecounter {
+  &::after {
+    content: '%';
+    font-weight: 100;
+    font-size: 0.7em;
+  }
 }
 
 /*--------------------------------------------------------------

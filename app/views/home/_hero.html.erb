@@ -5,39 +5,43 @@
         <%= render 'shared/alerts' %>
         <h1>Impali Primary School</h1>
         <h2>
-          Providing the most outstanding equitable, quality, inclusive, relevant and competence driven infant, junior and non-formal education in Zimbabwe.
+          Promoting and facilitating the provision of a high quality inclusive and relevant Early Childhood Development, Primary Education, Sports, Arts and Culture.
         </h2>
       </div>
     </div>
     <div class="text-center">
       <a href="#about" class="btn-get-started scrollto">Learn More</a>
     </div>
-    <div class="row icon-boxes">
-      <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0" data-aos="zoom-in" data-aos-delay="200">
+    <div class="row gy-4 mt-5 justify-content-center aos-init aos-animate">
+      <div class="col-xl-2 col-md-4" data-aos="zoom-in" data-aos-delay="200">
         <%= render IconBoxComponent.new(
             title: 'Integrity', 
             icon: 'ri-stack-line', 
-            description: 'We value courage, honesty and strength of character, guided by a strong moral code of conduct.') %>
+            ) %>
       </div>
-      <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0" data-aos="zoom-in" data-aos-delay="300">
+      <div class="col-xl-2 col-md-4" data-aos="zoom-in" data-aos-delay="300">
         <%= render IconBoxComponent.new(
-          title: 'Honesty', 
+          title: 'Teamwork', 
           icon: 'ri-palette-line',
-          description: 'We embrace honesty in our conduct as it engenders confidence, faith, empowers willpower and represents us in the best way for others to see and witness our example.') %>
+          ) %>
       </div>
-      <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0" data-aos="zoom-in" data-aos-delay="400">
+      <div class="col-xl-2 col-md-4" data-aos="zoom-in" data-aos-delay="300">
         <%= render IconBoxComponent.new(
-          title: 'Hardwork', 
+          title: 'Commitment', 
+          icon: 'ri-palette-line',
+          ) %>
+      </div>
+      <div class="col-xl-2 col-md-4" data-aos="zoom-in" data-aos-delay="400">
+        <%= render IconBoxComponent.new(
+          title: 'Transparency', 
           icon: 'ri-command-line', 
-          description: '
-          We value the effort invested in the process of striving to achieve excellence and good results. “Great things come from hard work and perseverance. No Excuses.” - Kobe Bryant
-          ') %>
+          ) %>
       </div>
-      <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0" data-aos="zoom-in" data-aos-delay="500">
+      <div class="col-xl-2 col-md-4" data-aos="zoom-in" data-aos-delay="500">
         <%= render IconBoxComponent.new(
-          title: 'Excellence', 
-          icon: 'ri-fingerprint-line', 
-          description: 'We encourage the process of striving for greatness, recognizing both relative and absolute standards of excellence, and the desire to produce one’s best at all times and surpass ordinary standards.') %>
+          title: 'Empathy', 
+          icon: 'ri-fingerprint-line'
+          ) %>
       </div>
     </div>
   </div>
