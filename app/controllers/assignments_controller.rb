@@ -84,8 +84,9 @@ class AssignmentsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def assignment_params
-    params.require(:assignment).permit(:classroom_subject_id, :due, :start, questions_attributes: [:id,
-                                                                                                   :text])
+    params.require(:assignment).permit(:classroom_subject_id, :due,
+                                       :start,
+                                       questions_attributes: [:id, :text])
   end
 
   def authorize_teacher

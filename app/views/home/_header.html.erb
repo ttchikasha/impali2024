@@ -5,7 +5,10 @@
       <%= link_to root_path, class: "logo" do %>
         <%= image_tag "impali-logo.svg", class: "img-fluid" %>
       <% end %>
-      <%= link_to "Impali School", root_path %>
+      <%= link_to root_path do %>
+        <span>Impali</span>
+        <span class='hide-on-medium'>School</span>
+      <% end %>
     </h1>
     <!-- Uncomment below if you prefer to use an image logo -->
     <!-- <a href="index.html" class="logo"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
@@ -17,7 +20,7 @@
           <li><a class="nav-link scrollto" href="#services">Subjects</a></li>
           <li><a class="nav-link scrollto o" href="#portfolio">Gallery</a></li>
           <li><a class="nav-link scrollto" href="#team">Staff</a></li>
-          <li><a class="nav-link scrollto" href="#pricing">Fees</a></li>
+          <%# <li><a class="nav-link scrollto" href="#pricing">Fees</a></li> %>
           <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
         <% end %>
         <li><%= link_to "Calendar", schedules_path, class: "nav-link", :"data-no-turbolink" => true %></li>

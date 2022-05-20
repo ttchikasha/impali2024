@@ -1,0 +1,12 @@
+<div class="col-lg-4 col-md-6 portfolio-item filter-<%= @category %>">
+  <div class="portfolio-wrap">
+    <%= image_tag "home/gallery/#{@image}", class: 'img-fluid' %>
+    <div class="portfolio-info">
+      <h4><%= @title %></h4>
+      <p><%= @category.capitalize %></p>
+      <div class="portfolio-links">
+        <a href="<%= image_path "home/gallery/#{@image}" %>" data-gallery="portfolioGallery" class="portfolio-lightbox" title="<%= @title %>"><i class="bx bx-plus"></i></a>
+      </div>
+    </div>
+  </div>
+</div>

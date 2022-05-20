@@ -1369,6 +1369,7 @@ GEM
       domain_name (~> 0.5)
     i18n (1.9.1)
       concurrent-ruby (~> 1.0)
+    image_optimizer (1.9.0)
     image_processing (1.12.1)
       mini_magick (>= 4.9.5, < 5)
       ruby-vips (>= 2.0.17, < 3)
@@ -1602,6 +1603,7 @@ DEPENDENCIES
   faker
   file_validators
   groupdate (~> 6.0.1)
+  image_optimizer
   image_processing (~> 1.2)
   jbuilder (~> 2.7)
   letter_opener_web (~> 1.0)
