@@ -25,11 +25,19 @@ namespace :import do
               d[k] = row[i].split("/").first
               d["phone2"] = row[i].split("/").last
             end
+          elsif k == "gender"
+            if row[i] == "F"
+              d[k] = "Female"
+            elsif row[i] == "M"
+              d[k] = "Male"
+            else
+              d[k] = row[i]
+            end
           else
             d[k] = row[i]
           end
         end
-        if user = User.find_by_email(d["email"])
+        if user = User.find_by_email(d["email"]&.downcase)
           if user.update(d)
             puts "Successfully updated #{user.reload.first_name}"
           else

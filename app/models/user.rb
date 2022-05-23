@@ -41,8 +41,8 @@ class User < ApplicationRecord
                              tsearch: { prefix: true },
                            }
 
-  before_validation :set_temp_password
-  before_save :set_login_id, :ensure_proper_name_case, :downcase_email
+  before_validation :set_temp_password, :set_login_id, :generate_email
+  before_save :ensure_proper_name_case, :downcase_email
   before_save :normalize_phone
 
   # Include default devise modules. Others available are:
@@ -81,13 +81,14 @@ class User < ApplicationRecord
     FEMALE = "Female",
   ].freeze
 
-  validates :first_name, :last_name, :city, :address, :id_no, :start_date, presence: true
-  validates :id_no, length: { minimum: 6 }
+  validates :first_name, :last_name, :city, :start_date, presence: true
+  validates :id_no, presence: true, length: { minimum: 6 }
+  validates :address, presence: true, on: :update
   validates :role, inclusion: { in: roles.keys }
   validates :grade, inclusion: { in: grades.keys }
   validates :room, inclusion: { in: Rooms::TYPES }
   validates :gender, inclusion: { in: GENDER_TYPES }
-  validates :login_id, :id_no, uniqueness: true
+  validates :login_id, uniqueness: true
   validates :phone, :phone2, phone: true, allow_blank: true
 
   scope :male_teachers, -> { teachers.where(:gender => "Male") }
@@ -185,6 +186,12 @@ class User < ApplicationRecord
 
   def display_name
     "#{first_name.slice(0).upcase}. #{last_name.capitalize}"
+  end
+
+  def generate_email
+    unless email
+      self.email = login_id + "@impali.domain"
+    end
   end
 
   def avatar_path
