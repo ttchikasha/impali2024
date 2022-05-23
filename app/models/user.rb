@@ -14,6 +14,7 @@
 #  id_no                  :string           default(""), not null
 #  last_name              :string           default(""), not null
 #  phone                  :string
+#  phone2                 :string
 #  previous_owing         :decimal(8, 2)    default(0.0)
 #  remember_created_at    :datetime
 #  reset_password_sent_at :datetime
@@ -80,14 +81,14 @@ class User < ApplicationRecord
     FEMALE = "Female",
   ].freeze
 
-  validates :first_name, :last_name, :city, :address, :id_no, :date_of_birth, :start_date, presence: true
+  validates :first_name, :last_name, :city, :address, :id_no, :start_date, presence: true
   validates :id_no, length: { minimum: 6 }
   validates :role, inclusion: { in: roles.keys }
   validates :grade, inclusion: { in: grades.keys }
   validates :room, inclusion: { in: Rooms::TYPES }
   validates :gender, inclusion: { in: GENDER_TYPES }
   validates :login_id, :id_no, uniqueness: true
-  validates :phone, phone: true, allow_blank: true
+  validates :phone, :phone2, phone: true, allow_blank: true
 
   scope :male_teachers, -> { teachers.where(:gender => "Male") }
   scope :boys, -> { students.where(:gender => "Male") }

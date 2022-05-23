@@ -25,7 +25,7 @@ SchoolPayment.create year: Date.today.year, term: "Term 1", levy: 85, tution: 10
 puts "Created SchoolPayment"
 
 grade = "Grade 5"
-room = "Yellow"
+room = "Blue"
 
 users = FactoryBot.create_list :user, 30, :student, grade: grade, room: room
 

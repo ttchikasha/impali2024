@@ -14,6 +14,7 @@
 #  id_no                  :string           default(""), not null
 #  last_name              :string           default(""), not null
 #  phone                  :string
+#  phone2                 :string
 #  previous_owing         :decimal(8, 2)    default(0.0)
 #  remember_created_at    :datetime
 #  reset_password_sent_at :datetime
@@ -96,7 +97,7 @@ RSpec.describe User, type: :model do
 
     describe "room validation" do
       it "accepts a valid room" do
-        %w[Red Yellow].each do |r|
+        %w[Red Blue].each do |r|
           u = build :user, room: r
           expect(u).to be_valid
         end
