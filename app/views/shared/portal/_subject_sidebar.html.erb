@@ -12,7 +12,7 @@
       <%= @classroom_subject.name %> - Topics
       <% if current_user.teacher? && @classroom_subject.teacher == current_user %>
         <%= link_to new_classroom_subject_topic_path(@classroom_subject) do %>
-          <i class="bi bi-plus-circle float-end text-secondary"></i>
+          <i draggable class="bi bi-plus-circle float-end text-secondary"></i>
         <% end %>
       <% end %>
     </li>
