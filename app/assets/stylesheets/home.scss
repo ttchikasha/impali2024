@@ -363,7 +363,7 @@ h6 {
   height: 100vh;
   position: relative;
   // background: url(home/hero-bg.jpg) top center;
-  background: url(home/gallery/infrastructure/school-view2.jpeg) top center;
+  background: url(home/gallery/infrastructure/school-view2.jpg) top center;
   background-size: cover;
   position: relative;
 }
@@ -572,7 +572,7 @@ section {
 
 .counts span.purecounter {
   &::after {
-    content: '%';
+    content: "%";
     font-weight: 100;
     font-size: 0.7em;
   }
@@ -1535,7 +1535,6 @@ section {
   color: #fff;
   text-decoration: none;
 }
-
 
 // Extra Classes
 .hide-on-medium {
