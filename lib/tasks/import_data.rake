@@ -26,13 +26,15 @@ namespace :import do
               d["phone2"] = row[i].split("/").last
             end
           elsif k == "gender"
-            if row[i] == "F"
+            if row[i] == "F" || row[i] == "FEMALE"
               d[k] = "Female"
             elsif row[i] == "M"
-              d[k] = "Male"
+              d[k] = "Male" || row[i] == "MALE"
             else
               d[k] = row[i]
             end
+          elsif k == "role"
+            d[k] = row[i]&.capitalize
           else
             d[k] = row[i]
           end
