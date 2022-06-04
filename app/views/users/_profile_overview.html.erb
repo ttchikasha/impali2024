@@ -15,10 +15,12 @@
   <div class="col-lg-3 col-md-4 label">Login ID</div>
   <div class="col-lg-9 col-md-8"><%= user.login_id %></div>
 </div>
-<div class="row">
-  <div class="col-lg-3 col-md-4 label">Start Date</div>
-  <div class="col-lg-9 col-md-8"><%= user.start_date.to_s(:medium) %></div>
-</div>
+<% if user.start_date %>
+  <div class="row">
+    <div class="col-lg-3 col-md-4 label">Start Date</div>
+    <div class="col-lg-9 col-md-8"><%= user&.start_date.to_s(:medium) %></div>
+  </div>
+<% end %>
 <div class="row">
   <div class="col-lg-3 col-md-4 label">Role</div>
   <div class="col-lg-9 col-md-8"><%= user.role %></div>

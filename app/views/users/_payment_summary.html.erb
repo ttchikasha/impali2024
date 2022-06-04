@@ -26,7 +26,7 @@
 <div class="row">
   <div class="col-sm-4">Total</div>
   <div class="col-sm-6">
-    <%= number_to_currency sch_payment.levy + sch_payment.tution + user.previous_owing %>
+    <%= number_to_currency sch_payment.levy + sch_payment.tution + (user.previous_owing || 0) %>
   </div>
 </div>
 <div class="row">

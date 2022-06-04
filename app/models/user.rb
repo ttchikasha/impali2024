@@ -117,7 +117,7 @@ class User < ApplicationRecord
   end
 
   def current_balance
-    previous_owing + SchoolPayment.total_this_term - total_paid
+    (previous_owing || 0) + SchoolPayment.total_this_term - total_paid
   end
 
   def private_threads
