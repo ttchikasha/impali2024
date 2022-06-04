@@ -28,7 +28,7 @@ namespace :import do
           elsif k == "gender"
             if row[i] == "F" || row[i] == "FEMALE"
               d[k] = "Female"
-            elsif row[i] == "M"
+            elsif row[i] == "M" || row[i] == "MALE"
               d[k] = "Male" || row[i] == "MALE"
             else
               d[k] = row[i]
@@ -43,7 +43,7 @@ namespace :import do
           if user.update(d)
             puts "Successfully updated #{user.reload.first_name}"
           else
-            puts "Failed updating #{u.first_name} due to #{u.errors.full_messages.join("")}"
+            puts "Failed updating #{user.first_name} due to #{user.errors.full_messages.join("")}"
           end
         else
           u = User.new(d)

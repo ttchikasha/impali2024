@@ -1539,6 +1539,7 @@ GEM
       sprockets (>= 3.0.0)
     thor (1.2.1)
     tilt (2.0.10)
+    todo_or_die (0.0.4)
     turbolinks (5.2.1)
       turbolinks-source (~> 5.2)
     turbolinks-source (5.2.0)
@@ -1628,6 +1629,7 @@ DEPENDENCIES
   shoulda-matchers (~> 5.1)
   sidekiq
   spring
+  todo_or_die
   turbolinks (~> 5)
   twilio-ruby (~> 5.65.0)
   tzinfo-data

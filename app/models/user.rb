@@ -81,7 +81,8 @@ class User < ApplicationRecord
     FEMALE = "Female",
   ].freeze
 
-  validates :first_name, :last_name, :city, :start_date, presence: true
+  validates :first_name, :last_name, :city, presence: true
+  TodoOrDie("Make start date required", by: "2022-06-05")
   validates :id_no, presence: true, length: { minimum: 6 }
   validates :address, presence: true, on: :update
   validates :role, inclusion: { in: roles.keys }
