@@ -15,8 +15,8 @@ namespace :import do
       else
         keys.each_with_index do |k, i|
           if k == "grade"
-            if (1..7).include? row[i]
-              d[k] = "Grade " + row[i]
+            if ("1".."7").include? row[i]
+              d[k] = row[i].to_i
             else
               d[k] = "ECD"
             end
@@ -59,6 +59,7 @@ namespace :import do
       i += 1
     end
 
+    # debugger
     puts "Saved new #{saved} users"
   end
 end
