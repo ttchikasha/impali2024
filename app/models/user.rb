@@ -88,7 +88,7 @@ class User < ApplicationRecord
   validates :grade, inclusion: { in: grades.keys }
   validates :room, inclusion: { in: Rooms::TYPES }
   validates :gender, inclusion: { in: GENDER_TYPES }
-  validates :login_id, uniqueness: true
+  validates :login_id, :id_no, uniqueness: true
   validates :phone, :phone2, phone: true, allow_blank: true
 
   scope :male_teachers, -> { teachers.where(:gender => "Male") }

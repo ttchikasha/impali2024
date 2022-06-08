@@ -40,10 +40,7 @@ RSpec.describe User, type: :model do
     it { should validate_presence_of(:first_name) }
     it { should validate_presence_of(:last_name) }
     it { should validate_presence_of(:city) }
-    it { should validate_presence_of(:address) }
     it { should validate_presence_of(:id_no) }
-    it { should validate_presence_of(:date_of_birth) }
-    it { should validate_presence_of(:start_date) }
     it { should validate_uniqueness_of(:id_no) }
     it { should validate_uniqueness_of(:login_id) }
 
@@ -104,7 +101,7 @@ RSpec.describe User, type: :model do
       end
 
       it "rejects an invalid room" do
-        ["Green", "Blue"].each do |r|
+        ["Green", "Pink"].each do |r|
           u = build :user, room: r
           expect(u).to be_invalid
         end
