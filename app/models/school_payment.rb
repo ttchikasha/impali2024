@@ -18,10 +18,12 @@ class SchoolPayment < ApplicationRecord
   }
   validates :term, inclusion: terms.keys
 
-  scope :current, -> { where(:year => Date.today.year).first || self.first }
-  # Ex:- scope :active, -> {where(:active => true)}
-
   class << self
+    def current
+      return nil if all.empty?
+      where(:year => Date.today.year).first || self.first
+    end
+
     def total_this_term
       curr = SchoolPayment.current
       curr.levy + curr.tution

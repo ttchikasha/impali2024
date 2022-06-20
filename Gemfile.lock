@@ -67,6 +67,9 @@ GEM
     annotate (3.1.1)
       activerecord (>= 3.2, < 7.0)
       rake (>= 10.4, < 14.0)
+    apparition (0.6.0)
+      capybara (~> 3.13, < 4)
+      websocket-driver (>= 0.6.5)
     autoprefixer-rails (10.4.2.0)
       execjs (~> 2)
     aws-eventstream (1.2.0)
@@ -1594,6 +1597,7 @@ PLATFORMS
 DEPENDENCIES
   activerecord-import
   annotate
+  apparition
   aws-sdk
   bootsnap (>= 1.4.4)
   bootstrap (~> 5.1.3)

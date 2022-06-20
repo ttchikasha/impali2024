@@ -252,11 +252,15 @@ class User < ApplicationRecord
   class << self
     def payment_stats
       sch_payment = SchoolPayment.current
-      user_ids = Payment.where(term: sch_payment.term, year: sch_payment.year, accepted: true).group(:user_id).count.keys
-      not_paid = User.students.count - user_ids.length
-      paid = Payment.where(user_id: [user_ids], term: sch_payment.term, year: sch_payment.year)
-        .group(:user_id).sum(:amount).select { |k, v| v >= sch_payment.levy + sch_payment.tution }.keys.length
-      owing = user_ids.length - paid
+      if sch_payment
+        user_ids = Payment.where(term: sch_payment.term, year: sch_payment.year, accepted: true).group(:user_id).count.keys
+        not_paid = User.students.count - user_ids.length
+        paid = Payment.where(user_id: [user_ids], term: sch_payment.term, year: sch_payment.year)
+          .group(:user_id).sum(:amount).select { |k, v| v >= sch_payment.levy + sch_payment.tution }.keys.length
+        owing = user_ids.length - paid
+      else
+        paid, owing, not_paid = 0, 0, User.students.count
+      end
       { "Fully Paid" => paid, "Paid Partially" => owing, "Not Paid" => not_paid }
     end
   end
