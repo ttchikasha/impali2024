@@ -901,6 +901,12 @@ section {
   position: relative;
   overflow: hidden;
   z-index: 1;
+
+  .gallery-img {
+    height: 240px;
+    width: 100%;
+    object-fit: cover;
+  }
 }
 .portfolio .portfolio-wrap::before {
   content: "";
@@ -1059,7 +1065,6 @@ section {
 .portfolio-details .portfolio-description p {
   padding: 0;
 }
-
 /*--------------------------------------------------------------
 # Team
 --------------------------------------------------------------*/

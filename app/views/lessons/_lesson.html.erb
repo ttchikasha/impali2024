@@ -1,7 +1,9 @@
 <% cache lesson do %>
   <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
     <div class="course-item my-3">
-      <%= image_tag lesson.banner_image_path, class: 'img-fluid lesson-image' %>
+      <% if lesson.banner_image.attached? %>
+        <%= image_tag lesson.banner_image_path, class: 'img-fluid lesson-image' %>
+      <% end %>
       <div class="course-content">
         <% unless lesson.topic == @topic %>
           <div class="d-flex justify-content-between align-items-center mb-3">

@@ -1,0 +1,1 @@
+Attach lesson in sync code not in a background job

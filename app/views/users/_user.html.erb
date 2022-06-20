@@ -100,7 +100,12 @@
                       <%= bootstrap_form_with(model: user, url: update_owing_user_student_payments_url(user)) do |f| %>
                         <%# this is a temporary field & will be removed after the system is in motion %>
                         <%= f.text_field :previous_owing, help: 'Amount owed prior in previous terms' %>
-                        <%= f.primary 'Update Owing Amount' %>
+                        <div class="d-flex justify-content-between">
+                          <%= f.primary 'Update Owing Amount' %>
+                          <% if current_user.admin? %>
+                            <button data-action="click->payment-details#toggleForm" class='btn btn-outline-danger btn-sm'>Cancel</button>
+                          <% end %>
+                        </div>
                       <% end %>
                     </div>
                   <% end %>

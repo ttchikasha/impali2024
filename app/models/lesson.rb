@@ -41,7 +41,9 @@ class Lesson < ApplicationRecord
   scope :draft, -> { where(:draft => true) }
 
   after_save do
-    add_banner_image unless banner_image.attached?
+    unless banner_image.attached?
+      add_banner_image
+    end
   end
 
   def number

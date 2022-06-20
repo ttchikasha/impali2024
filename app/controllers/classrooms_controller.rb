@@ -5,7 +5,7 @@ class ClassroomsController < ApplicationController
 
   # GET /classrooms or /classrooms.json
   def index
-    @classrooms = Classroom.includes(:teacher).order(:teacher_id)
+    @classrooms = Classroom.includes(:teacher).order(:grade)
   end
 
   # GET /classrooms/1 or /classrooms/1.json

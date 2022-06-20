@@ -16,7 +16,7 @@
   <div class="courses">
     <div class="row">
       <div class="col-md-7">
-        <% if current_user.teacher? %>
+        <% if current_user.teacher? || current_user.student? %>
           <div class="section-title">
             <h2>My Classes</h2>
           </div>
@@ -28,7 +28,11 @@
                     <span class='fw-bold fs-5'><%= csub.name %></span>
                     <span class="mx-sm-1"></span>
                     <small class='small text-muted fw-light'>
-                      (<%= csub.classroom.name %>)
+                      <% if current_user.teacher? %>
+                        (<%= csub.classroom.name %>)
+                      <% else %>
+                        <%= csub.teacher.display_name %>
+                      <% end %>
                     </small>
                   </button>
                 </h2>

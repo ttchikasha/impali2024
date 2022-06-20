@@ -228,9 +228,9 @@ class User < ApplicationRecord
       student.classroom&.classroom_subjects
     elsif teacher?
       result = teaching_subjects.select do |tsub|
-        ClassroomSubject.where(id: tsub.id, subject_id: [tsub.classroom.subject_ids]).any?
+        ClassroomSubject.where(id: tsub.id, subject_id: [tsub&.classroom&.subject_ids]).any?
       end
-      ids = (result + classroom&.classroom_subjects).uniq.map(&:id)
+      ids = (result + (classroom&.classroom_subjects || [])).uniq.map(&:id)
       ClassroomSubject.where(id: [ids])
     else
       classroom&.classroom_subjects

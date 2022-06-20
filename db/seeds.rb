@@ -16,7 +16,7 @@ end
 
 puts "Created #{Classroom.count} Classrooms"
 
-FactoryBot.create_list :user, 10, :student
+FactoryBot.create_list :user, 5, :student
 
 puts "Created #{User.students.count} Students"
 
@@ -27,19 +27,29 @@ puts "Created SchoolPayment"
 grade = "Grade 5"
 room = "Blue"
 
-users = FactoryBot.create_list :user, 30, :student, grade: grade, room: room
+users = FactoryBot.create_list :user, 15, :student, grade: grade, room: room
 
 puts "Create #{users.count} students for #{grade} #{room}"
 
-c_subs = FactoryBot.create_list :classroom_subject, rand(3..5), grade: grade, room: room
+c_subs = []
+
+teacher = FactoryBot.create \
+  :user,
+  :teacher,
+  login_id: "A1234T",
+  password: "secret"
+
+Subject.all.sample(rand(3..Subject.count)).each do |sub|
+  c_subs << FactoryBot.create(:classroom_subject, subject: sub, grade: grade, room: room, teacher: teacher)
+end
 
 puts "Created #{c_subs.count} Classroom Subjects for #{grade} #{room}"
 
 c_subs.each do |cs|
-  assignments = FactoryBot.create_list :assignment, rand(2..4),
+  assignments = FactoryBot.create_list :assignment, rand(1..3),
                                        classroom_subject: cs
   assignments.each do |a|
-    questions = FactoryBot.create_list :question, rand(4..8),
+    questions = FactoryBot.create_list :question, rand(2..5),
                                        questionable_id: a.id,
                                        questionable_type: a.class.name
     puts "Created #{questions.count} Questions for Assignment #{a.name}"
@@ -47,10 +57,10 @@ c_subs.each do |cs|
 
   puts "Created #{assignments.count} Assignments for #{cs.grade} #{cs.room} #{cs.name}"
 
-  topics = FactoryBot.create_list :topic, rand(6..10), classroom_subject: cs
+  topics = FactoryBot.create_list :topic, rand(3..5), classroom_subject: cs
   puts "Created #{topics.count} topics for #{cs.grade} #{cs.room} #{cs.name}"
   topics.each do |t|
-    lessons = FactoryBot.create_list :lesson, rand(10..15), topic: t
+    lessons = FactoryBot.create_list :lesson, rand(4..7), topic: t
     puts "Created #{lessons.count} lessons for Topic #{t.title}"
   end
 end
@@ -67,11 +77,7 @@ student = FactoryBot.create \
 
 classroom = cs.classroom
 
-classroom.teacher = FactoryBot.create \
-  :user,
-  :teacher,
-  login_id: "A1234T",
-  password: "secret"
+classroom.teacher = teacher
 
 classroom.save!
 
