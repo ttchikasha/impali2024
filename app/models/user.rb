@@ -66,6 +66,7 @@ class User < ApplicationRecord
   has_one :parent, through: :student_parent
   has_one :student, through: :parent_student
   has_many :teaching_subjects, class_name: "ClassroomSubject", foreign_key: "teacher_id"
+  has_many :classrooms, foreign_key: "teacher_id"
 
   enum role: {
          "Student": 0,

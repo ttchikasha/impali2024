@@ -62,8 +62,13 @@ class UsersController < ApplicationController
     if @user.admin?
       redirect_to @user, alert: "You cannot delete an admin user"
     else
+      @user.classrooms.each do |cl|
+        cl.teacher = nil
+        cl.save!
+      end
+
       @user.destroy
-      redirect_to users, notice: "'#{@user.full_name}' was successfully deleted"
+      redirect_to users_path, notice: "'#{@user.full_name}' was successfully deleted"
     end
   end
 
