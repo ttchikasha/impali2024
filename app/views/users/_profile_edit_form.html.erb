@@ -1,4 +1,4 @@
-<% if @user == current_user || current_user.admin? %>
+<% if @user == current_user || current_user.admin? || current_user == user.teacher %>
   <%= bootstrap_form_for user, url: @user == current_user ? registration_path(:user) : user_path(user) , html: {data: {controller: 'user-form'}} do |f| %>
     <%= render 'shared/form_alert', resource: user %>
     <div class="row mb-3">

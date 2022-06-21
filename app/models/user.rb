@@ -290,6 +290,11 @@ class User < ApplicationRecord
     student_attendances.find_by(date: Date.today)
   end
 
+  def teacher
+    return nil unless student?
+    classroom&.teacher
+  end
+
   private
 
   def normalize_phone
