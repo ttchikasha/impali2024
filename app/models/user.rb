@@ -61,7 +61,7 @@ class User < ApplicationRecord
   has_many :payments, dependent: :destroy
 
   has_many :student_attendances
-  has_one :student_parent, foreign_key: :student_id
+  has_one :student_parent, foreign_key: :student_id, dependent: :destroy
   has_one :parent_student, class_name: "StudentParent", foreign_key: :parent_id
   has_one :parent, through: :student_parent
   has_one :student, through: :parent_student

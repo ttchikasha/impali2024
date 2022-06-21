@@ -1,9 +1,10 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!
   respond_to :html, :xml, :json
-  before_action :set_user, only: %i[show update]
+  before_action :set_user, only: %i[show update destroy]
   before_action :authorize_admin, only: %i[create new edit]
   before_action :authorize_teacher_or_admin_or_parent, only: :show
+  before_action :authorize_admin, only: :destroy
 
   def index
     base_query = current_user.student? ? User.students : User
@@ -57,6 +58,15 @@ class UsersController < ApplicationController
     render :show
   end
 
+  def destroy
+    if @user.admin?
+      redirect_to @user, alert: "You cannot delete an admin user"
+    else
+      @user.destroy
+      redirect_to users, notice: "'#{@user.full_name}' was successfully deleted"
+    end
+  end
+
   protected
 
   def after_update_path_for(resource)
@@ -84,6 +94,12 @@ class UsersController < ApplicationController
     is_parent = current_user.parent? && @user.parent == current_user
     unless current_user.teacher? || current_user.admin? || is_parent || current_user == @user
       redirect_to dashboard_path, alert: "Not Authorized"
+    end
+  end
+
+  def authorize_admin
+    unless current_user.admin?
+      redirect_to dashboard_path, alert: "Only admin user can deactivate users"
     end
   end
 end
