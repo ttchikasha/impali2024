@@ -15,6 +15,10 @@ module HomeHelper
     on_home? && action_name == "profile"
   end
 
+  def staff_member(initials:, position:)
+    render(StaffMemberComponent.new(initials: initials, position: position, image: initials.parameterize + ".jpg"))
+  end
+
   private
 
   def on_home?

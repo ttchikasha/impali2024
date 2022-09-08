@@ -6,74 +6,11 @@
       <p>Meet our school staff. Our staff is dedicated to inspiring and empowering students to learn</p>
     </div>
     <div class="row">
-      <div class="col-lg-3 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="100">
-        <div class="member">
-          <div class="member-img">
-            <%= image_tag 'home/teachers/mr-muchengeti-head.jpg', class: 'img-fluid' %>
-            <div class="social">
-              <a href=""><i class="bi bi-twitter"></i></a>
-              <a href=""><i class="bi bi-facebook"></i></a>
-              <a href=""><i class="bi bi-instagram"></i></a>
-              <a href=""><i class="bi bi-linkedin"></i></a>
-            </div>
-          </div>
-          <div class="member-info">
-            <h4>Mr Muchengeti</h4>
-            <span>Head</span>
-          </div>
+      <% @staff.each.with_index do |staff_member, index| %>
+        <div class="col-lg-3 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="<%= (index+1) * 100 %>">
+          <%= staff_member(initials: staff_member[:initials], position: staff_member[:position] ) %>
         </div>
-      </div>
-      <div class="col-lg-3 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="200">
-        <div class="member">
-          <div class="member-img">
-            <%= image_tag 'home/teachers/mr-marevesa-deputy.jpg', class: 'img-fluid' %>
-            <div class="social">
-              <a href=""><i class="bi bi-twitter"></i></a>
-              <a href=""><i class="bi bi-facebook"></i></a>
-              <a href=""><i class="bi bi-instagram"></i></a>
-              <a href=""><i class="bi bi-linkedin"></i></a>
-            </div>
-          </div>
-          <div class="member-info">
-            <h4>Mr Marevesa</h4>
-            <span>Deputy Head</span>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-3 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="300">
-        <div class="member">
-          <div class="member-img">
-            <%= image_tag 'home/teachers/mr-marozveni-bursar.jpg', class: 'img-fluid' %>
-            <div class="social">
-              <a href=""><i class="bi bi-twitter"></i></a>
-              <a href=""><i class="bi bi-facebook"></i></a>
-              <a href=""><i class="bi bi-instagram"></i></a>
-              <a href=""><i class="bi bi-linkedin"></i></a>
-            </div>
-          </div>
-          <div class="member-info">
-            <h4>Mr Marozveni</h4>
-            <span>Bursar</span>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-3 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="400">
-        <div class="member">
-          <div class="member-img">
-            <%= image_tag 'home/teachers/mr-mamombe-ict.jpg', class: 'img-fluid' %>
-            <div class="social">
-              <a href=""><i class="bi bi-twitter"></i></a>
-              <a href=""><i class="bi bi-facebook"></i></a>
-              <a href=""><i class="bi bi-instagram"></i></a>
-              <a href=""><i class="bi bi-linkedin"></i></a>
-            </div>
-          </div>
-          <div class="member-info">
-            <h4>Mr Mamombe</h4>
-            <span>ICT</span>
-          </div>
-        </div>
-      </div>
+      <% end %>
     </div>
   </div>
 </section>

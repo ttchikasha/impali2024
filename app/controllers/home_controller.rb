@@ -1,6 +1,7 @@
 class HomeController < ApplicationController
   def index
     @price = SchoolPayment.current
+    @staff = StaffMembers.all
   end
 
   def about
