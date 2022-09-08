@@ -1543,7 +1543,7 @@ section {
 
 // Extra Classes
 .hide-on-medium {
-  @media (min-width: 992px) and (max-width: 1200px) {
+  @media (max-width: 1200px) {
     display: none;
   }
 }
