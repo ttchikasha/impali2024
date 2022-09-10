@@ -1,6 +1,7 @@
 <% @teachers.each do |teacher| %>
-  <button role='option' data-autocomplete-value="<%= teacher.id %>"
-     type="button" class="list-group-item list-group-item-action">
+  <button
+     role='option' data-autocomplete-value="<%= teacher.id %>"
+    type="button" class="list-group-item list-group-item-action">
     <%= teacher.full_name %>
   </button>
 <% end %>

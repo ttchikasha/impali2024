@@ -7,7 +7,7 @@
     </div>
     <div class="row">
       <% @staff.each.with_index do |staff_member, index| %>
-        <div class="col-lg-3 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="<%= (index+1) * 100 %>">
+        <div class="col-lg-3 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="<%= [(index+1) * 100, 500].max %>">
           <%= staff_member(initials: staff_member[:initials], position: staff_member[:position] ) %>
         </div>
       <% end %>

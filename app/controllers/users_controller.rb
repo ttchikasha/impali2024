@@ -27,6 +27,11 @@ class UsersController < ApplicationController
     render "users/teachers_autocomplete", layout: false
   end
 
+  def staff_autocomplete
+    @staff = User.where.not(role: "Student")
+    render json: @staff
+  end
+
   def new
     @user = User.new
   end

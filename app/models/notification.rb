@@ -41,6 +41,7 @@ class Notification < ApplicationRecord
     "Students": 1,
     "Teachers": 2,
     "Parents": 3,
+    "Individuals": 4,
   }
 
   validates :to, inclusion: tos.keys
@@ -76,6 +77,8 @@ class Notification < ApplicationRecord
       user.parent? ? true : false
     when "Teachers"
       user.teacher? ? true : false
+    when "Individuals"
+      user.notification_ids.include?(id)
     else
       false
     end

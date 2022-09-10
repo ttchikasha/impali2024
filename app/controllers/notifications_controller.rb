@@ -4,18 +4,17 @@ class NotificationsController < ApplicationController
 
   # GET /notifications or /notifications.json
   def index
+    # debugger
     base_query = case current_user.role
-      when "Student"
-        Notification.students_only
-      when "Parent"
-        Notification.parents_only
-      when "Teacher"
-        Notification.teachers_only
+      when "Admin"
+        Notification.where(id: current_user.owned_notification_ids)
       else
-        Notification
+        Notification.where(to: current_user.role.pluralize)
       end
-    @notifications = base_query.paginate(page: params[:page], per_page: 20).order(created_at: :desc)
-    current_user.notifications << @notifications
+    @notifications = base_query
+      .or(Notification.where(to: "Everyone"))
+      .or(Notification.where(id: current_user.notification_ids.uniq))
+      .paginate(page: params[:page], per_page: 20).order(created_at: :desc)
   end
 
   # GET /notifications/1 or /notifications/1.json
@@ -82,7 +81,7 @@ class NotificationsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def notification_params
-    params.require(:notification).permit(:notifiable_id, :notifiable_type, :title, :content, :tag, :to)
+    params.require(:notification).permit(:notifiable_id, :notifiable_type, :title, :content, :tag, :to, user_ids: [])
   end
 
   def verify_admin

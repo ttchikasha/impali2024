@@ -1,3 +1,6 @@
+# == Route Map
+#
+
 Rails.application.routes.draw do
   if Rails.env.development?
     mount LetterOpenerWeb::Engine, at: "/letter_opener"
@@ -52,6 +55,7 @@ Rails.application.routes.draw do
       collection do
         get :profile
         get :teachers_autocomplete
+        get :staff_autocomplete, format: :json
       end
     end
   end
