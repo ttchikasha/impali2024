@@ -11,7 +11,15 @@
       wrapper: { data: { 'notice-form-target' => 'to' } } %>
     </div>
   </div>
-  <div data-notice-form-target="searchIndividuals" class="row mb-4">
+  <div data-notice-form-target="searchIndividuals" class="row mb-3">
+    <% if notification.persisted? %>
+      <p class="mb-0 small">Notified Users</p>
+      <div class="flex mb-3">
+        <% notification.users.uniq.each do |user| %>
+          <span disabled=true style="cursor: none;" class="btn btn-secondary btn-sm"><%= user.full_name %></span>
+        <% end %>
+      </div>
+    <% end %>
     <%= react_component("SearchIndividuals") %>
   </div>
   <%= form.primary %>
