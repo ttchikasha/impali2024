@@ -7,7 +7,7 @@ end
 puts "Created #{Subject.count} Subjects"
 
 Grades::GRADES_HASH.values.each do |grade|
-  unless grade == -1
+  unless grade == -2
     Rooms::TYPES.each do |room|
       Classroom.create room: room, grade: grade, teacher: FactoryBot.create(:user, :teacher)
     end
@@ -94,3 +94,9 @@ parent = FactoryBot.create \
   password: "secret"
 
 StudentParent.create! student: student, parent: parent
+
+FactoryBot.create \
+  :user,
+  :sdc_member,
+  login_id: "A1234M",
+  password: "secret"

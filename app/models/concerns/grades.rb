@@ -1,7 +1,8 @@
 module Grades
   GRADES_HASH = {
-    "None" => -1,
-    "ECD" => 0,
+    "None" => -2,
+    "ECD A" => -1,
+    "ECD B" => 0,
     "Grade 1" => 1,
     "Grade 2" => 2,
     "Grade 3" => 3,

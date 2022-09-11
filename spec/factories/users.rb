@@ -97,6 +97,13 @@ FactoryBot.define do
     staff
   end
 
+  trait :sdc_member do
+    role { "SDC Member" }
+    room { Rooms::TYPES.sample }
+    grade { "None" }
+    staff
+  end
+
   trait :admin do
     role { "Admin" }
     room { Rooms::TYPES.sample }
