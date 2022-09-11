@@ -42,10 +42,16 @@
               You have <%= current_user.unread_notifications.count %> new 
               <%= 'notification'.pluralize current_user.unread_notifications.count %>
             <% else %>
-              Recently posted notifications
+              <% if recent_notifications.any? %>
+                Recently posted notifications
+              <% else %>
+                You have no recent notifications  
+              <% end %>
             <% end %>
-            <%= link_to notifications_path do %>
-              <span class="badge rounded-pill bg-primary p-2 ms-2">View all</span>
+            <% if recent_notifications.any? %>
+              <%= link_to notifications_path do %>
+                <span class="badge rounded-pill bg-primary p-2 ms-2">View all</span>
+              <% end %>
             <% end %>
           </li>
           <% recent_notifications.each do |notice| %>
