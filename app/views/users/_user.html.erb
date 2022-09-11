@@ -16,8 +16,10 @@
         </div>
       </div>
       <% unless current_user == user %>
-        <%= button_to private_threads_path(user_id: user.id), class: 'btn btn-outline-primary w-100' do %>
-          Message
+        <% if false %>
+          <%= button_to private_threads_path(user_id: user.id), class: 'btn btn-outline-primary w-100' do %>
+            Message
+          <% end %>
         <% end %>
         <% if current_user.admin? %>
           <%= button_to 'Delete', user, method: :delete, data: {confirm: 'Are you sure?'}, class: 'btn btn-danger w-100 mt-3' %>

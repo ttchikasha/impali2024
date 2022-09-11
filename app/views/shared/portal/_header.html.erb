@@ -71,9 +71,11 @@
         <!-- End Notification Dropdown Items -->
       </li>
       <!-- End Notification Nav -->
-      <li id='messages-dropdown' class="nav-item dropdown">
-        <%= render 'private_threads/messages_dropdown' %>
-      </li>
+      <% if false %>
+        <li id='messages-dropdown' class="nav-item dropdown">
+          <%= render 'private_threads/messages_dropdown' %>
+        </li>
+      <% end %>
       <!-- End Messages Nav -->
       <li class="nav-item dropdown pe-3">
         <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">

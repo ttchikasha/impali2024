@@ -16,9 +16,9 @@ Rails.application.routes.draw do
     resources :assignments, except: :index do
       resources :questions
     end
-    resources :private_threads do
-      resources :messages, only: :create
-    end
+    # resources :private_threads do
+    #   resources :messages, only: :create
+    # end
     resources :reports
     resource :dashboard, only: :show
     resources :teacher
@@ -38,13 +38,13 @@ Rails.application.routes.draw do
       resources :question_answers
     end
     resources :classrooms, except: %i[destroy new] do
-      resources :messages, only: :create
+      # resources :messages, only: :create
       member do
         get :chat_room
       end
     end
     resources :subjects
-    resources :messages, only: :index
+    # resources :messages, only: :index
     resources :payments, except: [:edit]
     resources :notifications, path: "notices"
     resources :users do
