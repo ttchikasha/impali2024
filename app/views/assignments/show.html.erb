@@ -57,7 +57,8 @@
       </div>
     <% end %>
     <% unless current_user.parent? || current_user.admin? %>
-      <% unless @assignment.late? || !@assignment.document.nil? %>
+      <% cond = (!@assignment.late? || current_user.teacher?) && !@assignment.document.attached? %>
+      <% if cond  %>
         <%= form.primary 'Submit Answers', class: 'btn btn-lg btn-primary submit-answer-btn' %>
       <% end %>
     <% end %>
@@ -71,9 +72,11 @@
       <% unless current_user.parent? %>
         <br>
         <br>
-        <%= bootstrap_form_with(model: [@assignment, current_user.assignment_answers.build(assignment: @assignment)]) do |form| %>
-          <%= form.file_field :document, label: 'Upload Your Answer', accept: 'application/pdf' %>
-          <%= form.primary 'Upload Answer' %>
+        <% unless current_user.student? && @assignment.due? %>
+          <%= bootstrap_form_with(model: [@assignment, current_user.assignment_answers.build(assignment: @assignment)]) do |form| %>
+            <%= form.file_field :document, label: 'Upload Your Answer', accept: 'application/pdf' %>
+            <%= form.primary 'Upload Answer' %>
+          <% end %>
         <% end %>
       <% end %>
     </div>

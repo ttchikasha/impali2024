@@ -3,6 +3,7 @@
 # Table name: assignment_answers
 #
 #  id            :bigint           not null, primary key
+#  score         :integer          default(0)
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
 #  assignment_id :bigint           not null

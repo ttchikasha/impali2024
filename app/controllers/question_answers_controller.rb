@@ -38,7 +38,9 @@ class QuestionAnswersController < ApplicationController
   def update
     respond_to do |format|
       if @question_answer.update(question_answer_params)
+        @question_answer.assignment_answer.set_score!
         @score = @question_answer.assignment_answer.score
+
         format.html { redirect_to question_answer_url(@question_answer), notice: "Question answer was successfully updated." }
         format.json { render :show, status: :ok, location: @question_answer }
         format.js { }

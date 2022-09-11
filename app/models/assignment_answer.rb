@@ -3,6 +3,7 @@
 # Table name: assignment_answers
 #
 #  id            :bigint           not null, primary key
+#  score         :integer          default(0)
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
 #  assignment_id :bigint           not null
@@ -26,6 +27,12 @@ class AssignmentAnswer < ApplicationRecord
                        file_content_type: { allow: ["application/pdf"] }
 
   validates_uniqueness_of :assignment_id, scope: :user_id
+
+  before_save do
+    unless document.attached?
+      self.score = calculate_score
+    end
+  end
 
   def classroom_subject
     assignment.classroom_subject
@@ -58,7 +65,14 @@ class AssignmentAnswer < ApplicationRecord
     mc_questions.count
   end
 
-  def score
+  def set_score!
+    self.score = calculate_score
+    save!
+  end
+
+  private
+
+  def calculate_score
     marks = []
     other_questions.each do |q|
       qa = user.question_answers.where(question_id: q.id).first

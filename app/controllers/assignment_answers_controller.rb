@@ -1,5 +1,5 @@
 class AssignmentAnswersController < ApplicationController
-  before_action :set_assignment
+  before_action :set_assignment, except: :mark
 
   def index
     if current_user.student?
@@ -10,6 +10,18 @@ class AssignmentAnswersController < ApplicationController
 
   def create
     update_or_create
+  end
+
+  def mark
+    @answer = AssignmentAnswer.find params[:id]
+    respond_to do |format|
+      @answer.score = params["question_answer"]["mark"]
+      @answer.save
+      @score = @answer.reload.score
+      format.js {
+        render "question_answers/update"
+      }
+    end
   end
 
   def update
@@ -36,7 +48,7 @@ class AssignmentAnswersController < ApplicationController
   def update_or_create
     if current_user.parent?
       redirect_to dashboard_path, alert: "Parents cannot answer questions"
-    elsif params["assignment_answer"]["document"]
+    elsif params["assignment_answer"] && params.fetch("assignment_answer")&.fetch("document")
       @answer = @assignment.assignment_answers.find_or_create_by user_id: current_user.id
       @answer.document = params["assignment_answer"]["document"]
       if @answer.save

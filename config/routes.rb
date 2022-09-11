@@ -28,7 +28,11 @@ Rails.application.routes.draw do
       resources :assignments
     end
     resources :assignments, except: :index do
-      resources :assignment_answers, only: %i[update index show create]
+      resources :assignment_answers, only: %i[update index show create] do
+        member do
+          put :mark
+        end
+      end
     end
     resources :topics do
       resources :lessons

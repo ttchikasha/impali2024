@@ -9,29 +9,36 @@
     </div>
   </div>
   <div data-assignment-form-target="document">
-    <%= form.file_field :document, label: 'Upload', accept: 'application/pdf' %>
+    <% if assignment.persisted? %>
+      <% if assignment.document.attached? %>
+        <%= link_to 'View Current Assignment', url_for(assignment.document) %>
+      <% end %>
+    <% end %>
+    <%= form.file_field :document, accept: 'application/pdf' %>
   </div>
-  <div style="display: none;" data-assignment-form-target="button">
+  <div data-assignment-form-target="button">
     <%= form.primary %>
   </div>
-  <div data-assignment-form-target="questions" data-controller='questions'>
-    <h5 data-questions-target='title' class="card-title fw-bold border-bottom">Questions</h5>
-    <% count = 1  %>
-    <div class="questions">
-      <%= form.fields_for :questions do |questions_form| %>
-        <div class='<%= 'question' if questions_form.object.new_record? %>'>
-          <label class="form-label"><%= "Question #{count}" %></label>
-          <%= questions_form.rich_text_area :text, hide_label: true  %>
+  <% if assignment.persisted? && !assignment.document.attached? %>
+    <div data-assignment-form-target="questions" data-controller='questions'>
+      <h5 data-questions-target='title' class="card-title fw-bold border-bottom">Questions</h5>
+      <% count = 1  %>
+      <div class="questions">
+        <%= form.fields_for :questions do |questions_form| %>
+          <div class='<%= 'question' if questions_form.object.new_record? %>'>
+            <label class="form-label"><%= "Question #{count}" %></label>
+            <%= questions_form.rich_text_area :text, hide_label: true  %>
+          </div>
+          <% count += 1 %>
+        <% end %>
+      </div>
+      <div class="d-flex align-items-center justify-content-between">
+        <%= form.primary %>
+        <div>
+          <a href="#" data-action="click->questions#add" class="btn btn-outline-success">Add Another Question</a>
+          <a href="#" data-questions-target='removeBtn' data-action="click->questions#remove" class="btn btn-outline-danger ms-2">Remove Last Question</a>
         </div>
-        <% count += 1 %>
-      <% end %>
-    </div>
-    <div class="d-flex align-items-center justify-content-between">
-      <%= form.primary %>
-      <div>
-        <a href="#" data-action="click->questions#add" class="btn btn-outline-success">Add Another Question</a>
-        <a href="#" data-questions-target='removeBtn' data-action="click->questions#remove" class="btn btn-outline-danger ms-2">Remove Last Question</a>
       </div>
     </div>
-  </div>
+  <% end %>
 <% end %>

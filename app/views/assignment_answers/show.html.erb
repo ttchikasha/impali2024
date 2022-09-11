@@ -79,8 +79,8 @@
                   <% if (@answer.user == current_user && !@answer.assignment.late?) || (current_user.teacher? && @answer.user == current_user) %>
                     <%= question_answer_form.rich_text_area :answer %>
                   <% else %>
-                    <% condition1 = current_user.teacher? && !question.correct_answer.answer.body.to_plain_text.blank? %>
-                    <% condition2 = @answer.assignment.late? && !question.correct_answer.answer.body.to_plain_text.blank?  %>
+                    <% condition1 = current_user.teacher? && question.correct_answer && !question.correct_answer.answer.body.to_plain_text.blank? %>
+                    <% condition2 = @answer.assignment.late? && question.correct_answer && !question.correct_answer.answer.body.to_plain_text.blank?  %>
                     <% if condition1 || condition2 %>
                       <span class="badge bg-info rounded-0">Teacher's Answer/Explanation</span>
                       <div class='border text-info bg-light p-2'>
@@ -96,7 +96,7 @@
                         <%= react_component("QuestionMarker", { url: question_answer_path(question_answer, format: :js), mark: question_answer.mark }) %>
                       <% else %>
                         <% if @answer.assignment.late? %>
-                          <button disabled class="my-2 rounded-0 btn btn-sm btn-outline-<%= question_answer.mark < 50 ? 'danger' : 'success' %>">
+                          <button disabled class="my-2 rounded-0 btn btn-sm btn-outline-<%= (question_answer.mark && question_answer.mark < 50) ? 'danger' : 'success' %>">
                             <%= question_answer.mark %>%
                           </button>
                         <% end %>
@@ -128,13 +128,22 @@
         <%= react_component("Pdf", { url: url_for(@answer.reload.document) }) %>
       </div>
       <div>
+        <% if current_user.teacher? && @answer.user.student? %>
+          <%= react_component("QuestionMarker", { url: mark_assignment_assignment_answer_path(@answer, format: :js), 
+                                                mark: @answer.score }) %>
+        <% end %>
         <% unless current_user.parent? %>
-          <%= bootstrap_form_with(model: [@answer.assignment, @answer], data: {'controller'=>'upload-answer-form'}) do |form| %>
-            <div data-upload-answer-form-target="fileInputWrapper">
-              <%= form.file_field :document, label: "Change #{current_user.teacher? ? 'Marking Scheme' : 'Answer'}", accept: 'application/pdf' %>
-            </div>
-            <%= form.primary 'Update Answer', disabled: true, 
+          <% unless current_user.teacher? && @answer.user != current_user %>
+            <% unless current_user.student? && @answer.assignment.late? %>
+              <%= bootstrap_form_with(model: [@answer.assignment, @answer], data: {'controller'=>'upload-answer-form'}) do |form| %>
+                <div data-upload-answer-form-target="fileInputWrapper">
+                  <%= form.file_field :document, label: "Change #{current_user.teacher? ? 'Marking Scheme' : 'Answer'}", accept: 'application/pdf' %>
+                </div>
+                <%= form.primary 'Update Answer', disabled: true, 
               data: {'upload-answer-form-target' => 'button'} %>
+              <% end %>
+            <% else %>
+            <% end %>
           <% end %>
         <% end %>
       </div>
