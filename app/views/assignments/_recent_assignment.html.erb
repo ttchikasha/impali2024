@@ -5,9 +5,13 @@
         <div class="course-content pb-0">
           <div class="d-flex justify-content-between align-items-center mb-3">
             <h4><%= link_to assignment.classroom_subject.name, assignment.classroom_subject, class: 'text-white' %></h4>
-            <span class="badge bg-danger">
-              <%= pluralize assignment.questions.count, 'Question' %>
-            </span>
+            <% if assignment.document.attached? %>
+              <%= link_to 'Download', url_for(assignment.document), class: 'fw-bold small' %>
+            <% else %>
+              <span class="badge bg-danger">
+                <%= pluralize assignment.questions.count, 'Question' %>
+              </span>
+            <% end %>
           </div>
           <h3>
             <%= link_to assignment do %>

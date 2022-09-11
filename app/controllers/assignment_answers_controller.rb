@@ -36,6 +36,14 @@ class AssignmentAnswersController < ApplicationController
   def update_or_create
     if current_user.parent?
       redirect_to dashboard_path, alert: "Parents cannot answer questions"
+    elsif params["assignment_answer"]["document"]
+      @answer = @assignment.assignment_answers.find_or_create_by user_id: current_user.id
+      @answer.document = params["assignment_answer"]["document"]
+      if @answer.save
+        redirect_to assignment_assignment_answer_path(@assignment, @answer.reload)
+      else
+        render "assignment_answers/show"
+      end
     else
       params[:assignment][:questions_attributes].keys.each do |key|
         question_attribute = params[:assignment][:questions_attributes][key]
@@ -54,7 +62,7 @@ class AssignmentAnswersController < ApplicationController
         end
       end
       @answer = @assignment.assignment_answers.find_or_create_by user_id: current_user.id
-      redirect_to assignment_assignment_answer_path(@assignment, @answer)
+      redirect_to assignment_assignment_answer_path(@assignment, @answer.reload)
     end
   end
 end

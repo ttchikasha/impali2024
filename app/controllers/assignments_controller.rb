@@ -37,7 +37,11 @@ class AssignmentsController < ApplicationController
 
   # POST /assignments or /assignments.json
   def create
-    @assignment = @classroom_subject.assignments.new(assignment_params)
+    if assignment_params["document"].nil?
+      @assignment = @classroom_subject.assignments.new(assignment_params)
+    else
+      @assignment = @classroom_subject.assignments.new(document_assignment_params)
+    end
 
     respond_to do |format|
       if @assignment.save
@@ -86,7 +90,14 @@ class AssignmentsController < ApplicationController
   def assignment_params
     params.require(:assignment).permit(:classroom_subject_id, :due,
                                        :start,
+                                       :document,
                                        questions_attributes: [:id, :text])
+  end
+
+  def document_assignment_params
+    params.require(:assignment).permit(:classroom_subject_id, :due,
+                                       :start,
+                                       :document)
   end
 
   def authorize_teacher

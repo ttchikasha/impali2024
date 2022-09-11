@@ -35,7 +35,7 @@ class Lesson < ApplicationRecord
   validates :banner_image, file_size: { less_than_or_equal_to: 200.kilobytes },
                            file_content_type: { allow: ["image/jpeg", "image/png"] }
   validates :document, file_size: { less_than_or_equal_to: 200.kilobytes },
-                       file_content_type: { allow: ["application/msword", "application/pdf"] }
+                       file_content_type: { allow: ["application/pdf"] }
 
   scope :published, -> { where(:draft => false) }
   scope :draft, -> { where(:draft => true) }

@@ -16,9 +16,11 @@
           <%= link_to 'Edit Assignment', edit_assignment_path(@assignment), class: 'btn btn-sm btn-outline-primary ms-md-2 mb-md-0 mb-2' %>
           <%= link_to 'Submissions', assignment_assignment_answers_path(@assignment), class: 'btn btn-primary btn-sm ms-md-2 mb-md-0 mb-2' %>
         <% end %>
-        <%= link_to assignment_path(@assignment, format: 'pdf'), class: 'btn btn-sm btn-danger ms-md-2 mb-md-0 mb-2' do %>
-          <i class="bi bi-file-earmark-pdf"></i>
-          <span>Download as PDF</span>
+        <% unless @assignment.document.attached? %>
+          <%= link_to assignment_path(@assignment, format: 'pdf'), class: 'btn btn-sm btn-danger ms-md-2 mb-md-0 mb-2' do %>
+            <i class="bi bi-file-earmark-pdf"></i>
+            <span>Download as PDF</span>
+          <% end %>
         <% end %>
         <% if current_user.parent? %>
           <% if ans = current_user.student&.assignment_answers.find_by(assignment_id: @assignment.id) %>
@@ -55,9 +57,25 @@
       </div>
     <% end %>
     <% unless current_user.parent? || current_user.admin? %>
-      <% unless @assignment.late? %>
+      <% unless @assignment.late? || !@assignment.document.nil? %>
         <%= form.primary 'Submit Answers', class: 'btn btn-lg btn-primary submit-answer-btn' %>
       <% end %>
     <% end %>
   <% end %>
+<% end %>
+<% if @assignment.document.attached? %>
+  <div class="d-flex">
+    <div class="flex-fill"><%= react_component("Pdf", { url: url_for(@assignment.document) }) %></div>
+    <div>
+      <%= link_to 'Download Assignment As PDF', url_for(@assignment.document) %>
+      <% unless current_user.parent? %>
+        <br>
+        <br>
+        <%= bootstrap_form_with(model: [@assignment, current_user.assignment_answers.build(assignment: @assignment)]) do |form| %>
+          <%= form.file_field :document, label: 'Upload Your Answer', accept: 'application/pdf' %>
+          <%= form.primary 'Upload Answer' %>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
 <% end %>

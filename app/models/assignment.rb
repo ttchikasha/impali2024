@@ -23,6 +23,10 @@ class Assignment < ApplicationRecord
   belongs_to :classroom_subject
   has_many :questions, as: :questionable
   has_one_attached :banner_image
+  has_one_attached :document
+  validates :document, file_size: { less_than_or_equal_to: 256.kilobytes },
+                       file_content_type: { allow: ["application/pdf"] }
+
   has_many :assignment_answers
 
   accepts_nested_attributes_for :questions
@@ -33,6 +37,7 @@ class Assignment < ApplicationRecord
     unless start
       self.start = Time.now
     end
+
     if questions.any?
       rest = questions.slice(1, questions.length).select { |q| !q.text.body.to_plain_text.blank? }
       self.questions = [questions.first].concat(rest)

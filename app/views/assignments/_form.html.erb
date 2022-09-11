@@ -1,4 +1,4 @@
-<%= bootstrap_form_with(model: [assignment.classroom_subject, assignment]) do |form| %>
+<%= bootstrap_form_with(model: [assignment.classroom_subject, assignment], data: {'controller'=>'assignment-form'}) do |form| %>
   <%= render 'shared/form_alert', resource: assignment %>
   <div class="row">
     <div class="col-md-6">
@@ -8,7 +8,13 @@
       <%= form.datetime_field :due, floating: true, required: true %>
     </div>
   </div>
-  <div data-controller='questions'>
+  <div data-assignment-form-target="document">
+    <%= form.file_field :document, label: 'Upload', accept: 'application/pdf' %>
+  </div>
+  <div style="display: none;" data-assignment-form-target="button">
+    <%= form.primary %>
+  </div>
+  <div data-assignment-form-target="questions" data-controller='questions'>
     <h5 data-questions-target='title' class="card-title fw-bold border-bottom">Questions</h5>
     <% count = 1  %>
     <div class="questions">

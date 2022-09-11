@@ -21,6 +21,9 @@
 class AssignmentAnswer < ApplicationRecord
   belongs_to :assignment
   belongs_to :user
+  has_one_attached :document
+  validates :document, file_size: { less_than_or_equal_to: 256.kilobytes },
+                       file_content_type: { allow: ["application/pdf"] }
 
   validates_uniqueness_of :assignment_id, scope: :user_id
 
