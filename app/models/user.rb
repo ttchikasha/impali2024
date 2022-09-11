@@ -73,6 +73,7 @@ class User < ApplicationRecord
          "Teacher": 1,
          "Admin": 2,
          "Parent": 3,
+         "SDC Member": 4,
        }
 
   enum grade: Grades::GRADES_HASH
@@ -138,6 +139,8 @@ class User < ApplicationRecord
         Notification.teachers_only
       when "Admin"
         Notification
+      when "SDC Member"
+        Notification.sdc_members_only
       end
     base_query.where.not(id: [notifications.pluck(:id)])
   end

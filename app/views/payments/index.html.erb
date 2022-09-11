@@ -16,9 +16,11 @@
         <h3>Tuition</h3>
         <h4><sup>$</sup><%= number_to_currency SchoolPayment.current.tution, unit: '', precision: 0 %><span> / term</span></h4>
         <% unless current_user.admin? %>
-          <div class="btn-wrap">
-            <a data-bs-toggle="modal" data-bs-target="#paymentModal" href="#" class="btn-buy">Make Payment</a>
-          </div>
+          <% unless current_user.role == "SDC Member" %>
+            <div class="btn-wrap">
+              <a data-bs-toggle="modal" data-bs-target="#paymentModal" href="#" class="btn-buy">Make Payment</a>
+            </div>
+          <% end %>
         <% end %>
       </div>
     </div>
@@ -27,14 +29,16 @@
         <h3>Levy</h3>
         <h4><sup>$</sup><%= number_to_currency SchoolPayment.current.levy, unit: '', precision: 0 %><span> / term</span></h4>
         <% unless current_user.admin? %>
-          <div class="btn-wrap">
-            <a data-bs-toggle="modal" data-bs-target="#paymentModal" href="#" class="btn-buy">Make Payment</a>
-          </div>
+          <% unless current_user.role == "SDC Member" %>
+            <div class="btn-wrap">
+              <a data-bs-toggle="modal" data-bs-target="#paymentModal" href="#" class="btn-buy">Make Payment</a>
+            </div>
+          <% end %>
         <% end %>
       </div>
     </div>
     <div class="col-lg-4 col-md-6 mt-4 mt-lg-0" data-aos="zoom-in" data-aos-delay="100">
-      <% if current_user.admin? %>
+      <% if current_user.admin? || current_user.role == "SDC Member" %>
         <div class="box">
           <h3>Total this Term</h3>
           <h4>

@@ -28,6 +28,9 @@
               <li>
                 <%= link_to 'Admins', users_path(role: 'Admin', gender: params[:gender]), class: 'dropdown-item' %>
               </li>
+              <li>
+                <%= link_to 'SDC Members', users_path(role: 'SDC Member', gender: params[:gender]), class: 'dropdown-item' %>
+              </li>
             </ul>
           </div>
           <div class="card-body pb-0">

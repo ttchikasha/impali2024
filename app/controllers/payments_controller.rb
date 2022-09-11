@@ -5,7 +5,7 @@ class PaymentsController < ApplicationController
 
   # GET /payments or /payments.json
   def index
-    base_query = current_user.admin? ? Payment : current_user.student.payments
+    base_query = (current_user.admin? || current_user.role == "SDC Member") ? Payment : current_user.student.payments
     if pay_type = params[:pay_type]
       base_query = base_query.where(pay_type: pay_type)
     end

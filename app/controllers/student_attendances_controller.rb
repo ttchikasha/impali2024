@@ -4,7 +4,7 @@ class StudentAttendancesController < ApplicationController
 
   # GET /student_attendances or /student_attendances.json
   def index
-    base_query = current_user.admin? ? StudentAttendance.all : StudentAttendance.where(user_id: [current_user.classroom.students])
+    base_query = (current_user.admin? || current_user.role == "SDC Member") ? StudentAttendance.all : StudentAttendance.where(user_id: [current_user.classroom.students])
     base_query = base_query.where(user_id: params[:user_id]) if params[:user_id]
     if params[:classroom] && params[:date]
       cl = Classroom.find params[:classroom]

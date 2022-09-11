@@ -10,7 +10,7 @@
     <% elsif on_topic? %>
       <%= render 'shared/portal/topic_sidebar' %>
     <% else %>
-      <% if current_user.admin? %>
+      <% if current_user.admin? || current_user.role == "SDC Member" %>
         <%= render 'shared/portal/admin_sidebar' %>
       <% else %>
         <%= render 'shared/portal/sidebar' %>

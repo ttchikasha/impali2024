@@ -42,6 +42,7 @@ class Notification < ApplicationRecord
     "Teachers": 2,
     "Parents": 3,
     "Individuals": 4,
+    "SDC Members": 5,
   }
 
   validates :to, inclusion: tos.keys
@@ -50,6 +51,7 @@ class Notification < ApplicationRecord
   scope :students_only, -> { where(:to => "Students").or(where(to: "Everyone")) }
   scope :teachers_only, -> { where(:to => "Teachers").or(where(to: "Everyone")) }
   scope :parents_only, -> { where(:to => "Parents").or(where(to: "Everyone")) }
+  scope :sdc_members_only, -> { where(:to => "SDC Members").or(where(to: "Everyone")) }
 
   class << self
     def for_user(user)
@@ -60,6 +62,8 @@ class Notification < ApplicationRecord
         parents_only
       when "Student"
         students_only
+      when "SDC Member"
+        sdc_members_only
       when "Admin"
         all
       end
@@ -77,6 +81,8 @@ class Notification < ApplicationRecord
       user.parent? ? true : false
     when "Teachers"
       user.teacher? ? true : false
+    when "SDC Members"
+      user.role == "SDC Member" ? true : false
     when "Individuals"
       user.notification_ids.include?(id)
     else

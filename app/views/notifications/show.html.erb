@@ -28,7 +28,9 @@
   <span class="notice-to">Sent to Students</span>
 <% elsif @notification.to == "Teachers" %>
   <span class="notice-to">Sent to Teachers</span>
-<% else %>
+<% elsif @notification.to == "SDC Members" %>
+  <span class="notice-to">Sent to SDC Members</span>
+<% elsif @notification.to == "Individuals" %>
   <p class="mb-0 small">Notified Users</p>
   <div class="flex mb-3">
     <% @notification.users.uniq.each do |user| %>

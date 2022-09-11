@@ -87,7 +87,7 @@ class ClassroomsController < ApplicationController
   end
 
   def authorize_teacher
-    unless current_user.teacher? || current_user.admin?
+    unless current_user.teacher? || current_user.admin? || current_user.role == "SDC Member"
       redirect_to dashboard_path, alert: "Not Authorized"
     end
   end

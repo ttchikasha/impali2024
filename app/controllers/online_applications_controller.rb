@@ -1,6 +1,7 @@
 class OnlineApplicationsController < ApplicationController
   before_action :authenticate_user!, except: :create
   before_action :set_online_application, only: %i[ show edit update destroy ]
+  before_action :authorize_admin, except: :create
 
   # GET /online_applications or /online_applications.json
   def index
@@ -74,5 +75,11 @@ class OnlineApplicationsController < ApplicationController
   # Only allow a list of trusted parameters through.
   def online_application_params
     params.require(:online_application).permit(:first_name, :last_name, :phone, :email, :grade, :gender, :address, :city, :comment, :state, :files => [])
+  end
+
+  def authorize_admin
+    unless current_user.admin?
+      redirect_to dashboard_path, alert: "Not Authorized"
+    end
   end
 end
