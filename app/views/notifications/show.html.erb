@@ -1,3 +1,4 @@
+<%= stylesheet_link_tag "notifications", media: "all", 'data-turbolinks-track': "reload" %>
 <div class="section-title">
   <div class="d-flex align-items-center justify-content-between">
     <p>
@@ -19,3 +20,19 @@
     <%= @notification.content %>
   </div>
 </div>
+<% if @notification.to == "Everyone" %>
+  <span class="notice-to">Sent to Everyone</span>
+<% elsif @notification.to == "Parents"  %>
+  <span class="notice-to">Sent to Parents</span>
+<% elsif @notification.to == "Students"  %>
+  <span class="notice-to">Sent to Students</span>
+<% elsif @notification.to == "Teachers" %>
+  <span class="notice-to">Sent to Teachers</span>
+<% else %>
+  <p class="mb-0 small">Notified Users</p>
+  <div class="flex mb-3">
+    <% @notification.users.uniq.each do |user| %>
+      <span disabled=true style="cursor: none;" class="btn btn-secondary btn-sm"><%= user.full_name %></span>
+    <% end %>
+  </div>
+<% end %>
