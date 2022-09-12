@@ -41,3 +41,8 @@ yarn-debug.log*
 spec/examples.txt
 .tool-versions
 data/.~lock.2-blue.csv#
+
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml
