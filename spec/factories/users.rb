@@ -6,6 +6,7 @@
 #  address                :string
 #  city                   :string
 #  date_of_birth          :date
+#  due_date               :date
 #  email                  :string           default(""), not null
 #  encrypted_password     :string           default(""), not null
 #  first_name             :string           default(""), not null

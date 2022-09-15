@@ -114,6 +114,16 @@
                       <% end %>
                     </div>
                   <% end %>
+                  <% if current_user.admin? && user.current_balance > 0 %>
+                    <%= react_component('DueDateSetter', {userId: user.id, dueDate: user.due_date}) %>
+                  <% end %>
+                  <% if (current_user.student? || current_user.parent?) %>
+                    <% balance = current_user.student? ? current_user.current_balance : current_user.student.current_balance  %>
+                    <% due_date = current_user.student? ? current_user.due_date : current_user.student.due_date  %>
+                    <% if (balance > 0 && due_date)  %>
+                      <small>You have been pardoned until <%= due_date %></small>
+                    <% end %>
+                  <% end %>
                 </div>
               <% end %>
             <% end %>

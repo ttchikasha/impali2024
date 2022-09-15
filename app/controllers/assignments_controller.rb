@@ -1,4 +1,6 @@
 class AssignmentsController < ApplicationController
+  include AccessAuthorizer
+
   before_action :set_classroom_subject, only: %i[index new create]
   before_action :set_assignment, only: %i[ show edit update destroy ]
   before_action :authorize_teacher, only: %i[new create edit update destroy]
@@ -113,15 +115,6 @@ class AssignmentsController < ApplicationController
       unless current_user.classroom_subjects&.include? @classroom_subject
         redirect_to dashboard_path, alert: "You cannot access other classrooms"
       end
-    end
-  end
-
-  def authorize_paid_students
-    if current_user.student? && current_user.current_balance > 0
-      redirect_to dashboard_path, alert: "Only paid students can access assignments"
-    end
-    if current_user.parent? && current_user.student.current_balance > 0
-      redirect_to dashboard_path, alert: "Only paid students can access assignments"
     end
   end
 

@@ -6,6 +6,7 @@
 #  address                :string
 #  city                   :string
 #  date_of_birth          :date
+#  due_date               :date
 #  email                  :string           default(""), not null
 #  encrypted_password     :string           default(""), not null
 #  first_name             :string           default(""), not null
@@ -297,6 +298,24 @@ class User < ApplicationRecord
   def teacher
     return nil unless student?
     classroom&.teacher
+  end
+
+  def can_access_lessons?
+    if due_date && (due_date > Date.today)
+      return true
+    end
+    pardoned = false
+    if student?
+      pardoned = !!due_date
+    elsif parent?
+      pardoned = !!student.due_date
+    end
+    if (student? && current_balance > 0) || !pardoned
+      return false
+    elsif (parent? && student.current_balance > 0) || !pardoned
+      return false
+    end
+    true
   end
 
   private

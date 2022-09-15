@@ -1,4 +1,5 @@
 class LessonsController < ApplicationController
+  include AccessAuthorizer
   before_action :set_topic
   before_action :set_lesson, only: %i[ show edit update destroy ]
   before_action :authorize_teacher, only: %i[edit update destroy create new]
@@ -81,15 +82,6 @@ class LessonsController < ApplicationController
   def authorize_teacher
     unless current_user.teacher? && current_user.classroom_subjects.include?(@topic.classroom_subject)
       redirect_to dashboard_path, alert: "Not Authorized"
-    end
-  end
-
-  def authorize_paid_students
-    if current_user.student? && current_user.current_balance > 0
-      redirect_to dashboard_path, alert: "Only paid students can access lessons"
-    end
-    if current_user.parent? && current_user.student.current_balance > 0
-      redirect_to dashboard_path, alert: "Only paid students can access lessons"
     end
   end
 
