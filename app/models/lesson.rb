@@ -3,7 +3,7 @@
 # Table name: lessons
 #
 #  id         :bigint           not null, primary key
-#  draft      :boolean
+#  draft      :boolean          default(TRUE)
 #  order      :bigint           default(0)
 #  title      :string
 #  video_url  :string
@@ -37,7 +37,7 @@ class Lesson < ApplicationRecord
   validates :document, file_size: { less_than_or_equal_to: 200.kilobytes },
                        file_content_type: { allow: ["application/pdf"] }
 
-  scope :published, -> { where(:draft => false) }
+  scope :published, -> { where.not(:draft => true) }
   scope :draft, -> { where(:draft => true) }
 
   after_save do

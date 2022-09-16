@@ -301,6 +301,7 @@ class User < ApplicationRecord
   end
 
   def can_access_lessons?
+    return true if teacher?
     if due_date && (due_date > Date.today)
       return true
     end
@@ -310,9 +311,9 @@ class User < ApplicationRecord
     elsif parent?
       pardoned = !!student.due_date
     end
-    if (student? && current_balance > 0) || !pardoned
+    if (student? && current_balance > 0) && !pardoned
       return false
-    elsif (parent? && student.current_balance > 0) || !pardoned
+    elsif (parent? && student.current_balance > 0) && !pardoned
       return false
     end
     true

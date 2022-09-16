@@ -120,7 +120,7 @@ ActiveRecord::Schema.define(version: 2022_09_15_092521) do
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "order", default: 0
     t.string "video_url"
-    t.boolean "draft"
+    t.boolean "draft", default: true
     t.index ["topic_id"], name: "index_lessons_on_topic_id"
   end
 

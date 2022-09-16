@@ -71,8 +71,11 @@
           </div>
           <% cache @topics do %>
             <% @topics.each do |topic| %>
-              <% cache topic do %>
-                <%= render 'topics/topic', topic: topic %>
+              <% lessons = current_user.teacher? ? topic.lessons : topic.lessons.published %>
+              <% if lessons.any? %>
+                <% cache topic do %>
+                  <%= render 'topics/topic', topic: topic %>
+                <% end %>
               <% end %>
             <% end %>
           <% end %>
