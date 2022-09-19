@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_09_15_092521) do
+ActiveRecord::Schema.define(version: 2022_09_19_161238) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -229,6 +229,20 @@ ActiveRecord::Schema.define(version: 2022_09_15_092521) do
     t.index ["user_id"], name: "index_reports_on_user_id"
   end
 
+  create_table "results", force: :cascade do |t|
+    t.integer "term"
+    t.integer "year"
+    t.integer "actual_mark"
+    t.integer "total_marks"
+    t.bigint "student_id"
+    t.bigint "classroom_subject_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.string "name", null: false
+    t.integer "for", default: 0
+    t.index ["classroom_subject_id"], name: "index_results_on_classroom_subject_id"
+  end
+
   create_table "schedules", force: :cascade do |t|
     t.string "title"
     t.integer "calendar_id"
@@ -332,6 +346,8 @@ ActiveRecord::Schema.define(version: 2022_09_15_092521) do
   add_foreign_key "question_answers", "users"
   add_foreign_key "reports", "classroom_subjects"
   add_foreign_key "reports", "users"
+  add_foreign_key "results", "classroom_subjects"
+  add_foreign_key "results", "users", column: "student_id"
   add_foreign_key "student_attendances", "users"
   add_foreign_key "student_parents", "users", column: "parent_id"
   add_foreign_key "student_parents", "users", column: "student_id"

@@ -21,6 +21,9 @@
             Message
           <% end %>
         <% end %>
+        <% if user.student? %>
+          <%= link_to 'View Results', user_results_path(user), class: 'btn btn-primary w-100' %>
+        <% end %>
         <% if current_user.admin? %>
           <%= button_to 'Delete', user, method: :delete, data: {confirm: 'Are you sure?'}, class: 'btn btn-danger w-100 mt-3' %>
         <% end %>

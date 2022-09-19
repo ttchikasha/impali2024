@@ -1,0 +1,30 @@
+<div class="col-md-12">
+  <div class="top-selling">
+    <table class="table table-borderless">
+      <thead>
+        <th>Subject</th>
+        <th>Name</th>
+        <th>Year</th>
+        <th>Term</th>
+        <th class='text-center'>Actual Mark</th>
+        <th class='text-center'>Total Marks</th>
+      </thead>
+      <tbody>
+        <% cache results do %>
+          <% results.each do |result| %>
+            <% cache [result] do %>
+              <tr>
+                <td><%= result.classroom_subject.subject.name %></td>
+                <td><%= result.name %></td>
+                <td><%= result.year %></td>
+                <td><%= result.term %></td>
+                <td class='text-center'><%= result.actual_mark %></td>
+                <td class='text-center'><%= result.total_marks %></td>
+              </tr>
+            <% end %>
+          <% end %>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
