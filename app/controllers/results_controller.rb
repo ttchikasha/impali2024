@@ -22,7 +22,7 @@ class ResultsController < ApplicationController
 
     respond_to do |format|
       if @result.save
-        format.html { redirect_to user_result_url(@user), notice: "Result was successfully created." }
+        format.html { redirect_to user_results_url(@user), notice: "Result was successfully created." }
       else
         format.html { render :new, status: :unprocessable_entity }
       end
