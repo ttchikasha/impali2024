@@ -132,7 +132,7 @@ Rails.application.configure do
   ActionMailer::Base.delivery_method = :smtp
 
   config.action_mailer.default_url_options = {
-    host: "impali-school.herokuapp.com",
+    host: "impali-school.onrender.com",
   }
   config.active_job.queue_adapter = :sidekiq
 end

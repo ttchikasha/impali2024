@@ -75,7 +75,7 @@ gem "wicked_pdf"
 group :production do
   gem "cloudinary"
   gem "wkhtmltopdf-heroku"
-  gem "aws-sdk"
+  gem "aws-sdk-s3", require: false
   gem "sidekiq"
 end
 gem "react-rails", "~> 2.6"
