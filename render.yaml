@@ -19,7 +19,7 @@ services:
         sync: false
 
   - type: web
-    name: impali-web
+    name: impali-school
     env: ruby
     buildCommand: "./bin/render-build.sh"
     startCommand: "bundle exec puma -C config/puma.rb"
