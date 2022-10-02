@@ -81,7 +81,8 @@ test:
 #
 production:
   <<: *default
-  database: impali_project_production
-  username: impali_project
-  password: <%= ENV['MY_PROJECT_DATABASE_PASSWORD'] %>
+  # database: impali_project_production
+  # username: impali_project
+  # password: <%= ENV['MY_PROJECT_DATABASE_PASSWORD'] %>
+  url: <%= ENV['DATABASE_URL'] %>
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
