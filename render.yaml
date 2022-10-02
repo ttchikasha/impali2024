@@ -18,11 +18,6 @@ services:
       - key: RAILS_MASTER_KEY
         sync: false
 
-  databases:
-  - name: impali
-    databaseName: impali
-    user: impali
-
   - type: web
     name: impali-web
     env: ruby
@@ -34,12 +29,16 @@ services:
           type: redis
           name: sidekiq-redis
           property: connectionString
-      
+
       - key: DATABASE_URL
         fromDatabase:
           name: impali
           property: connectionString
-          
+
       - key: RAILS_MASTER_KEY
         sync: false
 
+databases:
+  - name: impali
+    databaseName: impali
+    user: impali
