@@ -82,17 +82,19 @@ puts "Created SchoolPayment"
 
 # classroom.save!
 
-FactoryBot.create \
-  :user,
-  :admin,
-  first_name: "Blessed",
-  last_name: "Sibanda",
-  email: "blessedsibanda.me@gmail.com",
-  login_id: "A1234A",
-  password: "secret",
-  date_of_birth: "15/08/1996",
-  start_date: "15/01/2022",
-  id_no: "08-2035675L53"
+User.create first_name: "Blessed",
+            last_name: "Sibanda",
+            email: "blessedsibanda.me@gmail.com",
+            login_id: "A1234A",
+            password: "secret",
+            date_of_birth: "15/08/1996",
+            start_date: "15/01/2022",
+            id_no: "08-2035675L53",
+            role: "Admin",
+            city: "Gweru",
+            grade: User.grades.keys.reject { |g| g == "None" }.sample,
+            room: Rooms::TYPES.sample,
+            gender: "Male"
 
 # parent = FactoryBot.create \
 #   :user,
