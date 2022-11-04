@@ -371,7 +371,7 @@ h6 {
 #hero:before {
   content: "";
   // background: rgba(255, 255, 255, 0.8);
-  background: rgba(255, 255, 255, 0.85);
+  background: rgba(255, 255, 255, 0.25);
   position: absolute;
   bottom: 0;
   top: 0;
@@ -869,7 +869,8 @@ section {
 .portfolio .portfolio-item {
   margin-bottom: 30px;
 }
-.portfolio #portfolio-flters {
+.portfolio #portfolio-flters,
+.team #team-filters {
   padding: 0;
   margin: 0 auto 35px auto;
   list-style: none;
@@ -877,7 +878,9 @@ section {
   border-radius: 50px;
   padding: 2px 15px;
 }
-.portfolio #portfolio-flters li {
+.portfolio #portfolio-flters li,
+.team #team-filters li
+ {
   cursor: pointer;
   display: inline-block;
   padding: 10px 15px 8px 15px;
@@ -890,10 +893,15 @@ section {
   transition: all 0.3s ease-in-out;
 }
 .portfolio #portfolio-flters li:hover,
-.portfolio #portfolio-flters li.filter-active {
+.portfolio #portfolio-flters li.filter-active,
+.team #team-filters li:hover,
+.team #team-filters li.filter-active
+{
   color: #2487ce;
 }
-.portfolio #portfolio-flters li:last-child {
+.portfolio #portfolio-flters li:last-child,
+.team #team-filters li:last-child
+ {
   margin-right: 0;
 }
 .portfolio .portfolio-wrap {
