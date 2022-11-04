@@ -2,107 +2,151 @@ module StaffMembers
   def self.all
     [
       {
-        initials: "Mr Mahlahleni",
+        name: "Mahlahleni N",
         position: "6 Red",
+        image: "mr-mahlahleni.jpg",
+        category: "junior-teachers",
       },
-
       {
-        initials: "Miss Mbayimbayi",
+        name: "Mbayimbayi P",
         position: "7 Red",
+        image: "miss-mbayimbayi.jpg",
+        category: "junior-teachers",
       },
-
       {
-        initials: "Mrs Dube",
+        name: "Dube B",
         position: "3 Red",
+        image: "mrs-dube.jpg",
+        category: "junior-teachers",
       },
-
       {
-        initials: "Mr Mborera",
+        name: "Mborera B",
         position: "5 Blue",
+        image: "mr-mborera.jpg",
+        category: "junior-teachers",
       },
-
       {
-        initials: "Mrs Gadzikwa",
+        name: "Gadzikwa D",
         position: "TIC",
+        image: "mrs-gadzikwa.jpg",
+        category: "admin",
       },
-
       {
-        initials: "Mr Chibaya",
+        name: "Chibaya S",
         position: "6 Blue",
+        image: "mr-chibaya.jpg",
+        category: "junior-teachers",
       },
       {
-        initials: "Mr Muchengeti",
+        name: "Muchengeti I",
         position: "Head",
+        image: "mr-muchengeti.jpeg",
+        category: "admin",
       },
       {
-        initials: "Miss Chinheva",
+        name: "Chinheva E",
         position: "ECD B Blue",
+        image: "miss-chinheva.jpg",
+        category: "infant-teachers",
       },
       {
-        initials: "Miss Ndhlovu",
+        name: "Ndhlovu T",
         position: "4 Blue",
+        image: "miss-ndhlovu.jpg",
+        category: "junior-teachers",
       },
       {
-        initials: "Mrs Mandhla",
+        name: "Mandhla G",
         position: "2 Red",
+        image: "mrs-mandhla.jpg",
+        category: "infant-teachers",
       },
       {
-        initials: "Miss Muchingami",
+        name: "Muchingami T",
         position: "Assistant Bursar",
+        image: "miss-muchingami.jpg",
+        category: "staff",
       },
       {
-        initials: "Mrs Kanyemba",
+        name: "Kanyemba E",
         position: "4 Red",
+        image: "mrs-kanyemba.jpg",
+        category: "junior-teachers",
       },
       {
-        initials: "Mrs Mafuya",
+        name: "Mafuya P",
         position: "2 Blue",
-      },
-      {
-        initials: "Mr Marevesa",
-        position: "Deputy Head",
-      },
-      {
-        initials: "Miss Sandifolo",
-        position: "Grade 5",
-      },
-      {
-        initials: "Miss Mapindure",
-        position: "ECD B Red",
-      },
-      {
-        initials: "Miss Mbokochena",
-        position: "1 Blue",
-      },
-      {
-        initials: "Mr Kona",
-        position: "PE",
-      },
-      {
-        initials: "Mr Marozveni",
-        position: "Bursar",
-      },
-      {
-        initials: "Miss Furusa",
-        position: "3 Blue",
-      },
-      {
-        initials: "Mr Mamombe",
-        position: "ICT",
-      },
-      {
-        initials: "Miss Mudambo",
-        position: "ECD A Red",
-      },
-      {
-        initials: "Miss Nhika",
-        position: "ECD A Blue",
-      },
-      {
-        initials: "Miss Nyasulo",
-        position: "5 Blue",
-      },
+        image: "mrs-mafuya.jpg",
+        category: "junior-teachers",
 
+      },
+      {
+        name: "Marevesa W",
+        position: "Deputy Head",
+        image: "mr-marevesa.jpeg",
+        category: "admin",
+
+      },
+      {
+        name: "Sandifolo Y",
+        position: "Grade 5",
+        image: "miss-sandifolo.jpg",
+        category: "junior-teachers",
+      },
+      {
+        name: "Mapindure J",
+        position: "ECD B Red",
+        image: "miss-mapindure.jpg",
+        category: "infant-teachers",
+      },
+      {
+        name: "Mbokochena E",
+        position: "1 Blue",
+        image: "miss-mbokochena.jpg",
+        category: "infant-teachers",
+      },
+      {
+        name: "Kona L",
+        position: "Sports Director",
+        image: "mr-kona.jpg",
+        category: "admin",
+      },
+      {
+        name: "Marozveni M",
+        position: "Bursar",
+        image: "mr-marozveni.jpeg",
+        category: "staff",
+      },
+      {
+        name: "Furusa R",
+        position: "3 Blue",
+        image: "miss-furusa.jpg",
+        category: "junior-teachers",
+      },
+      {
+        name: "Mangombe M",
+        position: "ICT",
+        image: "mr-mamombe.jpeg",
+        category: "junior-teachers",
+      },
+      {
+        name: "Mudambo A",
+        position: "ECD A Red",
+        image: "miss-mudambo.jpg",
+        category: "infant-teachers",
+      },
+      {
+        name: "Nhika C",
+        position: "ECD A Blue",
+        image: "miss-nhika.jpg",
+        category: "infant-teachers",
+      },
+      {
+        name: "Nyasulo N",
+        position: "5 Blue",
+        image: "miss-nyasulo.jpg",
+        category: "junior-teachers",
+      },
     ]
   end
 end

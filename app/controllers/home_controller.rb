@@ -4,9 +4,8 @@ class HomeController < ApplicationController
     @staff = StaffMembers.all
   end
 
-  def about
-  end
-
-  def contact
+  def staff
+    @staff = StaffMembers.all
+    render :layout => 'staff.html.erb'
   end
 end

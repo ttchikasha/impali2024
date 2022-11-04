@@ -1,10 +1,9 @@
 # frozen_string_literal: true
 
 class StaffMemberComponent < ViewComponent::Base
-  def initialize(image:, initials:, position:)
+  def initialize(image:, name:, position:)
     @image = image
-    @initials = initials
+    @name = name
     @position = position
   end
-
 end
