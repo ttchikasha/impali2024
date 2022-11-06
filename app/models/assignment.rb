@@ -24,7 +24,7 @@ class Assignment < ApplicationRecord
   has_many :questions, as: :questionable
   has_one_attached :banner_image
   has_one_attached :document
-  validates :document, file_size: { less_than_or_equal_to: 256.kilobytes },
+  validates :document, file_size: { less_than_or_equal_to: 3_000.kilobytes },
                        file_content_type: { allow: ["application/pdf"] }
 
   has_many :assignment_answers
