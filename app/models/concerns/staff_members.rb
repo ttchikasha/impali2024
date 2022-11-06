@@ -32,13 +32,13 @@ module StaffMembers
       {
         name: "Muchengeti I",
         position: "Head",
-        image: "mr-muchengeti.jpeg",
+        image: "mr-muchengeti.jpg",
         category: "admin",
       },
       {
         name: "Marevesa W",
         position: "Deputy Head",
-        image: "mr-marevesa.jpeg",
+        image: "mr-marevesa.jpg",
         category: "admin",
       },
       {
@@ -117,7 +117,7 @@ module StaffMembers
       {
         name: "Marozveni M",
         position: "Bursar",
-        image: "mr-marozveni.jpeg",
+        image: "mr-marozveni.jpg",
         category: "staff",
       },
       {
@@ -129,7 +129,7 @@ module StaffMembers
       {
         name: "Mangombe M",
         position: "ICT",
-        image: "mr-mamombe.jpeg",
+        image: "mr-mamombe.jpg",
         category: "junior-teachers",
       },
       {
