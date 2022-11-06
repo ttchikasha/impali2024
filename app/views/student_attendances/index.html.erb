@@ -8,24 +8,25 @@
 </div>
 <section class="section dashboard">
   <div class="row">
-    <div class="col-12">
+    <% if @student_attendances.any? %>
       <div class="col-12">
-        <div class="card top-selling overflow-auto">
-          <div class="filter">
-            <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-            <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-              <li class="dropdown-header text-start">
-                <h6>Filter</h6>
-              </li>
-              <li>
-                <%= link_to 'All', student_attendances_path, class: 'dropdown-item' %>
-              </li>
-            </ul>
-          </div>
-          <div class="card-body pb-0">
-            <h5 class="card-title">Student Attendances</h5>
-            <table class='table table-borderless'>
-              <thead>
+        <div class="col-12">
+          <div class="card top-selling overflow-auto">
+            <div class="filter">
+              <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
+              <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                <li class="dropdown-header text-start">
+                  <h6>Filter</h6>
+                </li>
+                <li>
+                  <%= link_to 'All', student_attendances_path, class: 'dropdown-item' %>
+                </li>
+              </ul>
+            </div>
+            <div class="card-body pb-0">
+              <h5 class="card-title">Student Attendances</h5>
+              <table class='table table-borderless'>
+                <thead>
                 <tr>
                   <th>Date</th>
                   <th>Name</th>
@@ -35,8 +36,8 @@
                   <th>Gender</th>
                   <th scope='col' class='text-center'>Present</th>
                 </tr>
-              </thead>
-              <tbody>
+                </thead>
+                <tbody>
                 <% cache @student_attendances do %>
                   <% @student_attendances.each do |student_attendance| %>
                     <% cache student_attendance do %>
@@ -50,7 +51,7 @@
                           <td><%= link_to user.classroom.name, student_attendances_path(date: params[:date], classroom: user.classroom.id), class: 'link link-success' %></td>
                         <% end %>
                         <td>
-                          <span class='<%= "badge rounded-pill text-decoration-none #{user.gender == User::MALE ? 'bg-info': 'bg-warning'}" %>'>
+                          <span class='<%= "badge rounded-pill text-decoration-none #{user.gender == User::MALE ? 'bg-info' : 'bg-warning'}" %>'>
                             <%= user.gender %>
                           </span>
                         </td>
@@ -60,10 +61,10 @@
                           <% else %>
                             <i class="bi bi-x-circle text-danger"></i>
                           <% end %>
-                        </tr>
-                      <% end %>
+                          </tr>
                     <% end %>
                   <% end %>
+                <% end %>
                 </tbody>
               </table>
               <%= will_paginate @student_attendances %>
@@ -71,5 +72,9 @@
           </div>
         </div>
       </div>
-    </div>
-  </section>
+    <% else %>
+      <h4>You haven't marked the register for today</h4>
+      <p>click <%= link_to "here", students_path %> to mark the register </p>
+    <% end %>
+  </div>
+</section>
