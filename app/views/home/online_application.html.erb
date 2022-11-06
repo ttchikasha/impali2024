@@ -1,0 +1,43 @@
+<section id="section">
+  <div class="container">
+    <h1 class="h2 text-uppercase text-center my-3">Apply Online</h1>
+    <div class="row justify-content-center">
+      <div class="col-md-8 bg-light p-4 rounded shadow-sm">
+        <%= bootstrap_form_with(model: @online_application) do |form| %>
+          <%= form.text_field :first_name, floating: true, required: true %>
+          <%= form.text_field :last_name, floating: true, required: true %>
+          <%= form.email_field :email, floating: true, required: true %>
+          <div class="row">
+            <div class="col-sm-6">
+              <%= form.select :grade, User.grades.keys.reject { |g| g == 'None' }, floating: true, required: true %>
+            </div>
+            <div class="col-sm-6">
+              <%= form.select :gender, User::GENDER_TYPES, floating: true %>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-6">
+              <%= form.text_field :phone, floating: true, required: true %>
+            </div>
+            <div class="col-sm-6">
+              <%= form.date_field :date_of_birth, floating: true, required: true %>
+            </div>
+          </div>
+          <%= form.hidden_field :state, value: OnlineApplication::PENDING %>
+          <%= form.text_field :address, floating: true, required: true %>
+          <%= form.text_field :city, floating: true, required: true %>
+          <div data-controller="multi-upload">
+            <div class="files">
+              <%= form.file_field :files, :multiple => true, :data => { :action => "multi-upload#addFile" } %>
+            </div>
+            <div class="small text-muted">
+              Birth certificate, Proof of residence & Results
+            </div>
+            <div data-multi-upload-target="files"></div>
+          </div>
+          <%= form.primary 'Apply' %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</section>

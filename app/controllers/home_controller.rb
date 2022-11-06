@@ -9,4 +9,9 @@ class HomeController < ApplicationController
     @staff = StaffMembers.all
     render :layout => 'staff.html.erb'
   end
+
+  def online_application
+    @online_application = OnlineApplication.new
+    render :layout => "staff"
+  end
 end

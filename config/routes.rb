@@ -74,6 +74,7 @@ Rails.application.routes.draw do
 
   get "/staff", to: "home#staff"
   get "/learning-areas", to: "learning_areas#index"
+  get "/apply-online", to: "home#online_application"
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
