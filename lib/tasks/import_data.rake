@@ -14,16 +14,29 @@ namespace :import do
         keys = row
       else
         keys.each_with_index do |k, i|
-          if k == "grade"
-            if ("1".."7").include? row[i]
-              d[k] = row[i].to_i
-            else
-              d[k] = "ECD"
-            end
-          elsif k == "phone"
+          if k == "phone"
             if row[i]&.include? "/"
               d[k] = row[i].split("/").first
               d["phone2"] = row[i].split("/").last
+              full = d[k].starts_with?("0") || d[k].starts_with?("263") || d[k].starts_with?("+")
+              full2 = d['phone2'].starts_with?("0") || d['phone2'].starts_with?("263") || d['phone2'].starts_with?("+")
+              d[k] = "0" + d[k] unless full
+              d['phone2'] = '0' + d['phone2'] unless full2
+            else
+              begin
+                d[k] = row[i]
+                full = d[k].starts_with?("0") || d[k].starts_with?("263") || d[k].starts_with?("+")
+                d[k] = "0" + d[k] unless full
+              rescue;
+              end
+            end
+          elsif k == "room"
+            d[k] = row[i].capitalize
+          elsif k == "id_no"
+            begin
+              d[k] = row[i].upcase
+            rescue
+              # Ignored
             end
           elsif k == "gender"
             if row[i] == "F" || row[i] == "FEMALE"
@@ -35,17 +48,38 @@ namespace :import do
             end
           elsif k == "role"
             d[k] = row[i]&.capitalize
+          elsif k == "date_of_birth"
+            # reformat date from mm/dd/yyyy --> dd/mm/yyyy
+            begin
+              day = row[i].split[1]
+              month = row[i].split("/").first
+              year = row[i].split("/").last
+              d[k] = Date.parse [day, month, year].join("/")
+            rescue
+              d[k] = ""
+            end
+          elsif %w[physical health].include? k
+            d[k] = row[i].nil? ? "fit" : row[i].downcase
+          elsif %w(first_name last_name).include? k
+            d[k] = row[i]
+          elsif k == 'start_date'
+            begin
+              d[k] = Date.parse row[i]
+            rescue;
+            end
           else
             d[k] = row[i]
           end
         end
-        if user = User.find_by_email(d["email"]&.downcase)
+        if user = User.find_by_id_no(d["id_no"]&.upcase)
           if user.update(d)
             puts "Successfully updated #{user.reload.first_name}"
           else
             puts "Failed updating #{user.first_name} due to #{user.errors.full_messages.join("")}"
           end
         else
+          d['email'] = d['first_name'].downcase + d["last_name"].downcase + rand(999).to_s + "@example.co.zw"
+          d['email'] = d['email'].gsub(' ', '')
           u = User.new(d)
           if u.save
             puts "Created #{u.first_name}"

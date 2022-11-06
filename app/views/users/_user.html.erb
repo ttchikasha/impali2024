@@ -13,6 +13,9 @@
           <% if user.classroom %>
             <h4><%= user.classroom_name %></h4>
           <% end %>
+          <% if user.position && user.position != 'Teacher' %>
+            <h4><%= user.position %></h4>
+          <% end %>
         </div>
       </div>
       <% unless current_user == user %>
@@ -25,7 +28,7 @@
           <%= link_to 'View Results', user_results_path(user), class: 'btn btn-primary w-100' %>
         <% end %>
         <% if current_user.admin? %>
-          <%= button_to 'Delete', user, method: :delete, data: {confirm: 'Are you sure?'}, class: 'btn btn-danger w-100 mt-3' %>
+          <%= button_to 'Delete', user, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger w-100 mt-3' %>
         <% end %>
         <% if current_user.admin? && user.student? %>
           <%= link_to 'Add Payment', new_user_student_payment_path(user), class: 'btn btn-outline-success w-100 my-3' %>
@@ -37,31 +40,33 @@
         <div class="card-body pt-3">
           <ul class="nav nav-tabs nav-tabs-bordered">
             <li class="nav-item">
-              <button class="nav-link <%= 'active' unless @edit  %>" data-bs-toggle="tab" data-bs-target="#profile-overview">Overview</button>
+              <button class="nav-link <%= 'active' unless @edit %>" data-bs-toggle="tab" data-bs-target="#profile-overview">Overview</button>
             </li>
             <% if user == current_user || current_user.admin? || current_user == user.teacher %>
               <% unless current_user.parent? || current_user.student? %>
                 <li class="nav-item">
-                  <button class="nav-link <%= 'active' if (@edit && !@edit_password)  %>"" data-bs-toggle="tab" data-bs-target="#profile-edit">Edit</button>
+                  <button class="nav-link <%= 'active' if (@edit && !@edit_password) %>"
+                          data-bs-toggle="tab" data-bs-target="#profile-edit">Edit
+                  </button>
                 </li>
               <% end %>
             <% end %>
             <% if user == current_user %>
               <li class="nav-item">
-                <button class="nav-link <%= 'active' if @edit_password %>"  data-bs-toggle="tab" data-bs-target="#profile-change-password">
+                <button class="nav-link <%= 'active' if @edit_password %>" data-bs-toggle="tab" data-bs-target="#profile-change-password">
                   Security
                 </button>
               </li>
             <% end %>
-            <% if user.student?  %>
-              <% if current_user == user.teacher_account || current_user==user || current_user.admin? || user == current_user.student %>
+            <% if user.student? %>
+              <% if current_user == user.teacher_account || current_user == user || current_user.admin? || user == current_user.student %>
                 <li class="nav-item">
                   <button data-bs-toggle="tab" data-bs-target="#parent-details" class="nav-link">Parent</button>
                 </li>
               <% end %>
             <% end %>
             <% if user.student? %>
-              <% if current_user==user || current_user.admin? %>
+              <% if current_user == user || current_user.admin? %>
                 <li class="nav-item">
                   <button data-bs-toggle="tab" data-bs-target="#payment-details" class="nav-link">Payments</button>
                 </li>
@@ -87,6 +92,14 @@
             <% if user.student? %>
               <% if current_user.admin? || current_user == user || current_user == user.parent || current_user == user.teacher_account %>
                 <div class="tab-pane fade pt-2 profile-overview" id="parent-details">
+                  <% if user.student? %>
+                    <div class="row">
+                      <div class="col-lg-6 col-md-6 label ">Parent Occupation</div>
+                      <div class="col-lg-6 col-md-6">
+                        <%= user.parent_occupation %>
+                      </div>
+                    </div>
+                  <% end %>
                   <% if user&.parent&.persisted? %>
                     <%= render 'parents/parent', parent: user.parent %>
                   <% else %>
@@ -98,7 +111,7 @@
               <% end %>
             <% end %>
             <% if user.student? %>
-              <% if user==current_user || current_user.admin? %>
+              <% if user == current_user || current_user.admin? %>
                 <div data-controller='payment-details' class="tab-pane fade pt-2 profile-overview" id="payment-details">
                   <div data-payment-details-target='owing'>
                     <%= render 'users/payment_summary', user: user %>
@@ -118,12 +131,12 @@
                     </div>
                   <% end %>
                   <% if current_user.admin? && user.current_balance > 0 %>
-                    <%= react_component('DueDateSetter', {userId: user.id, dueDate: user.due_date}) %>
+                    <%= react_component('DueDateSetter', { userId: user.id, dueDate: user.due_date }) %>
                   <% end %>
                   <% if (current_user.student? || current_user.parent?) %>
-                    <% balance = current_user.student? ? current_user.current_balance : current_user.student.current_balance  %>
-                    <% due_date = current_user.student? ? current_user.due_date : current_user.student.due_date  %>
-                    <% if (balance > 0 && due_date)  %>
+                    <% balance = current_user.student? ? current_user.current_balance : current_user.student.current_balance %>
+                    <% due_date = current_user.student? ? current_user.due_date : current_user.student.due_date %>
+                    <% if (balance > 0 && due_date) %>
                       <small>You have been pardoned until <%= due_date %></small>
                     <% end %>
                   <% end %>
@@ -134,4 +147,5 @@
         </div>
       </div>
     </div>
-  </section>
+  </div>
+</section>

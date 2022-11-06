@@ -1,0 +1,28 @@
+first_name,last_name,date_of_birth,id_no,gender,start_date,position,phone,address,city,role,grade,room
+Ishmael ,Muchengeti,1/10/1961,29-068676L04,M,9/1/2022,SCHOOL HEAD,772165315,"Box 276, Shurugwi",Shurugwi,Admin,None,RED
+Wilfred ,Marevesa,11/24/1959,29-114916X04,M,9/1/2022,DEPUTY HEAD,773402023,"Box 276, Shurugwi",Shurugwi,Admin,None,RED
+Morelife,Marozveni,5/6/1995,29-294323E04,M,9/1/2022,ACC/BURSAR,782455248,"Box 276, Shurugwi",Shurugwi,Admin,None,RED
+Doren ,Gadzikwa,10/15/1975,71-071872J71,F,9/1/2022,TIC,716232794,"Box 276, Shurugwi",Shurugwi,Admin,Grade 1,RED
+Molledge ,Mangombe,5/27/1979,04-091322N04,M,9/1/2022,ICT/WEB MASTER,715720338,"Box 276, Shurugwi",Shurugwi,Admin,None,Red
+Tatenda,Muchingami,9/19/1994,29-304410T77,F,9/1/2022,ADMIN ASSISTANT,771723011,"Box 276, Shurugwi",Shurugwi,Admin,None,Red
+Simbarashe ,Chibaya,5/10/1979,29-191947B04,M,9/1/2022,Teacher,777776977,"Box 276, Shurugwi",Shurugwi,Teacher,Grade 6,Red
+Agatha ,Mudambo,5/29/1977,42-167837E42,F,9/1/2022,Teacher,778127689,"Box 276, Shurugwi",Shurugwi,Teacher,ECD A,Red
+Agness,Charamba,2/12/1982,63-1149064Q47,F,9/1/2022,Agriculture,772380615,"Box 276, Shurugwi",Shurugwi,Teacher,None,Red
+Bernard,Mborera,8/11/1984,77-064888G77,M,9/1/2022,Teacher,773514610,"Box 276, Shurugwi",Shurugwi,Teacher,Grade 5,Blue
+Bongani ,Dube,10/12/1989,79-128264G21,F,9/1/2022,Tec,774699114,"Box 276, Shurugwi",Shurugwi,Teacher,Grade 3,Red
+Charity ,Nhika,11/10/1982,29-22191984A66,F,9/1/2022,Teacher,775150525,"Box 276, Shurugwi",Shurugwi,Teacher,ECD A,Blue
+Christina ,Maminye,5/20/1975,13-129332M13,F,9/1/2022,Teacher,773025697,"Box 276, Shurugwi",Shurugwi,Teacher,Grade 7,Blue
+Elizabeth ,Mbokochena,4/25/1980,27-148179T27,F,9/1/2022,Teacher,773744503,"Box 276, Shurugwi",Shurugwi,Teacher,Grade 1,Blue
+Esther ,Chinheva,12/23/1989,22-255025T12,F,9/1/2022,Teacher,776683734,"Box 276, Shurugwi",Shurugwi,Teacher,ECD B,Blue
+Estrelinha ,Kanyemba ,4/10/1979,66-057228J70,F,9/1/2022,Teacher,777751264,"Box 276, Shurugwi",Shurugwi,Teacher,Grade 4,Red
+Gawdencia ,Mandhla,8/24/1974,42-142079G42,F,9/1/2022,Teacher,O773608216,"Box 276, Shurugwi",Shurugwi,Teacher,Grade 2,Red
+James , Bwanakaya,2/6/1969,58-112836A58,M,9/1/2022,VISUAL PERFORMING ARTS,775486053,"Box 276, Shurugwi",Shurugwi,Teacher,None,Red
+Joana ,Mapindure,6/10/1982,22-210376M22,F,9/1/2022,ECD B,776139967,"Box 276, Shurugwi",Shurugwi,Teacher,ECD B,Red
+Leonard ,Kona,10/10/1981,29-208068Z58,M,9/1/2022,PESMD,782153774,"Box 276, Shurugwi",Shurugwi,Teacher,None,Red
+Naume ,Nyasulo,1/17/1985,22-232941P22,F,9/1/2022,Teacher,775143275,"Box 276, Shurugwi",Shurugwi,Teacher,Grade 5,Red
+Nkosana ,Mahlahleni,4/19/1967,08-536654W66,M,9/1/2022,Teacher,772652692,"Box 276, Shurugwi",Shurugwi,Teacher,Grade 6,Red
+Patience,Mbayimbayi,4/6/1979,67-092629V67,F,9/1/2022,Teacher,773748945,"Box 276, Shurugwi",Shurugwi,Teacher,Grade 7,Red
+Patricia ,Mafuya,1/15/1981,59-040005S24,F,9/1/2022,Teacher,774349558,"Box 276, Shurugwi",Shurugwi,Teacher,Grade 2,Blue
+Rutendo, Furusa,9/11/1978,66-056276Z66,F,9/1/2022,Teacher,782144506,"Box 276, Shurugwi",Shurugwi,Teacher,Grade 3,Blue
+Tsitsi ,Ndlovu,7/26/1970,12-032612A67,F,9/1/2022,Teacher,779025238,"Box 276, Shurugwi",Shurugwi,Teacher,Grade 4,Blue
+Yvonne ,Sandifolo,4/17/1992,29-27299225E12,F,9/1/2022,SP CLASS,773639529,"Box 276, Shurugwi",Shurugwi,Teacher,None,Blue

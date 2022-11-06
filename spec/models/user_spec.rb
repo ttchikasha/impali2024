@@ -12,11 +12,17 @@
 #  first_name             :string           default(""), not null
 #  gender                 :string
 #  grade                  :integer
+#  health                 :string
 #  id_no                  :string           default(""), not null
+#  languages_spoken       :string
 #  last_name              :string           default(""), not null
+#  parent_occupation      :string
 #  phone                  :string
 #  phone2                 :string
+#  physical               :string
+#  position               :string
 #  previous_owing         :decimal(8, 2)    default(0.0)
+#  religion               :string
 #  remember_created_at    :datetime
 #  reset_password_sent_at :datetime
 #  reset_password_token   :string

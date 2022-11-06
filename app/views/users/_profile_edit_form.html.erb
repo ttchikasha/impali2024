@@ -1,15 +1,17 @@
 <% if @user == current_user || current_user.admin? || current_user == user.teacher %>
-  <%= bootstrap_form_for user, url: @user == current_user ? registration_path(:user) : user_path(user) , html: {data: {controller: 'user-form'}} do |f| %>
+  <%= bootstrap_form_for user, url: @user == current_user ? registration_path(:user) : user_path(user), html: { data: { controller: 'user-form' } } do |f| %>
     <%= render 'shared/form_alert', resource: user %>
     <div class="row mb-3">
       <label for="profileImage" class="col-md-4 col-lg-3 col-form-label">Profile Image</label>
       <div data-controller='avatar-upload' class="col-md-8 col-lg-9">
-        <%= image_tag user.avatar_path, {data: {'avatar-upload-target' => 'avatar'}} %>
-        <%= image_tag user.avatar_path, class: 'd-none', data: {'avatar-upload-target' => 'originalAvatar'} %>
-        <%= f.file_field :avatar, label_class: 'd-none', hide_label: true, control_class: "d-none", data: { 'avatar-upload-target' => 'input'}, 'accept'=>'image/*' %>
+        <%= image_tag user.avatar_path, { data: { 'avatar-upload-target' => 'avatar' } } %>
+        <%= image_tag user.avatar_path, class: 'd-none', data: { 'avatar-upload-target' => 'originalAvatar' } %>
+        <%= f.file_field :avatar, label_class: 'd-none', hide_label: true, control_class: "d-none", data: { 'avatar-upload-target' => 'input' }, 'accept' => 'image/*' %>
         <div class="pt-2">
-          <button type='button' data-action="click->avatar-upload#pick" class="btn btn-primary btn-sm" title="Upload new profile image"><i class="bi bi-upload"></i></button>
-          <button type='button' data-action="click->avatar-upload#reset" class="btn btn-danger btn-sm" title="Remove profile image"><i class="bi bi-trash"></i></button>
+          <button type='button' data-action="click->avatar-upload#pick" class="btn btn-primary btn-sm" title="Upload new profile image">
+            <i class="bi bi-upload"></i></button>
+          <button type='button' data-action="click->avatar-upload#reset" class="btn btn-danger btn-sm" title="Remove profile image">
+            <i class="bi bi-trash"></i></button>
         </div>
       </div>
     </div>
@@ -33,6 +35,22 @@
         <div class="col-md-6"><%= f.date_field :start_date, required: true %></div>
       <% end %>
       <div class="col"><%= f.date_field :date_of_birth, required: true %></div>
+    </div>
+    <div class="row">
+      <div class="col"><%= f.text_field :religion %></div>
+      <% if @user.student? %>
+        <div class="col"><%= f.select :health, User::HEALTH_TYPES, required: true %></div>
+        <div class="col"><%= f.select :physical, User::PHYSICAL_TYPES, required: true %></div>
+      <% end %>
+    </div>
+    <div class="row">
+      <div class="col"><%= f.text_field :phone2 %></div>
+      <% if @user.student? %>
+        <div class="col"><%= f.text_field :parent_occupation %></div>
+        <div class="col"><%= f.text_field :languages_spoken %></div>
+      <% else %>
+        <div class="col"><%= f.text_field :position %></div>
+      <% end %>
     </div>
     <% if current_user.admin? %>
       <div class="row">

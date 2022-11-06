@@ -41,49 +41,57 @@
             </h5>
             <table class="table table-borderless">
               <thead>
-                <tr>
-                  <th scope="col">#</th>
-                  <th scope="col">Name</th>
-                  <th scope="col">Email</th>
-                  <th scope="col">Role</th>
-                  <th scope="col">Gender</th>
-                  <th scope="col">Start Date</th>
-                </tr>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">
+                  Class
+                </th>
+                <th scope="col">Role</th>
+                <th scope="col">Gender</th>
+                <th scope="col">Start Date</th>
+              </tr>
               </thead>
               <tbody>
-                <% cache @users do  %>
-                  <% @users.each do |user| %>
-                    <% cache user do %>
-                      <tr>
-                        <th scope='row'>
-                          <a href="#">
-                            <% if user.avatar.attached? %>
-                              <img src="<%= user.avatar_path %>" alt="">
-                            <% else %>
-                              <%= image_tag 'user.png' %>
-                            <% end %>
-                          </a>
-                        </th>
-                        <td>
-                          <%= link_to user.full_name, user, class: 'text-primary fw-bold' %>
-                        </td>
-                        <td><%= user.email %></td>
-                        <td><%= user.role %></td>
-                        <td>
-                          <%= link_to user.gender, users_path(gender: user.gender, role: params[:role]), class: "badge rounded-pill text-decoration-none #{user.gender == User::MALE ? 'bg-info': 'bg-warning'}" %>
-                        </td>
-                        <td class="fw-bold"><%= user.start_date %></td>
-                      </tr>
-                    <% end %>
+              <% cache @users do %>
+                <% @users.each do |user| %>
+                  <% cache user do %>
+                    <tr>
+                      <th scope='row'>
+                        <a href="#">
+                          <% if user.avatar.attached? %>
+                            <img src="<%= user.avatar_path %>" alt="">
+                          <% else %>
+                            <%= image_tag 'user.png' %>
+                          <% end %>
+                        </a>
+                      </th>
+                      <td>
+                        <%= link_to user.full_name, user, class: 'text-primary fw-bold' %>
+                      </td>
+                      <td>
+                        <% if user.student? %>
+                          <%= user.classroom.name %>
+                        <% else %>
+                          <%= user.position || user.role %>
+                        <% end %>
+                      </td>
+                      <td><%= user.role %></td>
+                      <td>
+                        <%= link_to user.gender, users_path(gender: user.gender, role: params[:role]), class: "badge rounded-pill text-decoration-none #{user.gender == User::MALE ? 'bg-info' : 'bg-warning'}" %>
+                      </td>
+                      <td class="fw-bold"><%= user.start_date %></td>
+                    </tr>
                   <% end %>
+                <% end %>
                 </tbody>
               <% end %>
-            </table>
+              </table>
             <%= will_paginate @users %>
           </div>
         </div>
       </div>
     </div>
   </div>
-</div>
+  </div>
 </section>

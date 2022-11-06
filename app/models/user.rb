@@ -12,11 +12,17 @@
 #  first_name             :string           default(""), not null
 #  gender                 :string
 #  grade                  :integer
+#  health                 :string
 #  id_no                  :string           default(""), not null
+#  languages_spoken       :string
 #  last_name              :string           default(""), not null
+#  parent_occupation      :string
 #  phone                  :string
 #  phone2                 :string
+#  physical               :string
+#  position               :string
 #  previous_owing         :decimal(8, 2)    default(0.0)
+#  religion               :string
 #  remember_created_at    :datetime
 #  reset_password_sent_at :datetime
 #  reset_password_token   :string
@@ -43,8 +49,17 @@ class User < ApplicationRecord
                            }
 
   before_validation :set_temp_password, :set_login_id, :generate_email
-  before_save :ensure_proper_name_case, :downcase_email
+  before_save :downcase_email
   before_save :normalize_phone
+
+  before_validation do
+    self.position = position.titleize unless position.nil?
+    self.first_name = first_name.strip.titleize unless first_name.nil?
+    self.last_name = last_name.strip.titleize unless last_name.nil?
+    self.gender = gender.strip.capitalize unless gender.nil?
+    self.health = "fit" if health.nil?
+    self.physical = "fit" if physical.nil?
+  end
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
@@ -85,12 +100,17 @@ class User < ApplicationRecord
     FEMALE = "Female",
   ].freeze
 
+  HEALTH_TYPES  = %w(fit unfit).freeze
+  PHYSICAL_TYPES = %w(fit unfit).freeze
+
   validates :first_name, :last_name, :city, presence: true
-  validates :id_no, presence: true, length: { minimum: 6 }
+  validates :id_no, presence: true, length: { minimum: 4 }
   validates :address, presence: true, on: :update
   validates :role, inclusion: { in: roles.keys }
   validates :grade, inclusion: { in: grades.keys }
   validates :room, inclusion: { in: Rooms::TYPES }
+  validates :health, inclusion: { in: HEALTH_TYPES }
+  validates :physical, inclusion: { in: PHYSICAL_TYPES }
   validates :gender, inclusion: { in: GENDER_TYPES }
   validates :login_id, :id_no, uniqueness: true
   validates :phone, :phone2, phone: true, allow_blank: true
@@ -347,11 +367,6 @@ class User < ApplicationRecord
 
   def downcase_email
     self.email&.downcase!
-  end
-
-  def ensure_proper_name_case
-    self.first_name&.capitalize!
-    self.last_name&.capitalize!
   end
 
   def rand_letter

@@ -4,7 +4,7 @@
 #
 #  id                   :bigint           not null, primary key
 #  actual_mark          :integer
-#  for                  :integer          default(0)
+#  for                  :integer          default("Test")
 #  name                 :string           not null
 #  term                 :integer
 #  total_marks          :integer
