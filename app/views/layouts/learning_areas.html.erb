@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Impali School - Learning Areas</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
+  <%= javascript_pack_tag "application", 'data-turbolinks-track': "reload" %>
+  <%= stylesheet_pack_tag "application", media: "all", 'data-turbolinks-track': "reload" %>
+  <%= stylesheet_link_tag "home", media: "all", 'data-turbolinks-track': "reload" %>
+</head>
+<body>
+<%= render 'home/header' %>
+<div class="pt-3">
+  <%= yield %>
+</div>
+<%= javascript_include_tag 'purecounter' %>
+<%= javascript_include_tag 'aos' %>
+<%= javascript_include_tag 'bootstrap.bundle.min' %>
+<%= javascript_include_tag 'glightbox.min' %>
+<%= javascript_include_tag 'isotope.pkgd.min' %>
+<%= javascript_include_tag 'swiper-bundle.min' %>
+<%= javascript_include_tag 'main' %>
+</body>
+</html>

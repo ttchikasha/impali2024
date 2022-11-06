@@ -2,6 +2,7 @@
 #
 
 Rails.application.routes.draw do
+  get 'learning_areas/index'
   post "pardon_students/pardon", format: :json
   if Rails.env.development?
     mount LetterOpenerWeb::Engine, at: "/letter_opener"
@@ -72,6 +73,7 @@ Rails.application.routes.draw do
   root "home#index"
 
   get "/staff", to: "home#staff"
+  get "/learning-areas", to: "learning_areas#index"
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

@@ -1,4 +1,8 @@
 module StaffMembers
+  def self.home
+    admins = all.select {|x| x[:category] == "admin"}
+    admins.slice(0,4)
+  end
   def self.all
     [
       {
@@ -26,6 +30,18 @@ module StaffMembers
         category: "junior-teachers",
       },
       {
+        name: "Muchengeti I",
+        position: "Head",
+        image: "mr-muchengeti.jpeg",
+        category: "admin",
+      },
+      {
+        name: "Marevesa W",
+        position: "Deputy Head",
+        image: "mr-marevesa.jpeg",
+        category: "admin",
+      },
+      {
         name: "Gadzikwa D",
         position: "TIC",
         image: "mrs-gadzikwa.jpg",
@@ -36,12 +52,6 @@ module StaffMembers
         position: "6 Blue",
         image: "mr-chibaya.jpg",
         category: "junior-teachers",
-      },
-      {
-        name: "Muchengeti I",
-        position: "Head",
-        image: "mr-muchengeti.jpeg",
-        category: "admin",
       },
       {
         name: "Chinheva E",
@@ -78,13 +88,6 @@ module StaffMembers
         position: "2 Blue",
         image: "mrs-mafuya.jpg",
         category: "junior-teachers",
-
-      },
-      {
-        name: "Marevesa W",
-        position: "Deputy Head",
-        image: "mr-marevesa.jpeg",
-        category: "admin",
 
       },
       {

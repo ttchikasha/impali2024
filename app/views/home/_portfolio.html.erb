@@ -6,29 +6,31 @@
     <div class="row" data-aos="fade-up" data-aos-delay="150">
       <div class="col-lg-12 d-flex justify-content-center">
         <ul id="portfolio-flters">
-<!--          <li data-filter="*" class="filter-active">All</li>-->
-          <li data-filter=".filter-infrastructure">Infrastructure</li>
-          <li data-filter=".filter-events" class="filter-active">Events</li>
-          <li data-filter=".filter-sports">Sports</li>
+          <li data-filter="*" class="filter-active">All</li>
+<!--          <li data-filter=".filter-infrastructure">Infrastructure</li>-->
+<!--          <li data-filter=".filter-events">Events</li>-->
           <li data-filter=".filter-agriculture">Agriculture</li>
+          <li data-filter=".filter-sports">Sports</li>
+          <li data-filter=".filter-activities">Activities</li>
+          <li data-filter=".filter-tours">Educational Tours</li>
         </ul>
       </div>
     </div>
     <div class="row portfolio-container" data-aos="fade-up" data-aos-delay="300">
       <%= render(GalleryItemComponent.new(title: "East Wing", image: "infrastructure/school-view.jpg", category: "infrastructure")) %>
-      <%= render(GalleryItemComponent.new(title: "Event 1", image: "events/event1.jpg", category: "events")) %>
+      <%= render(GalleryItemComponent.new(title: "Event 1", image: "events/event1.jpg", category: "activities")) %>
       <%= render(GalleryItemComponent.new(title: "Training and Practise", image: "sports/9.jpg", category: "sports")) %>
       <%= render(GalleryItemComponent.new(title: "Traditional Dance", image: "sports/10.jpg", category: "sports")) %>
-      <%= render(GalleryItemComponent.new(title: "Official Opening", image: "events/official-opening.jpg", category: "events")) %>
+      <%= render(GalleryItemComponent.new(title: "Official Opening", image: "events/official-opening.jpg", category: "activities")) %>
       <%= render(GalleryItemComponent.new(title: "Sports 11", image: "sports/11.jpg", category: "sports")) %>
       <%= render(GalleryItemComponent.new(title: "Soccer Team", image: "sports/12.jpg", category: "sports")) %>
       <%= render(GalleryItemComponent.new(title: "Sports 13", image: "sports/13.jpg", category: "sports")) %>
-      <%= render(GalleryItemComponent.new(title: "Event 3", image: "events/event3.jpg", category: "events")) %>
+      <%= render(GalleryItemComponent.new(title: "Event 3", image: "events/event3.jpg", category: "activities")) %>
       <%= render(GalleryItemComponent.new(title: "Sports 14", image: "sports/14.jpg", category: "sports")) %>
       <%= render(GalleryItemComponent.new(title: "Sports 15", image: "sports/15.jpg", category: "sports")) %>
       <%= render(GalleryItemComponent.new(title: "Sports 1", image: "sports/1.jpg", category: "sports")) %>
       <%= render(GalleryItemComponent.new(title: "Sports 2", image: "sports/2.jpg", category: "sports")) %>
-      <%= render(GalleryItemComponent.new(title: "Event 2", image: "events/event2.jpg", category: "events")) %>
+      <%= render(GalleryItemComponent.new(title: "Event 2", image: "events/event2.jpg", category: "activities")) %>
       <%= render(GalleryItemComponent.new(title: "Sports 17", image: "sports/17.jpg", category: "sports")) %>
       <%= render(GalleryItemComponent.new(title: "Girls Soccer Team", image: "sports/18.jpg", category: "sports")) %>
       <%= render(GalleryItemComponent.new(title: "Netball Team", image: "sports/19.jpg", category: "sports")) %>
@@ -36,7 +38,7 @@
       <%= render(GalleryItemComponent.new(title: "School Building", image: "infrastructure/school-view2.jpg", category: "infrastructure")) %>
       <%= render(GalleryItemComponent.new(title: "Sports 22", image: "sports/22.jpg", category: "sports")) %>
       <%= render(GalleryItemComponent.new(title: "Sports 23", image: "sports/23.jpg", category: "sports")) %>
-      <%= render(GalleryItemComponent.new(title: "Prize Giving Day", image: "events/event5.jpg", category: "events")) %>
+      <%= render(GalleryItemComponent.new(title: "Prize Giving Day", image: "events/event5.jpg", category: "activities")) %>
       <%= render(GalleryItemComponent.new(title: "Netball Match", image: "sports/3.jpg", category: "sports")) %>
       <%= render(GalleryItemComponent.new(title: "Sports 5", image: "sports/5.jpg", category: "sports")) %>
       <%= render(GalleryItemComponent.new(title: "Hockey Team", image: "sports/6.jpg", category: "sports")) %>

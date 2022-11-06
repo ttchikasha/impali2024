@@ -19,6 +19,10 @@ module HomeHelper
     render(StaffMemberComponent.new(name: name, position: position, image: image))
   end
 
+  def render_learning_area(name, icon)
+    render(LearningAreaComponent.new(name: name, bx_icon: icon))
+  end
+
   private
 
   def on_home?
