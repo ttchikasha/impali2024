@@ -21,7 +21,7 @@ module DisplaySubjects
       icon: 'bx-slideshow',
     },
     {
-      name: 'Religious Studies',
+      name: 'Family Religion and Moral Education',
       icon: 'bx-file',
     },
     {
