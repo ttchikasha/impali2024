@@ -73,7 +73,6 @@ class AssignmentAnswer < ApplicationRecord
   private
 
   def calculate_score
-    debugger
     marks = []
     other_questions.each do |q|
       qa = user.question_answers.where(question_id: q.id).first
