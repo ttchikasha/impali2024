@@ -92,6 +92,7 @@ class AssignmentsController < ApplicationController
   def assignment_params
     params.require(:assignment).permit(:classroom_subject_id, :due,
                                        :start,
+                                       :name,
                                        :document,
                                        questions_attributes: [:id, :text])
   end
@@ -99,6 +100,7 @@ class AssignmentsController < ApplicationController
   def document_assignment_params
     params.require(:assignment).permit(:classroom_subject_id, :due,
                                        :start,
+                                       :name,
                                        :document)
   end
 

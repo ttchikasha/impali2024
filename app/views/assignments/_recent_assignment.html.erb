@@ -15,7 +15,7 @@
           </div>
           <h3>
             <%= link_to assignment do %>
-              <%= assignment.classroom_subject.name %> Assignment <%= assignment.number %>
+              <%= assignment.name %>
             <% end %>
           </h3>
           <p>Due <%= assignment.due.to_s(:long) %></p>

@@ -33,7 +33,7 @@
       </div>
     </div>
   </div>
-  <h2 class='mt-4 mt-md-1'>Assignment <%= @assignment.number %></h2>
+  <h2 class='mt-4 mt-md-1'><%= @assignment.name %></h2>
 </div>
 <% cache @assignment do  %>
   <%= bootstrap_form_with model: @assignment, url: assignment_assignment_answers_path(@assignment), html: {method: :post} do |form| %>

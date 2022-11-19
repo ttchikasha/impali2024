@@ -1,5 +1,6 @@
 <%= bootstrap_form_with(model: [assignment.classroom_subject, assignment], data: {'controller'=>'assignment-form'}) do |form| %>
   <%= render 'shared/form_alert', resource: assignment %>
+  <%= form.text_field :name, required: true %>
   <div class="row">
     <div class="col-md-6">
       <%= form.datetime_field :start, floating: true, required: true %>

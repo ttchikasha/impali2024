@@ -4,6 +4,7 @@
 #
 #  id                   :bigint           not null, primary key
 #  due                  :datetime
+#  name                 :string
 #  start                :datetime
 #  created_at           :datetime         not null
 #  updated_at           :datetime         not null

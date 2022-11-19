@@ -4,6 +4,7 @@
 #
 #  id                   :bigint           not null, primary key
 #  due                  :datetime
+#  name                 :string
 #  start                :datetime
 #  created_at           :datetime         not null
 #  updated_at           :datetime         not null
@@ -48,9 +49,9 @@ class Assignment < ApplicationRecord
     classroom_subject.assignments.index(self) + 1
   end
 
-  def name
-    "#{classroom_subject.classroom.name}-#{classroom_subject.name}-Assignment-#{number}"
-  end
+  # def name
+  #   "#{classroom_subject.classroom.name}-#{classroom_subject.name}-Assignment-#{number}"
+  # end
 
   def late?
     due < (Time.zone.now + 2.hours)
