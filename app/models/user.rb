@@ -100,7 +100,7 @@ class User < ApplicationRecord
     FEMALE = "Female",
   ].freeze
 
-  HEALTH_TYPES  = %w(fit unfit).freeze
+  HEALTH_TYPES = %w(fit unfit).freeze
   PHYSICAL_TYPES = %w(fit unfit).freeze
 
   validates :first_name, :last_name, :city, presence: true
@@ -294,6 +294,30 @@ class User < ApplicationRecord
         paid, owing, not_paid = 0, 0, User.students.count
       end
       { "Fully Paid" => paid, "Paid Partially" => owing, "Not Paid" => not_paid }
+    end
+
+    def next_grade_for_student(student)
+      return "None" if student.grade == "Grade 7"
+      index = Grades::GRADES_HASH.keys.index student.grade
+      return Grades::GRADES_HASH.keys[index + 1]
+    end
+
+    def prev_grade_for_student(student)
+      return "None" if student.grade == "ECD A"
+      index = Grades::GRADES_HASH.keys.index student.grade
+      return Grades::GRADES_HASH.keys[index - 1]
+    end
+
+    def query_students_grades
+      students_grade = User.students
+        .select("grade", "COUNT(*) as total")
+        .group("grade").to_a
+      json = JSON.parse students_grade.to_json
+      result = json.map do |i|
+        i.delete("id")
+        i
+      end
+      result
     end
   end
 
