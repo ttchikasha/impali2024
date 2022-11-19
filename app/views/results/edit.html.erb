@@ -1,0 +1,13 @@
+<div class="section-title mt-3">
+  <div class="d-flex align-items-center justify-content-between">
+    <p><%= @user.full_name %></p>
+    <p><%= @user.classroom.name %></p>
+  </div>
+  <h2>Edit Result - <%= @result.display_name %></h2>
+</div>
+<div class="card">
+  <div class="card-body">
+    <h3 class="card-title">Fill the form below to edit new result</h3>
+    <%= render 'form', result: @result %>
+  </div>
+</div>

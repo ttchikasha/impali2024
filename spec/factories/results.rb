@@ -5,6 +5,7 @@
 #  id                   :bigint           not null, primary key
 #  actual_mark          :integer
 #  for                  :integer          default("Test")
+#  grade                :integer
 #  name                 :string           not null
 #  term                 :integer
 #  total_marks          :integer

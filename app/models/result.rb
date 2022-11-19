@@ -5,6 +5,7 @@
 #  id                   :bigint           not null, primary key
 #  actual_mark          :integer
 #  for                  :integer          default("Test")
+#  grade                :integer
 #  name                 :string           not null
 #  term                 :integer
 #  total_marks          :integer
@@ -25,9 +26,14 @@
 #
 class Result < ApplicationRecord
   validates_presence_of :name
+  validates_uniqueness_of :name, scope: [:student, :classroom_subject,
+                                         :year, :term, :for],
+                                 message: "This result already exists"
 
   belongs_to :classroom_subject
   belongs_to :student, class_name: "User"
+
+  before_validation { self.grade = student.grade }
 
   validates :year,
             presence: true,
@@ -43,8 +49,14 @@ class Result < ApplicationRecord
     "Term 3": 3,
   }
 
+  enum grade: Grades::GRADES_HASH
+
   enum for: {
     "Test": 0,
     "Exam": 1,
   }
+
+  def display_name
+    "#{classroom_subject.name} #{name} #{self.for}"
+  end
 end

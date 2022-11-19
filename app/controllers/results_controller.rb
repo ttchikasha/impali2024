@@ -1,6 +1,7 @@
 class ResultsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_user
+  before_action :set_result, only: %i[edit update destroy]
   before_action :ensure_authorized
 
   def index
@@ -14,7 +15,11 @@ class ResultsController < ApplicationController
   end
 
   def new
-    @result = @user.results.build
+    @result = @user.results.build(year: Date.today.year,
+                                  term: SchoolTerm.get)
+  end
+
+  def edit
   end
 
   def create
@@ -26,6 +31,25 @@ class ResultsController < ApplicationController
       else
         format.html { render :new, status: :unprocessable_entity }
       end
+    end
+  end
+
+  def update
+    respond_to do |format|
+      if @result.update result_params
+        format.html { redirect_to user_results_url(@user), notice: "Result was successfully updated." }
+      else
+        format.html { render :edit, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  def destroy
+    @result.destroy
+
+    respond_to do |format|
+      format.html { redirect_to user_results_url(@user), notice: "Result was successfully deleted." }
+      format.json { head :no_content }
     end
   end
 
@@ -46,5 +70,9 @@ class ResultsController < ApplicationController
 
   def set_user
     @user = User.find params[:user_id]
+  end
+
+  def set_result
+    @result = @user.results.find params[:id]
   end
 end

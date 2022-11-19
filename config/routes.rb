@@ -2,7 +2,7 @@
 #
 
 Rails.application.routes.draw do
-  get 'learning_areas/index'
+  get "learning_areas/index"
   post "pardon_students/pardon", format: :json
   if Rails.env.development?
     mount LetterOpenerWeb::Engine, at: "/letter_opener"
@@ -54,7 +54,7 @@ Rails.application.routes.draw do
     resources :payments, except: [:edit]
     resources :notifications, path: "notices"
     resources :users do
-      resources :results, only: %i[index new create]
+      resources :results
       resources :student_parents
       resources :student_payments, only: %i[new create] do
         collection { patch :update_owing }

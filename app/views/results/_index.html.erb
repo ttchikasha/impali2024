@@ -4,10 +4,14 @@
       <thead>
         <th>Subject</th>
         <th>Name</th>
+        <th>Grade</th>
         <th>Year</th>
         <th>Term</th>
         <th class='text-center'>Actual Mark</th>
         <th class='text-center'>Total Marks</th>
+        <% if current_user.teacher? %>
+          <th>Actions</th>
+        <% end %>
       </thead>
       <tbody>
         <% cache results do %>
@@ -16,10 +20,17 @@
               <tr>
                 <td><%= result.classroom_subject.subject.name %></td>
                 <td><%= result.name %></td>
+                <td><%= result.grade %></td>
                 <td><%= result.year %></td>
                 <td><%= result.term %></td>
                 <td class='text-center'><%= result.actual_mark %></td>
                 <td class='text-center'><%= result.total_marks %></td>
+                <% if current_user.teacher? %>
+                  <td>
+                    <%= link_to 'Edit', edit_user_result_path(result.student, result), class: 'btn btn-info btn-sm' %>
+                    <%= link_to 'Delete', user_result_path(result.student, result), method: :delete, class: 'btn btn-danger btn-sm', data: {confirm: 'Are you sure?'} %>
+                  </td>
+                <% end %>
               </tr>
             <% end %>
           <% end %>
