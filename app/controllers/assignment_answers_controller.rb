@@ -54,7 +54,11 @@ class AssignmentAnswersController < ApplicationController
       if @answer.save
         redirect_to assignment_assignment_answer_path(@assignment, @answer.reload)
       else
-        render "assignment_answers/show"
+        if @answer.errors[:document].any?
+          redirect_to @assignment, alert: @answer.errors.full_messages_for(:document).first
+        else
+          render :show, status: :unprocessable_entity
+        end
       end
     else
       params[:assignment][:questions_attributes].keys.each do |key|

@@ -72,10 +72,12 @@
       <% unless current_user.parent? %>
         <br>
         <br>
-        <% unless current_user.student? && @assignment.due? %>
-          <%= bootstrap_form_with(model: [@assignment, current_user.assignment_answers.build(assignment: @assignment)]) do |form| %>
-            <%= form.file_field :document, label: 'Upload Your Answer', accept: 'application/pdf' %>
-            <%= form.primary 'Upload Answer' %>
+        <% unless @assignment.late? %>
+          <%= bootstrap_form_with(model: [@assignment, current_user.assignment_answers.build(assignment: @assignment)], data: {'controller'=>'upload-answer-form'}) do |form| %>
+            <div data-upload-answer-form-target="fileInputWrapper">
+              <%= form.file_field :document, label: 'Upload Your Answer', accept: 'application/pdf' %>
+            </div>
+            <%= form.primary 'Upload Answer', disabled: true, data: {'upload-answer-form-target' => 'button'} %>
           <% end %>
         <% end %>
       <% end %>

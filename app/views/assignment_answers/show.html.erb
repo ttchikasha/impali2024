@@ -125,13 +125,13 @@
   <% if @assignment.document.attached? %>
     <div class="d-flex">
       <div class="flex-fill">
-        <%= react_component("Pdf", { url: url_for(@answer.reload.document) }) %>
-      </div>
-      <div>
         <% if current_user.teacher? && @answer.user.student? %>
           <%= react_component("QuestionMarker", { url: mark_assignment_assignment_answer_path(@answer, format: :js), 
                                                 mark: @answer.score }) %>
         <% end %>
+        <%= react_component("Pdf", { url: url_for(@answer.reload.document) }) %>
+      </div>
+      <div>
         <% unless current_user.parent? %>
           <% unless current_user.teacher? && @answer.user != current_user %>
             <% unless current_user.student? && @answer.assignment.late? %>
