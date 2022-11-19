@@ -1,27 +1,70 @@
 module DisplaySubjects
-  def self.home = [
+  def self.juniors = [
     {
-      name: 'Mathematics',
+      name: 'Maths',
       icon: 'bx-vertical-center'
+    },
+    {
+      name: 'English',
+      icon: 'bx-tachometer',
     },
     {
       name: 'Shona',
       icon: 'bx-file'
     },
     {
-      name: 'English Language',
-      icon: 'bx-tachometer',
+      name: 'Science and Technology',
+      icon: 'bx-arch',
+    },
+    {
+      name: 'PESMD',
+      icon: 'bx-tennis-ball',
     },
     {
       name: 'Agriculture',
       icon: 'bx-layer',
     },
     {
+      name: 'Family Religion and Moral Education',
+      icon: 'bx-file',
+    },
+    {
       name: 'Heritage Studies',
       icon: 'bx-slideshow',
     },
     {
-      name: 'Family Religion and Moral Education',
+      name: 'Visual Performing Arts',
+      icon: 'bx-arch',
+    },
+    {
+      name: 'ICT',
+      icon: 'bx-tennis-ball',
+    },
+    {
+      name: 'Guidance and Counselling',
+      icon: 'bx-slideshow',
+    }
+  ]
+
+  def self.infants = [
+    {
+      name: 'Maths',
+      icon: 'bx-vertical-center'
+    },
+    {
+      name: 'Science',
+      icon: 'bx-tachometer',
+    },
+    {
+      name: 'English',
+      icon: 'bx-tachometer',
+    },
+    {
+      name: 'Shona',
+      icon: 'bx-file'
+    },
+    {
+      name: 'Family and Heritage Studies',
       icon: 'bx-file',
     },
     {
@@ -29,9 +72,17 @@ module DisplaySubjects
       icon: 'bx-tennis-ball',
     },
     {
-      name: 'Visual Arts',
-      icon: 'bx-arch',
+      name: 'Mass Displays',
+      icon: 'bx-tennis-ball',
+    },
+    {
+      name: 'VPA',
+      icon: 'bx-tennis-ball',
+    },
+    {
+      name: 'ICT',
+      icon: 'bx-tennis-ball',
     },
   ]
-  def self.all = home + []
+  def self.all = juniors
 end
