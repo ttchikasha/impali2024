@@ -1,12 +1,13 @@
+subjects = ["Maths", "English", "Shona", "Science", "Agriculture", "Physical Education", "Information Communication Technology",
+            "Family and Heritage Studies", "Visual Peforming Arts", "Family Religion and Moral Education"]
+
+subjects.each do |name|
+  Subject.create name: name
+end
+
+puts "Created #{Subject.count} Subjects"
+
 if Rails.env.development?
-  subjects = ["Maths", "English", "Shona", "Computers", "Science", "Agriculture", "Physical Education"]
-
-  subjects.each do |name|
-    Subject.create name: name
-  end
-
-  puts "Created #{Subject.count} Subjects"
-
   Grades::GRADES_HASH.values.each do |grade|
     unless grade == -2
       Rooms::TYPES.each do |room|
