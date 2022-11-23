@@ -1,6 +1,12 @@
 subjects = ["Maths", "English", "Shona", "Science", "Agriculture", "Physical Education", "Information Communication Technology",
             "Family and Heritage Studies", "Visual Peforming Arts", "Family Religion and Moral Education"]
 
+infant_subjects = ["Maths and Science", "English", "Shona", "Family and Heritage Studies", "Physical Education", "Mass Displays", "Visual Performing Arts", "Information Communication Technology"]
+
+infant_subjects.each do |sub|
+  Subject.create name: sub, target: "Infants"
+end
+
 subjects.each do |name|
   Subject.create name: name
 end

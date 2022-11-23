@@ -13,7 +13,7 @@
     <%= form.text_field :teacher_id, data: {'autocomplete-target' => 'hidden'}, hide_label: true %>
     <div class="list-group" data-autocomplete-target="results"></div>
   </div>
-  <%= form.collection_check_boxes(:subject_ids, Subject.all, :id,
+  <%= form.collection_check_boxes(:subject_ids, classroom.infant? ? Subject.infants : Subject.juniors, :id,
 :name, label: 'Subjects') do |b| %>
     <% b.label { b.check_box + b.text } %>
   <% end %>

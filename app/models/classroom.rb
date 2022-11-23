@@ -45,6 +45,10 @@ class Classroom < ApplicationRecord
     ClassroomSubject.where(grade: grade, room: room, subject_id: [subjects.ids])
   end
 
+  def infant?
+    ["ECD A", "ECD B", "Grade 1", "Grade 2"].include? grade
+  end
+
   private
 
   def sync_subject_teachers
