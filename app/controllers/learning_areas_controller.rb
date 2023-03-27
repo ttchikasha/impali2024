@@ -37,6 +37,18 @@ class LearningAreasController < ApplicationController
         name: "Athletics",
         icon: "bx-body",
       },
+      {
+        name: "Rugby",
+        icon: "bx-ball",
+      },
+      {
+        name: "Cricket",
+        icon: "bx-baseball",
+      },
+      {
+        name: "Table Tennis",
+        icon: "bx-tennis-ball",
+      },
     ]
     @extra = [
       "Quiz",
@@ -45,8 +57,11 @@ class LearningAreasController < ApplicationController
       "Drum majoretees",
       "Choreography",
       "Traditional Dance",
-      "Perccusion",
+      "Percussion",
       "Marimba",
+      "Modelling",
+      "Craftwork",
+      "Mbira",
     ]
     @junior_subjects = DisplaySubjects.juniors
     @infant_subjects = DisplaySubjects.infants

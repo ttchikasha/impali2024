@@ -48,12 +48,8 @@ module DisplaySubjects
 
   def self.infants = [
     {
-      name: 'Maths',
+      name: 'Maths & Science',
       icon: 'bx-vertical-center'
-    },
-    {
-      name: 'Science',
-      icon: 'bx-tachometer',
     },
     {
       name: 'English',
