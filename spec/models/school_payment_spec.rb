@@ -6,7 +6,7 @@
 #  levy       :decimal(8, 2)
 #  term       :integer
 #  tution     :decimal(8, 2)
-#  year       :integer          default(2022)
+#  year       :integer          default(2023)
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #

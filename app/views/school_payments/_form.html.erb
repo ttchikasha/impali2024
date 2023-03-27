@@ -8,13 +8,13 @@
       <%= form.text_field :tution, floating: true %>
     </div>
   </div>
-  <div class="row">
+  <%# <div class="row">
     <div class="col-md-6">
       <%= form.select :year, SchoolPayment.years, floating: true %>
-    </div>
-    <div class="col-md-6">
+  <%# </div> %>
+  <%# <div class="col-md-6">
       <%= form.select :term, SchoolPayment.terms.keys, floating: true %>
-    </div>
-  </div>
+  <%# </div>
+  </div> %>
   <%= form.primary 'Update' %>
 <% end %>

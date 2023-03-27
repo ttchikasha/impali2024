@@ -24,6 +24,9 @@ class SchoolPaymentsController < ApplicationController
   def create
     @school_payment = SchoolPayment.new(school_payment_params)
 
+    @school_payment.year = Date.today.year
+    @school_payment.term = SchoolTerm.get
+
     respond_to do |format|
       if @school_payment.save
         format.html { redirect_to school_payment_url(@school_payment), notice: "School payment was successfully created." }
@@ -37,6 +40,8 @@ class SchoolPaymentsController < ApplicationController
 
   # PATCH/PUT /school_payments/1 or /school_payments/1.json
   def update
+    @school_payment.year = Date.today.year
+    @school_payment.term = SchoolTerm.get
     respond_to do |format|
       if @school_payment.update(school_payment_params)
         format.html { redirect_to payments_path, notice: "School payment was successfully updated." }
@@ -67,7 +72,8 @@ class SchoolPaymentsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def school_payment_params
-    params.require(:school_payment).permit(:levy, :tution, :year, :term)
+    # params.require(:school_payment).permit(:levy, :tution, :year, :term)
+    params.require(:school_payment).permit(:levy, :tution)
   end
 
   def verify_admin

@@ -258,7 +258,7 @@ ActiveRecord::Schema.define(version: 2022_11_23_103049) do
   create_table "school_payments", force: :cascade do |t|
     t.decimal "levy", precision: 8, scale: 2
     t.decimal "tution", precision: 8, scale: 2
-    t.integer "year", default: 2022
+    t.integer "year", default: 2023
     t.integer "term"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

@@ -6,7 +6,7 @@
       <%= link_to 'Update Payments', edit_school_payment_path(SchoolPayment.first), class: 'btn btn-outline-primary' %>
     <% end %>
   </div>
-  <h2><%= Date.today.year %> Payments & Fees</h2>
+  <h2><%= Date.today.year %> - <%= SchoolTerm.get %> Payments & Fees</h2>
 </div>
 </div>
 <section id="pricing" class="pricing">
