@@ -1,5 +1,8 @@
 <div class="col-md-12">
   <div class="top-selling">
+    <% if  @user.class_position && results == @exam_results %>
+      <p>Class Position = <%= @user.class_position %> / <%= @user.classroom.students.count %> </p>
+    <% end %>
     <table class="table table-borderless">
       <thead>
         <th>Subject</th>
@@ -13,8 +16,8 @@
           <th>Actions</th>
         <% end %>
       </thead>
-      <tbody>
-        <% cache results do %>
+      <% cache results do %>
+        <tbody>
           <% results.each do |result| %>
             <% cache [result] do %>
               <tr>
@@ -34,8 +37,17 @@
               </tr>
             <% end %>
           <% end %>
-        <% end %>
-      </tbody>
+        </tbody>
+        <tfoot>
+          <tr>
+            <td>TOTAL</td>
+            <td colspan='4'></td>
+            <% actual, total = @user.total_marks_for(results == @test_results ? 'Test' : 'Exam')  %>
+            <td class='text-center'><%= actual %></td>
+            <td class='text-center'><%= total %></td>
+          </tr>
+        </tfoot>
+      <% end %>
     </table>
   </div>
 </div>

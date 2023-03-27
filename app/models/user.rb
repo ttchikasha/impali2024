@@ -370,6 +370,18 @@ class User < ApplicationRecord
     true
   end
 
+  def total_marks_for(type, year = Date.today.year, term = SchoolTerm.get)
+    actual = results.where(year: year, term: term, for: type).sum(&:actual_mark)
+    total = results.where(year: year, term: term, for: type).sum(&:total_marks)
+    [actual, total]
+  end
+
+  def class_position(year = Date.today.year, term = SchoolTerm.get)
+    pos_index = classroom.sorted_marks(year, term).find_index { |x| x.last == id }
+    return nil if results.where(term: term, year: year).empty?
+    pos_index.nil? ? nil : pos_index + 1
+  end
+
   private
 
   def normalize_phone

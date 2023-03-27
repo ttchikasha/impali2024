@@ -1,6 +1,9 @@
-<div class="section-title">
-  <p>Students</p>
-  <h2><%= current_user&.classroom&.name %></h2>
+<div class="section-title d-flex align-items-start justify-content-between">
+  <div>
+    <p>Students</p>
+    <h2><%= current_user&.classroom&.name %></h2>
+  </div>
+  <%= link_to 'View Results', results_students_path, class: 'btn btn-primary' %>
 </div>
 <section class="section dashboard">
   <div class="row">

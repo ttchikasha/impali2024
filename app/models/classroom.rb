@@ -49,6 +49,17 @@ class Classroom < ApplicationRecord
     ["ECD A", "ECD B", "Grade 1", "Grade 2"].include? grade
   end
 
+  def sorted_marks(year = Date.today.year, term = SchoolTerm.get)
+    results_hash = Hash.new
+    students.each do |s|
+      total_actual_mark = s.total_marks_for("Exam", year, term).first
+      results_hash[s.id] = total_actual_mark
+    end
+    r = results_hash.sort
+    r.sort_by! { |x| x.last }
+    r.reverse.map { |x| [x.last, x.first] }
+  end
+
   private
 
   def sync_subject_teachers

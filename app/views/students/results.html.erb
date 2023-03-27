@@ -1,0 +1,48 @@
+<div class="section-title">
+  <p>Students Results</p>
+  <h2><%= current_user&.classroom&.name %></h2>
+</div>
+<section class="section dashboard">
+  <div class="row">
+    <div class="col-12">
+      <div class="col-12">
+        <div class="card top-selling overflow-auto">
+          <div class="card-body pb-0">
+            <h5 class="card-title">
+              <%= pluralize @students.count, 'Student' %>
+            </h5>
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">Name</th>
+                  <th class='text-center' scope="col">Class Position</th>
+                  <th scope="col">Gender</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% cache @students do  %>
+                  <% @students.each do |user| %>
+                    <% cache user do %>
+                      <tr class='borderd-bottom'>
+                        <td>
+                          <%= link_to user.full_name, user, class: 'text-primary fw-bold' %>
+                        </td>
+                        <td class='text-center'>
+                          <%= user.class_position || 'Not Available' %>
+                        </td>
+                        <td>
+                          <%= link_to user.gender, students_path(gender: user.gender, payment_status: params[:payment_status]), class: "badge rounded-pill text-decoration-none #{user.gender == User::MALE ? 'bg-info': 'bg-warning'}" %>
+                        </td>
+                      </tr>
+                    <% end %>
+                  <% end %>
+                </tbody>
+              <% end %>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</section>

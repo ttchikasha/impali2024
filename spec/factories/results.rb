@@ -26,11 +26,12 @@
 #
 FactoryBot.define do
   factory :result do
-    term { 1 }
-    year { 1 }
-    actual_mark { 1 }
-    total_marks { 1 }
-    student_id { "" }
-    classroom_subject { nil }
+    name { ["Paper 1", "Paper 2"].sample }
+    term { SchoolTerm.get }
+    year { Date.today.year }
+    actual_mark { rand(30..50) }
+    total_marks { 50 }
+    student { User.students.sample }
+    classroom_subject { student.classroom_subjects.sample }
   end
 end

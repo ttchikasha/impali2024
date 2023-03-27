@@ -22,6 +22,10 @@ class StudentsController < ApplicationController
     end
   end
 
+  def results
+    @students = current_user.classroom&.students.sort_by { |x| x.class_position || x.id }
+  end
+
   private
 
   def verify_teacher

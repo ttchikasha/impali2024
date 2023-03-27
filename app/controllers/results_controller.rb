@@ -10,8 +10,8 @@ class ResultsController < ApplicationController
     end
     @reports = Report.all
     @answers = @user.assignment_answers.all.order(created_at: :desc).paginate(page: params[:page])
-    @exam_results = Result.where(student_id: @user.id, for: "Exam")
-    @test_results = Result.where(student_id: @user.id, for: "Test")
+    @exam_results = Result.where(student_id: @user.id, for: "Exam").order(:classroom_subject_id)
+    @test_results = Result.where(student_id: @user.id, for: "Test").order(:classroom_subject_id)
   end
 
   def new
