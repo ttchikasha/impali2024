@@ -30,11 +30,14 @@
     <p style="position:absolute;top:359px;left:248px;white-space:nowrap" class="ft10"><b>Grade:&#160;</b></p>
     <p style="position:absolute;top:355px;left:309px;white-space:nowrap" class="ft17"><%= @user.classroom.grade.split(' ').last + ' ' + @user.classroom.room %></p>
     <%# Averages %>
+    <% random_user_result = @user.results.where(year: Date.today.year, term: SchoolTerm.get, for: 'Exam').sample  %>
     <p style="position:absolute;top:359px;left:356px;white-space:nowrap" class="ft10"><b>&#160;</b></p>
     <p style="position:absolute;top:359px;left:410px;white-space:nowrap" class="ft10">
       <b>Class Average: &#160; &#160; &#160; &#160;  &#160; &#160; &#160;  &#160;<span class='ms-5'>Learner's Average</span>: &#160;</b>
     </p>
-    <p style="position:absolute;top:355px;left:552px;white-space:nowrap" class="ft17">56%</p>
+    <p style="position:absolute;top:355px;left:552px;white-space:nowrap" class="ft17">
+      <%= number_to_percentage (100 * random_user_result.total_class_average.to_f / @user.total_marks_for('Exam').last ), precision: 0 %>
+    </p>
     <p style="position:absolute;top:355px;left:777px;white-space:nowrap" class="ft17"><%= number_to_percentage @user.average_exam_mark, precision: 0 %></p>
     <%# Term %>
     <p style="position:absolute;top:319px;left:560px;white-space:nowrap" class="ft10"><b>Term:</b></p>
@@ -67,7 +70,6 @@
     <p style="position:absolute;top:555px;left:361px;white-space:nowrap" class="ft14"><b>ACT</b></p>
     <%# <p style="position:absolute;top:555px;left:412px;white-space:nowrap" class="ft14"><b>100</b></p> %>
     <%#  %>
-    <% random_user_result = @user.results.where(year: Date.today.year, term: SchoolTerm.get, for: 'Exam').sample  %>
     <p style="position:absolute;top:570px;left:255px;white-space:nowrap" class="ft14">
       <b><%= random_user_result.total_class_average %></b>
     </p>

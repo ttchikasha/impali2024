@@ -32,7 +32,7 @@
                 <td class='text-center'><%= result.actual_mark %></td>
                 <td class='text-center'><%= result.total_marks %></td>
                 <td class='text-center'><%= number_to_percentage result.percent, precision: 0 %></td>
-                <td class='text-center'><%= result.grading %></td>
+                <td class='text-center'><%= MarkGrading.get result.percent %></td>
                 <% if current_user.teacher? %>
                   <td>
                     <%= link_to 'Edit', edit_user_result_path(result.student, result), class: 'btn btn-info btn-sm' %>
