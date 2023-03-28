@@ -93,6 +93,7 @@
           <p style="position:absolute;top:<%= loop_index %>px;left:366px;white-space:nowrap" class="ft15"><%= paper.actual_mark %></p>
           <p style="position:absolute;top:<%= loop_index %>px;left:416px;white-space:nowrap" class="ft15"><%= paper.total_marks %></p>
         <% end %>
+        <p style="position:absolute;top:<%= result.papers.length < 2 ? loop_index + 5 : loop_index - 10 %>px;left:470px;white-space:nowrap" class="ft17"><%= result.grading %></p>
         <% if result.papers.length < 2 %>
           <% loop_index += 15  %>
         <% end %>

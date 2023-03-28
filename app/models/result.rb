@@ -66,7 +66,9 @@ class Result < ApplicationRecord
   end
 
   def grading
-    MarkGrading.get percent
+    actual = papers.sum(&:actual_mark)
+    total = papers.sum(&:total_marks)
+    MarkGrading.get (100 * actual.to_f / total).round
   end
 
   def percent

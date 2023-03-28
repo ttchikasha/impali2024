@@ -3,23 +3,23 @@ module MarkGrading
     def get(mark)
       case mark
       when 85..100
-        1
+        "A"
       when 77..84
-        2
+        "B+"
       when 70..76
-        3
+        "B"
       when 60..69
-        4
+        "C++"
       when 50..59
-        5
+        "C+"
       when 40..49
-        6
+        "C"
       when 30..39
-        7
+        "D"
       when 20..29
-        8
+        "E"
       else
-        9
+        "U"
       end
     end
   end
