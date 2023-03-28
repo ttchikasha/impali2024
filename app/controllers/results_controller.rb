@@ -19,6 +19,9 @@ class ResultsController < ApplicationController
                                   term: SchoolTerm.get)
   end
 
+  def report
+  end
+
   def edit
   end
 

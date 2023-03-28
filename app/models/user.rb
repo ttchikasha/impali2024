@@ -382,6 +382,11 @@ class User < ApplicationRecord
     pos_index.nil? ? nil : pos_index + 1
   end
 
+  def average_exam_mark(year = Date.today.year, term = SchoolTerm.get)
+    m = total_marks_for "Exam", year, term
+    100 * m.first.to_f / m.last
+  end
+
   private
 
   def normalize_phone

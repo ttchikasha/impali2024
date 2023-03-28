@@ -14,7 +14,7 @@ Rails.application.routes.draw do
   authenticate :user do
     resources :student_attendances
     resources :students do
-      collection do 
+      collection do
         get :results
       end
     end
@@ -58,7 +58,11 @@ Rails.application.routes.draw do
     resources :payments, except: [:edit]
     resources :notifications, path: "notices"
     resources :users do
-      resources :results
+      resources :results do
+        collection do
+          get :report
+        end
+      end
       resources :student_parents
       resources :student_payments, only: %i[new create] do
         collection { patch :update_owing }
