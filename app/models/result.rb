@@ -59,4 +59,12 @@ class Result < ApplicationRecord
   def display_name
     "#{classroom_subject.name} #{name} #{self.for}"
   end
+
+  def grading
+    MarkGrading.get percent
+  end
+
+  def percent
+    (100 * actual_mark.to_f / total_marks).round
+  end
 end

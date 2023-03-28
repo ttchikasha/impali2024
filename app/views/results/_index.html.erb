@@ -1,17 +1,18 @@
 <div class="col-md-12">
   <div class="top-selling">
-    <% if  @user.class_position && results == @exam_results %>
-      <p>Class Position = <%= @user.class_position %> / <%= @user.classroom.students.count %> </p>
+    <% if @user.class_position && results == @exam_results %>
+      <p class='mt-2'>Class Position = <%= @user.class_position %> / <%= @user.classroom.students.count %> </p>
     <% end %>
     <table class="table table-borderless">
       <thead>
         <th>Subject</th>
         <th>Name</th>
-        <th>Grade</th>
         <th>Year</th>
         <th>Term</th>
         <th class='text-center'>Actual Mark</th>
         <th class='text-center'>Total Marks</th>
+        <th class='text-center'>%</th>
+        <th class="text-center">Grading</th>
         <% if current_user.teacher? %>
           <th>Actions</th>
         <% end %>
@@ -23,11 +24,12 @@
               <tr>
                 <td><%= result.classroom_subject.subject.name %></td>
                 <td><%= result.name %></td>
-                <td><%= result.grade %></td>
                 <td><%= result.year %></td>
                 <td><%= result.term %></td>
                 <td class='text-center'><%= result.actual_mark %></td>
                 <td class='text-center'><%= result.total_marks %></td>
+                <td class='text-center'><%= number_to_percentage result.percent, precision: 0 %></td>
+                <td class='text-center'><%= result.grading %></td>
                 <% if current_user.teacher? %>
                   <td>
                     <%= link_to 'Edit', edit_user_result_path(result.student, result), class: 'btn btn-info btn-sm' %>
@@ -41,7 +43,7 @@
         <tfoot>
           <tr>
             <td>TOTAL</td>
-            <td colspan='4'></td>
+            <td colspan='3'></td>
             <% actual, total = @user.total_marks_for(results == @test_results ? 'Test' : 'Exam')  %>
             <td class='text-center'><%= actual %></td>
             <td class='text-center'><%= total %></td>
