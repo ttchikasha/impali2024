@@ -23,18 +23,39 @@
     <p style="position:absolute;top:179px;left:295px;white-space:nowrap" class="ft12"><b>Zimbabwe</b></p>
     <p style="position:absolute;top:117px;left:295px;white-space:nowrap" class="ft111"><b>+263 54 267 0331 / +263 772 670 331 / +263 772 162 315<br/>
         www.impalischool.ac.zw</b></p>
+    <%# Name %>
     <p style="position:absolute;top:319px;left:248px;white-space:nowrap" class="ft10"><b>Name:</b></p>
+    <p style="position:absolute;top:313px;left:309px;white-space:nowrap" class="ft17"><%= @user.first_name.upcase + " " + @user.last_name.upcase %></p>
+    <%# Grade %>
     <p style="position:absolute;top:359px;left:248px;white-space:nowrap" class="ft10"><b>Grade:&#160;</b></p>
+    <p style="position:absolute;top:355px;left:309px;white-space:nowrap" class="ft17"><%= @user.classroom.grade.split(' ').last + ' ' + @user.classroom.room %></p>
+    <%# Averages %>
     <p style="position:absolute;top:359px;left:356px;white-space:nowrap" class="ft10"><b>&#160;</b></p>
-    <p style="position:absolute;top:359px;left:410px;white-space:nowrap" class="ft10"><b>Class Average: &#160; &#160; &#160; &#160;  &#160; &#160; &#160;  &#160;<span class='ms-5'>Learner's Average</span>: &#160;</b></p>
+    <p style="position:absolute;top:359px;left:410px;white-space:nowrap" class="ft10">
+      <b>Class Average: &#160; &#160; &#160; &#160;  &#160; &#160; &#160;  &#160;<span class='ms-5'>Learner's Average</span>: &#160;</b>
+    </p>
+    <p style="position:absolute;top:355px;left:552px;white-space:nowrap" class="ft17">56%</p>
+    <p style="position:absolute;top:355px;left:777px;white-space:nowrap" class="ft17"><%= number_to_percentage @user.average_exam_mark, precision: 0 %></p>
+    <%# Term %>
     <p style="position:absolute;top:319px;left:560px;white-space:nowrap" class="ft10"><b>Term:</b></p>
+    <p style="position:absolute;top:313px;left:616px;white-space:nowrap" class="ft17"><%= SchoolTerm.get %></p>
+    <%# Year %>
     <p style="position:absolute;top:319px;left:688px;white-space:nowrap" class="ft10"><b>Year:</b></p>
+    <p style="position:absolute;top:313px;left:745px;white-space:nowrap" class="ft17"><%= Date.today.year %></p>
+    <%#  %>
     <p style="position:absolute;top:468px;left:98px;white-space:nowrap" class="ft13"><b>Symbols: A = Excellent B = Good &#160; &#160;C = Satisfactory &#160; D = Poor &#160; &#160; E = Weak/unsatisfactory</b></p>
     <p style="position:absolute;top:482px;left:98px;white-space:nowrap" class="ft13"><b>Note: Attainment is an assessment of child`s attainment in relation to the whole class: Effort is an assessment as an&#160;</b></p>
     <p style="position:absolute;top:496px;left:98px;white-space:nowrap" class="ft13"><b>individual</b></p>
+    <%# Class Position %>
     <p style="position:absolute;top:404px;left:248px;white-space:nowrap" class="ft10"><b>Class Position: &#160;&#160;&#160;&#160;&#160;</b></p>
+    <p style="position:absolute;top:388px;left:416px;white-space:nowrap" class="ft16"><b><%= @user.class_position %></b></p>
+    <%# Total Students %>
     <p style="position:absolute;top:404px;left:494px;white-space:nowrap" class="ft10"><b>Out of:</b></p>
+    <p style="position:absolute;top:405px;left:594px;white-space:nowrap" class="ft17"><b><%=  @user.classroom.students.count %></b></p>
+    <%# Login ID %>
     <p style="position:absolute;top:404px;left:666px;white-space:nowrap" class="ft10"><b>ID</b></p>
+    <p style="position:absolute;top:404px;left:737px;white-space:nowrap" class="ft18"><b><%= @user.login_id %></b></p>
+    <%# Headers %>
     <p style="position:absolute;top:540px;left:91px;white-space:nowrap" class="ft14"><b>SUBJECTS&#160;</b></p>
     <p style="position:absolute;top:540px;left:246px;white-space:nowrap" class="ft14"><b>CLASS</b></p>
     <p style="position:absolute;top:540px;left:406px;white-space:nowrap" class="ft14"><b>TOTAL</b></p>
@@ -44,43 +65,41 @@
     <p style="position:absolute;top:555px;left:238px;white-space:nowrap" class="ft14"><b>AVERAGE</b></p>
     <p style="position:absolute;top:555px;left:303px;white-space:nowrap" class="ft14"><b>POS</b></p>
     <p style="position:absolute;top:555px;left:361px;white-space:nowrap" class="ft14"><b>ACT</b></p>
-    <p style="position:absolute;top:555px;left:412px;white-space:nowrap" class="ft14"><b>100</b></p>
-    <p style="position:absolute;top:600px;left:416px;white-space:nowrap" class="ft14"><b>40</b></p>
-    <p style="position:absolute;top:615px;left:416px;white-space:nowrap" class="ft14"><b>60</b></p>
-    <p style="position:absolute;top:645px;left:416px;white-space:nowrap" class="ft14"><b>60</b></p>
-    <p style="position:absolute;top:661px;left:416px;white-space:nowrap" class="ft14"><b>40</b></p>
-    <p style="position:absolute;top:691px;left:416px;white-space:nowrap" class="ft14"><b>60</b></p>
-    <p style="position:absolute;top:706px;left:416px;white-space:nowrap" class="ft14"><b>40</b></p>
-    <p style="position:absolute;top:736px;left:415px;white-space:nowrap" class="ft14"><b>50</b></p>
-    <p style="position:absolute;top:751px;left:415px;white-space:nowrap" class="ft14"><b>50</b></p>
-    <p style="position:absolute;top:782px;left:415px;white-space:nowrap" class="ft14"><b>50</b></p>
-    <p style="position:absolute;top:797px;left:415px;white-space:nowrap" class="ft14"><b>50</b></p>
-    <p style="position:absolute;top:827px;left:412px;white-space:nowrap" class="ft14"><b>100</b></p>
-    <p style="position:absolute;top:857px;left:412px;white-space:nowrap" class="ft14"><b>100</b></p>
-    <p style="position:absolute;top:887px;left:412px;white-space:nowrap" class="ft14"><b>100</b></p>
-    <p style="position:absolute;top:902px;left:412px;white-space:nowrap" class="ft14"><b>100</b></p>
-    <p style="position:absolute;top:585px;left:91px;white-space:nowrap" class="ft14"><b>ENGLISH</b></p>
-    <p style="position:absolute;top:600px;left:91px;white-space:nowrap" class="ft15">PAPER&#160;1</p>
-    <p style="position:absolute;top:615px;left:91px;white-space:nowrap" class="ft15">PAPER&#160;2</p>
-    <p style="position:absolute;top:630px;left:91px;white-space:nowrap" class="ft14"><b>SHONA</b></p>
-    <p style="position:absolute;top:646px;left:91px;white-space:nowrap" class="ft15">PAPER&#160;1</p>
-    <p style="position:absolute;top:661px;left:91px;white-space:nowrap" class="ft15">PAPER&#160;2</p>
-    <p style="position:absolute;top:676px;left:91px;white-space:nowrap" class="ft14"><b>MATHEMATICS</b></p>
-    <p style="position:absolute;top:691px;left:91px;white-space:nowrap" class="ft15">PAPER&#160;1</p>
-    <p style="position:absolute;top:706px;left:91px;white-space:nowrap" class="ft15">PAPER&#160;2</p>
-    <p style="position:absolute;top:721px;left:91px;white-space:nowrap" class="ft14"><b>AGRIC,SCIE&#160;&amp;TECH</b></p>
-    <p style="position:absolute;top:736px;left:91px;white-space:nowrap" class="ft15">PAPER&#160;1</p>
-    <p style="position:absolute;top:751px;left:91px;white-space:nowrap" class="ft15">PAPER&#160;2</p>
-    <p style="position:absolute;top:766px;left:91px;white-space:nowrap" class="ft14"><b>SOCIAL&#160;SCIENCE</b></p>
-    <p style="position:absolute;top:782px;left:91px;white-space:nowrap" class="ft15">PAPER&#160;1</p>
-    <p style="position:absolute;top:797px;left:91px;white-space:nowrap" class="ft15">PAPER&#160;2</p>
-    <p style="position:absolute;top:812px;left:91px;white-space:nowrap" class="ft14"><b>PESMD</b></p>
-    <p style="position:absolute;top:827px;left:91px;white-space:nowrap" class="ft15">PAPER&#160;1</p>
-    <p style="position:absolute;top:842px;left:91px;white-space:nowrap" class="ft14"><b>VPA</b></p>
-    <p style="position:absolute;top:857px;left:91px;white-space:nowrap" class="ft15">PAPER&#160;1</p>
-    <p style="position:absolute;top:872px;left:91px;white-space:nowrap" class="ft14"><b>ICT</b></p>
-    <p style="position:absolute;top:887px;left:91px;white-space:nowrap" class="ft15">PAPER&#160;1</p>
-    <p style="position:absolute;top:903px;left:91px;white-space:nowrap" class="ft15">PAPER&#160;2</p>
+    <%# <p style="position:absolute;top:555px;left:412px;white-space:nowrap" class="ft14"><b>100</b></p> %>
+    <%#  %>
+    <% random_user_result = @user.results.where(year: Date.today.year, term: SchoolTerm.get, for: 'Exam').sample  %>
+    <p style="position:absolute;top:570px;left:255px;white-space:nowrap" class="ft14">
+      <b><%= random_user_result.total_class_average %></b>
+    </p>
+    <p style="position:absolute;top:570px;left:310px;white-space:nowrap" class="ft14">
+      <b><%= @user.class_position %></b>
+    </p>
+    <p style="position:absolute;top:570px;left:366px;white-space:nowrap" class="ft14">
+      <b><%= @user.total_marks_for('Exam').first %></b>
+    </p>
+    <p style="position:absolute;top:570px;left:416px;white-space:nowrap" class="ft14">
+      <b><%= @user.total_marks_for('Exam').last %></b>
+    </p>
+    <% loop_index = 585  %>
+    <% subjects = []  %>
+    <% @user.results.where(year: Date.today.year, term: SchoolTerm.get, for: 'Exam').each do |result, index| %>
+      <% unless subjects.include? result.classroom_subject.name %>
+        <p style="position:absolute;top:<%= loop_index %>px;left:91px;white-space:nowrap" class="ft14"><b><%= result.classroom_subject.name.upcase %></b></p>
+        <% result.papers.each do |paper| %>
+          <% loop_index += 15  %>
+          <p style="position:absolute;top:<%= loop_index %>px;left:91px;white-space:nowrap" class="ft15"><%= paper.name.upcase %></p>
+          <p style="position:absolute;top:<%= loop_index %>px;left:255px;white-space:nowrap" class="ft15"><%= paper.class_average %></p>
+          <p style="position:absolute;top:<%= loop_index %>px;left:310px;white-space:nowrap" class="ft15"><%= paper.student_position %></p>
+          <p style="position:absolute;top:<%= loop_index %>px;left:366px;white-space:nowrap" class="ft15"><%= paper.actual_mark %></p>
+          <p style="position:absolute;top:<%= loop_index %>px;left:416px;white-space:nowrap" class="ft15"><%= paper.total_marks %></p>
+        <% end %>
+        <% if result.papers.length < 2 %>
+          <% loop_index += 15  %>
+        <% end %>
+        <% loop_index += 16  %>
+      <% end %>
+      <% subjects << result.classroom_subject.name  %>
+    <% end %>
     <p style="position:absolute;top:933px;left:91px;white-space:nowrap" class="ft14"><b>CO-CURRICULAR&#160;ACTIVITIES</b></p>
     <p style="position:absolute;top:963px;left:240px;white-space:nowrap" class="ft15">V.GOOD</p>
     <p style="position:absolute;top:963px;left:298px;white-space:nowrap" class="ft15">GOOD</p>
@@ -95,15 +114,6 @@
     <p style="position:absolute;top:1058px;left:92px;white-space:nowrap" class="ft13"><b>COMMENTS</b></p>
     <p style="position:absolute;top:1137px;left:91px;white-space:nowrap" class="ft13"><b>CLASS TEACHER SIGN:&#160;</b></p>
     <p style="position:absolute;top:1138px;left:340px;white-space:nowrap" class="ft13"><b>HEAD/D.H/T.I.C :&#160;</b></p>
-    <p style="position:absolute;top:388px;left:416px;white-space:nowrap" class="ft16"><b><%= @user.class_position %></b></p>
-    <p style="position:absolute;top:313px;left:309px;white-space:nowrap" class="ft17"><%= @user.first_name.upcase + " " + @user.last_name.upcase %></p>
-    <p style="position:absolute;top:404px;left:737px;white-space:nowrap" class="ft18"><b><%= @user.login_id %></b></p>
-    <p style="position:absolute;top:355px;left:309px;white-space:nowrap" class="ft17"><%= @user.classroom.grade.split(' ').last + ' ' + @user.classroom.room %></p>
-    <p style="position:absolute;top:355px;left:552px;white-space:nowrap" class="ft17">56%</p>
-    <p style="position:absolute;top:355px;left:777px;white-space:nowrap" class="ft17"><%= number_to_percentage @user.average_exam_mark, precision: 0 %></p>
-    <p style="position:absolute;top:313px;left:616px;white-space:nowrap" class="ft17"><%= SchoolTerm.get %></p>
-    <p style="position:absolute;top:313px;left:745px;white-space:nowrap" class="ft17"><%= Date.today.year %></p>
-    <p style="position:absolute;top:405px;left:594px;white-space:nowrap" class="ft17"><b><%=  @user.classroom.students.count %></b></p>
     <p style="position:absolute;top:1219px;left:616px;white-space:nowrap" class="ft110"><b>An&#160;Anglo&#160;American&#160;Unki&#160;Mine&#160;School</b></p>
   </div>
 </section>

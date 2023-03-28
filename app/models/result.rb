@@ -60,11 +60,41 @@ class Result < ApplicationRecord
     "#{classroom_subject.name} #{name} #{self.for}"
   end
 
+  def papers
+    student.results.where(year: year, term: term, for: "Exam",
+                          classroom_subject_id: classroom_subject_id)
+  end
+
   def grading
     MarkGrading.get percent
   end
 
   def percent
     (100 * actual_mark.to_f / total_marks).round
+  end
+
+  def student_position
+    h = {}
+    for_whole_class.each do |result|
+      h[result.student_id] = result.actual_mark
+    end
+    h = h.sort_by { |x| x.last }
+    h.reverse!
+    pos = h.find_index { |x| x.first == student_id }
+    pos + 1
+  end
+
+  def class_average
+    (for_whole_class.sum(&:actual_mark) / for_whole_class.count.to_f).round
+  end
+
+  def total_class_average
+    student.results.where(term: term, year: year, for: self.for).sum(&:class_average)
+  end
+
+  private
+
+  def for_whole_class
+    Result.where(term: term, year: year, for: self.for, classroom_subject_id: classroom_subject_id, name: name)
   end
 end
