@@ -1,28 +1,58 @@
 <%= bootstrap_form_with(model: [result.student, result]) do |form| %>
   <%= render 'shared/form_alert', resource: result %>
-  <%= form.text_field :name, floating: true, help: 'e.g. Paper 1' %>
+  <% new =  !result.persisted? %>
+  <% if new %>
+    <% cs = ClassroomSubject.find params[:classroom_subject_id]  %>
+    <% result.classroom_subject = cs %>
+    <% result.name = params[:name] %>
+    <% result.for = 'Exam'%>
+    <% result.term = SchoolTerm.get %>
+    <% result.year = Date.today.year %>
+    <% result.total_marks = result.name == 'Paper 1' ? cs.paper1_totalmarks : cs.paper2_totalmarks %>
+  <% end %>
   <div class="row">
-    <div class="col-md-3">
-      <%= form.select :classroom_subject_id,
-         current_user.classroom_subjects.select{|cs| result.student.classroom_subjects.include?(cs) }.map {|cs| [cs.subject.name, cs.id]}, 
-          floating: true, label: 'Subject' %>
+    <div class="col">
+      <%= form.text_field :classroom_subject_id, value: result.classroom_subject.name,  disabled: true, hide_label: true %>
+      <% if new %>
+        <%= form.hidden_field :classroom_subject_id, label: false %>
+      <% end %>
     </div>
-    <div class="col-md-3">
-      <%= form.select :for, Result.fors.keys, floating: true %>
+    <div class="col">
+      <%= form.text_field :name, disabled: true, hide_label: true %>
+      <% if new %>
+        <%= form.hidden_field :name, label: false %>
+      <% end %>
     </div>
-    <div class="col-md-3">
-      <%= form.number_field :year, floating: true, in: 2000..Date.today.year %>
+  </div>
+  <div class="row">
+    <div class="col-md-4">
+      <%= form.text_field :for, floating: true, disabled: true %>
+      <% if new %>
+        <%= form.hidden_field :for, label: false %>
+      <% end %>
     </div>
-    <div class="col-md-3">
-      <%= form.select :term, Result.terms.keys, floating: true %>
+    <div class="col-md-4">
+      <%= form.number_field :year, floating: true, in: 2000..Date.today.year, disabled: true %>
+      <% if new %>
+        <%= form.hidden_field :year, label: false %>
+      <% end %>
+    </div>
+    <div class="col-md-4">
+      <%= form.text_field :term, floating: true, disabled: true %>
+      <% if new %>
+        <%= form.hidden_field :term, label: false %>
+      <% end %>
     </div>
   </div>
   <div class="row">
     <div class="col-md-6">
-      <%= form.number_field :actual_mark, floating: true %>
+      <%= form.number_field :actual_mark, floating: true, max: result.total_marks, min: 0 %>
     </div>
     <div class="col-md-6">
-      <%= form.number_field :total_marks, floating: true %>
+      <%= form.number_field :total_marks, floating: true, disabled: true %>
+      <% if new %>
+        <%= form.hidden_field :total_marks, label: false %>
+      <% end %>
     </div>
   </div>
   <%= form.primary %>

@@ -22,21 +22,35 @@
       </thead>
       <% cache results do %>
         <tbody>
-          <% results.each do |result| %>
-            <% cache [result] do %>
+          <% @user.classroom_subjects.each do |csub| %>
+            <% csub.papers.times do |paper| %>
+              <% paper_name = "Paper #{paper + 1}"  %>
+              <% result = @user.results.where(name: paper_name, classroom_subject_id: csub.id, for: 'Exam').first  %>
               <tr>
-                <td><%= result.classroom_subject.subject.name %></td>
-                <td><%= result.name %></td>
-                <td><%= result.year %></td>
-                <td><%= result.term %></td>
-                <td class='text-center'><%= result.actual_mark %></td>
-                <td class='text-center'><%= result.total_marks %></td>
-                <td class='text-center'><%= number_to_percentage result.percent, precision: 0 %></td>
-                <td class='text-center'><%= result.grading %></td>
+                <td><%= csub.name %></td>
+                <td><%= "Paper #{paper + 1}" %></td>
+                <% if result %>
+                  <td><%= result.year %></td>
+                  <td><%= result.term %></td>
+                  <td class='text-center'><%= result.actual_mark %></td>
+                  <td class='text-center'><%= result.total_marks %></td>
+                  <td class='text-center'><%= number_to_percentage result.percent, precision: 0 %></td>
+                  <td class='text-center'><%= MarkGrading.get result.percent %></td>
+                <% else %>
+                  <td> &mdash;</td>
+                  <td> &mdash; </td>
+                  <td class='text-center'> &mdash; </td>
+                  <td class='text-center'><%= paper.zero? ? csub.paper1_totalmarks : csub.paper2_totalmarks %></td>
+                  <td class='text-center'>&mdash;</td>
+                  <td class='text-center'>&mdash;</td>
+                <% end %>
                 <% if current_user.teacher? %>
                   <td>
-                    <%= link_to 'Edit', edit_user_result_path(result.student, result), class: 'btn btn-info btn-sm' %>
-                    <%= link_to 'Delete', user_result_path(result.student, result), method: :delete, class: 'btn btn-danger btn-sm', data: {confirm: 'Are you sure?'} %>
+                    <% if result %>
+                      <%= link_to 'Update', edit_user_result_path(@user, result), class: 'btn btn-primary btn-sm' %>
+                    <% else %>
+                      <%= link_to 'Insert', new_user_result_path(@user.id, classroom_subject_id: csub.id, name: "Paper #{paper + 1}"), class: 'btn btn-outline-primary btn-sm' %>
+                    <% end %>
                   </td>
                 <% end %>
               </tr>

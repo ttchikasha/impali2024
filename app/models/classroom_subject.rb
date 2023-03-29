@@ -48,6 +48,10 @@ class ClassroomSubject < ApplicationRecord
     self.teacher = classroom&.teacher if teacher.nil?
   end
 
+  def papers
+    paper2_totalmarks.zero? ? 1 : 2
+  end
+
   def lessons
     Lesson.where(topic_id: [topic_ids])
   end

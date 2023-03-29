@@ -39,7 +39,7 @@ class ResultsController < ApplicationController
 
   def update
     respond_to do |format|
-      if @result.update result_params
+      if @result.update actual_mark: result_params[:actual_mark]
         format.html { redirect_to user_results_url(@user), notice: "Result was successfully updated." }
       else
         format.html { render :edit, status: :unprocessable_entity }
