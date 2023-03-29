@@ -14,10 +14,12 @@
   .ft111{font-size:11px;line-height:19px;font-family:Times;color:#393536;}
 </style>
 <% rc = @user.report_comments.find_by term: SchoolTerm.get, year: Date.today.year  %>
-<% if rc %>
-  <%= link_to 'Edit Report Comments', edit_report_comment_path(rc), class: 'btn btn-primary' %>
-<% else %>
-  <%= link_to 'Add Report Comments', new_user_report_comment_path(@user), class: 'btn btn-primary' %>
+<% if current_user.teacher? && current_user == @user.classroom.teacher %>
+  <% if rc %>
+    <%= link_to 'Edit Report Comments', edit_report_comment_path(rc), class: 'btn btn-primary' %>
+  <% else %>
+    <%= link_to 'Add Report Comments', new_user_report_comment_path(@user), class: 'btn btn-primary' %>
+  <% end %>
 <% end %>
 <section>
   <div id="page1-div" style="position:relative;width:892px;height:1262px;">

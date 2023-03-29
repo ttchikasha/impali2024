@@ -16,7 +16,7 @@
     <li class="nav-heading"><%= current_user.teacher? ? 'Teaching' : 'Learning' %></li>
     <% if current_user.student? || current_user.parent? %>
       <li class="nav-item">
-        <%= link_to reports_path, class: "nav-link #{'collapsed' unless on_reports_index?}" do %>
+        <%= link_to user_results_path(current_user.student? ? current_user : current_user.student ), class: "nav-link #{'collapsed' unless on_reports_index?}" do %>
           <i class="bi bi-bar-chart-steps"></i>
           <span>Reports</span>
         <% end %>
