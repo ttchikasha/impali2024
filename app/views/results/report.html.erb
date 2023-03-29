@@ -111,24 +111,26 @@
       <% subjects << result.classroom_subject.name  %>
     <% end %>
     <% rc = @user.report_comments.find_by term: SchoolTerm.get, year: Date.today.year %>
+    <% if rc %>
+      <p style="position:absolute;top:933px;left:255px;white-space:nowrap" class="ft14"><b><%= rc.co_curricular_activities %></b></p>
+      <p style="position:absolute;top:978px;left: <%= rc.get_left :neatness %>px;white-space:nowrap" class="ft15">X</p>
+      <p style="position:absolute;top:993px;left:<%= rc.get_left :courtesy %>px;white-space:nowrap" class="ft15">X</p>
+      <p style="position:absolute;top:1008px;left:<%= rc.get_left :conduct %>px;white-space:nowrap" class="ft15">X</p>
+      <p style="position:absolute;top:1023px;left:<%= rc.get_left :deportment %>px;white-space:nowrap" class="ft15">X</p>
+      <p style="position:absolute;top:1058px;left:185px;white-space:nowrap;color: blue;font-style:italic;" class="ft13"><b><%= rc.comments %></b></p>
+    <% end %>
     <p style="position:absolute;top:933px;left:91px;white-space:nowrap" class="ft14"><b>CO-CURRICULAR&#160;ACTIVITIES</b></p>
-    <p style="position:absolute;top:933px;left:255px;white-space:nowrap" class="ft14"><b><%= rc.co_curricular_activities %></b></p>
     <p style="position:absolute;top:963px;left:240px;white-space:nowrap" class="ft15">V.GOOD</p>
     <p style="position:absolute;top:963px;left:298px;white-space:nowrap" class="ft15">GOOD</p>
     <p style="position:absolute;top:963px;left:360px;white-space:nowrap" class="ft15">AVE</p>
     <p style="position:absolute;top:963px;left:91px;white-space:nowrap" class="ft15">PERSONALITY TRAITS</p>
     <p style="position:absolute;top:978px;left:91px;white-space:nowrap" class="ft15">DRESS&#160;NEATNESS</p>
-    <p style="position:absolute;top:978px;left: <%= rc.get_left :neatness %>px;white-space:nowrap" class="ft15">X</p>
     <p style="position:absolute;top:993px;left:91px;white-space:nowrap" class="ft15">COURTESY</p>
-    <p style="position:absolute;top:993px;left:<%= rc.get_left :courtesy %>px;white-space:nowrap" class="ft15">X</p>
     <p style="position:absolute;top:1008px;left:91px;white-space:nowrap" class="ft15">CONDUCT</p>
-    <p style="position:absolute;top:1008px;left:<%= rc.get_left :conduct %>px;white-space:nowrap" class="ft15">X</p>
     <p style="position:absolute;top:1023px;left:91px;white-space:nowrap" class="ft15">DEPORTMENT</p>
-    <p style="position:absolute;top:1023px;left:<%= rc.get_left :deportment %>px;white-space:nowrap" class="ft15">X</p>
     <p style="position:absolute;top:963px;left:409px;white-space:nowrap" class="ft15">BELOW&#160;STANDARD</p>
     <p style="position:absolute;top:540px;left:307px;white-space:nowrap" class="ft14"><b>ATTAINMENT</b></p>
     <p style="position:absolute;top:1058px;left:92px;white-space:nowrap" class="ft13"><b>COMMENTS</b></p>
-    <p style="position:absolute;top:1058px;left:185px;white-space:nowrap;color: blue;font-style:italic;" class="ft13"><b><%= rc.comments %></b></p>
     <p style="position:absolute;top:1137px;left:91px;white-space:nowrap" class="ft13"><b>CLASS TEACHER SIGN:&#160;</b></p>
     <p style="position:absolute;top:1138px;left:340px;white-space:nowrap" class="ft13"><b>HEAD/D.H/T.I.C :&#160;</b></p>
     <p style="position:absolute;top:1219px;left:616px;white-space:nowrap" class="ft110"><b>An&#160;Anglo&#160;American&#160;Unki&#160;Mine&#160;School</b></p>
