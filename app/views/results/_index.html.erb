@@ -1,7 +1,7 @@
 <div class="col-md-12">
   <div class="top-selling">
     <% if @user.class_position && results == @exam_results %>
-      <div class="d-flex justify-content-between align-items-center my-2">
+      <div class="d-flex justify-content-between align-items-center">
         <p class='mt-2'>Class Position = <%= @user.class_position %> / <%= @user.classroom.students.count %> </p>
         <%= link_to 'View Report', report_user_results_path(@user), class: 'btn btn-primary' %>
       </div>
@@ -32,7 +32,7 @@
                 <td class='text-center'><%= result.actual_mark %></td>
                 <td class='text-center'><%= result.total_marks %></td>
                 <td class='text-center'><%= number_to_percentage result.percent, precision: 0 %></td>
-                <td class='text-center'><%= MarkGrading.get result.percent %></td>
+                <td class='text-center'><%= result.grading %></td>
                 <% if current_user.teacher? %>
                   <td>
                     <%= link_to 'Edit', edit_user_result_path(result.student, result), class: 'btn btn-info btn-sm' %>
