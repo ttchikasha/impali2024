@@ -43,6 +43,8 @@
 class User < ApplicationRecord
   include PgSearch::Model
 
+  has_many :report_comments
+
   pg_search_scope :search, against: [:first_name, :last_name],
                            using: {
                              tsearch: { prefix: true },

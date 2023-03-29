@@ -13,6 +13,12 @@
   .ft110{font-size:8px;font-family:Times;color:#2a3a99;}
   .ft111{font-size:11px;line-height:19px;font-family:Times;color:#393536;}
 </style>
+<% rc = @user.report_comments.find_by term: SchoolTerm.get, year: Date.today.year  %>
+<% if rc %>
+  <%= link_to 'Edit Report Comments', edit_report_comment_path(rc), class: 'btn btn-primary' %>
+<% else %>
+  <%= link_to 'Add Report Comments', new_user_report_comment_path(@user), class: 'btn btn-primary' %>
+<% end %>
 <section>
   <div id="page1-div" style="position:relative;width:892px;height:1262px;">
     <%# <img width="892" height="1262" src="target001.png" alt="background image"/> %>

@@ -2,6 +2,7 @@
 #
 
 Rails.application.routes.draw do
+  resources :report_comments
   get "learning_areas/index"
   post "pardon_students/pardon", format: :json
   if Rails.env.development?
@@ -58,6 +59,7 @@ Rails.application.routes.draw do
     resources :payments, except: [:edit]
     resources :notifications, path: "notices"
     resources :users do
+      resources :report_comments
       resources :results do
         collection do
           get :report

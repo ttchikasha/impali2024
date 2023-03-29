@@ -1,0 +1,20 @@
+<%= bootstrap_form_with(model: [report_comment.user, report_comment]) do |form| %>
+  <%= render 'shared/form_alert', resource: report_comment %>
+  <%= form.text_field :co_curricular_activities, help: 'e.g. soccer, netball' %>
+  <div class="row">
+    <div class="col-sm-3">
+      <%= form.select :neatness, ReportComment::ALLOCATIONS, floating: true %>
+    </div>
+    <div class="col-sm-3">
+      <%= form.select :courtesy, ReportComment::ALLOCATIONS, floating: true %>
+    </div>
+    <div class="col-sm-3">
+      <%= form.select :conduct,ReportComment::ALLOCATIONS, floating: true %>
+    </div>
+    <div class="col-sm-3">
+      <%= form.select :deportment, ReportComment::ALLOCATIONS, floating: true %>
+    </div>
+  </div>
+  <%= form.text_area :comments %>
+  <%= form.submit %>
+<% end %>

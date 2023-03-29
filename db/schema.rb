@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_03_29_123030) do
+ActiveRecord::Schema.define(version: 2023_03_29_125550) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -220,6 +220,21 @@ ActiveRecord::Schema.define(version: 2023_03_29_123030) do
     t.index ["questionable_type", "questionable_id"], name: "index_questions_on_questionable"
   end
 
+  create_table "report_comments", force: :cascade do |t|
+    t.string "co_curricular_activities"
+    t.string "neatness"
+    t.string "courtesy"
+    t.string "conduct"
+    t.string "deportment"
+    t.text "comments"
+    t.bigint "user_id", null: false
+    t.integer "year"
+    t.integer "term"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_report_comments_on_user_id"
+  end
+
   create_table "reports", force: :cascade do |t|
     t.bigint "classroom_subject_id", null: false
     t.bigint "user_id", null: false
@@ -355,6 +370,7 @@ ActiveRecord::Schema.define(version: 2023_03_29_123030) do
   add_foreign_key "question_answers", "allowed_answers", column: "selected_answer_id"
   add_foreign_key "question_answers", "questions"
   add_foreign_key "question_answers", "users"
+  add_foreign_key "report_comments", "users"
   add_foreign_key "reports", "classroom_subjects"
   add_foreign_key "reports", "users"
   add_foreign_key "results", "classroom_subjects"

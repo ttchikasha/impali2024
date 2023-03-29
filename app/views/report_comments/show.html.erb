@@ -1,0 +1,49 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Co curricular activities:</strong>
+  <%= @report_comment.co_curricular_activities %>
+</p>
+
+<p>
+  <strong>Neatness:</strong>
+  <%= @report_comment.neatness %>
+</p>
+
+<p>
+  <strong>Courtesy:</strong>
+  <%= @report_comment.courtesy %>
+</p>
+
+<p>
+  <strong>Conduct:</strong>
+  <%= @report_comment.conduct %>
+</p>
+
+<p>
+  <strong>Deportment:</strong>
+  <%= @report_comment.deportment %>
+</p>
+
+<p>
+  <strong>Comments:</strong>
+  <%= @report_comment.comments %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @report_comment.user_id %>
+</p>
+
+<p>
+  <strong>Year:</strong>
+  <%= @report_comment.year %>
+</p>
+
+<p>
+  <strong>Term:</strong>
+  <%= @report_comment.term %>
+</p>
+
+<%= link_to 'Edit', edit_report_comment_path(@report_comment) %> |
+<%= link_to 'Back', report_comments_path %>
