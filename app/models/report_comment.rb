@@ -56,4 +56,18 @@ class ReportComment < ApplicationRecord
               with: /(19|20)\d{2}/i,
               message: "should be a four-digit year",
             }
+
+  def get_left(property)
+    value = self.send property
+    case value
+    when VERY_GOOD
+      255
+    when GOOD
+      310
+    when AVERAGE
+      366
+    else
+      416
+    end
+  end
 end
