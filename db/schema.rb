@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_03_29_070115) do
+ActiveRecord::Schema.define(version: 2023_03_29_123030) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -244,6 +244,7 @@ ActiveRecord::Schema.define(version: 2023_03_29_070115) do
     t.string "name", null: false
     t.integer "for", default: 0
     t.integer "grade"
+    t.text "remarks"
     t.index ["classroom_subject_id"], name: "index_results_on_classroom_subject_id"
   end
 

@@ -39,7 +39,7 @@ class ResultsController < ApplicationController
 
   def update
     respond_to do |format|
-      if @result.update actual_mark: result_params[:actual_mark]
+      if @result.update actual_mark: result_params[:actual_mark], remarks: result_params[:remarks]
         format.html { redirect_to user_results_url(@user), notice: "Result was successfully updated." }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -60,7 +60,7 @@ class ResultsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def result_params
-    params.require(:result).permit(:actual_mark, :classroom_subject_id, :for, :name, :term, :total_marks, :year)
+    params.require(:result).permit(:actual_mark, :classroom_subject_id, :for, :name, :term, :total_marks, :year, :remarks)
   end
 
   def ensure_authorized

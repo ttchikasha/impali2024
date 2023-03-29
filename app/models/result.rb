@@ -7,6 +7,7 @@
 #  for                  :integer          default("Test")
 #  grade                :integer
 #  name                 :string           not null
+#  remarks              :text
 #  term                 :integer
 #  total_marks          :integer
 #  year                 :integer
@@ -25,6 +26,7 @@
 #  fk_rails_...  (student_id => users.id)
 #
 class Result < ApplicationRecord
+  validates :remarks, length: { maximum: 50 }
   validates_presence_of :name
   validates_uniqueness_of :name, scope: [:student, :classroom_subject,
                                          :year, :term, :for],

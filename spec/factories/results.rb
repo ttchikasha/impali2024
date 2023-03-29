@@ -7,6 +7,7 @@
 #  for                  :integer          default("Test")
 #  grade                :integer
 #  name                 :string           not null
+#  remarks              :text
 #  term                 :integer
 #  total_marks          :integer
 #  year                 :integer
